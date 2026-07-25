@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -206,7 +206,7 @@
             object-fit: cover;
             object-position: center;
             opacity: 0;
-            animation: kenburns 24s infinite;
+            animation: kenburns 30s infinite;
             transition: opacity 1s ease-in-out, transform 8s ease-in-out;
             filter: brightness(1.06) contrast(1.05) saturate(1.08);
         }
@@ -214,12 +214,13 @@
         .slide:nth-child(2) { animation-delay: 6s; }
         .slide:nth-child(3) { animation-delay: 12s; }
         .slide:nth-child(4) { animation-delay: 18s; }
+        .slide:nth-child(5) { animation-delay: 24s; }
 
         @keyframes kenburns {
             0% { opacity: 0; transform: scale(1.05); }
-            6% { opacity: 0.92; transform: scale(1.08); }
-            22% { opacity: 0.92; transform: scale(1.12); }
-            28% { opacity: 0; transform: scale(1.15); }
+            5% { opacity: 0.92; transform: scale(1.08); }
+            20% { opacity: 0.92; transform: scale(1.12); }
+            25% { opacity: 0; transform: scale(1.15); }
             100% { opacity: 0; transform: scale(1.15); }
         }
 
@@ -257,6 +258,7 @@
             aspect-ratio: 4/5;
             background: #f0ebe4;
         }
+
         .product-img {
             width: 100%;
             height: 100%;
@@ -288,7 +290,6 @@
             transform: translateY(0);
         }
         
-        /* New Stock Badge Styling */
         .tag-new {
             position: absolute;
             top: 1rem;
@@ -731,10 +732,11 @@
     <!-- Header Hero Section -->
     <header class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
         <div class="hero-slideshow">
-            <img src="8.jpg" class="slide" alt="Slide 1">
-            <img src="1.jpg" class="slide" alt="Slide 2">
-            <img src="9.jpg" class="slide" alt="Slide 3">
-            <img src="2.jpg" class="slide" alt="Slide 4">
+            <img src="https://lh3.googleusercontent.com/d/19P7jmwgdB6mNRMRgZO5z-cjn0sHcuQmi" class="slide" alt="Slide 1">
+            <img src="https://lh3.googleusercontent.com/d/1u5BdQpYuaDpstUkto_ejwkvkb1gdlvH9" class="slide" alt="Slide 2">
+            <img src="https://lh3.googleusercontent.com/d/18SgN_UhedWTuFHR4vJWgnUlRewLjiIQ1" class="slide" alt="Slide 3">
+            <img src="https://lh3.googleusercontent.com/d/1wNk25XTzxlBWpcTb0gu9fQpzNs3S9wAU" class="slide" alt="Slide 4">
+            <img src="https://lh3.googleusercontent.com/d/1Kwy0FAHeC-DgESNmPMnK003szKmKmTze" class="slide" alt="Slide 5">
         </div>
         <div class="absolute inset-0 hero-overlay z-10 pointer-events-none"></div>
 
@@ -761,7 +763,7 @@
         <!-- Category Banners -->
         <section class="grid grid-cols-1 md:grid-cols-2">
             <a href="#watches-collection" id="watches" class="group relative h-[70vh] img-zoom-container block bg-zoga-dark">
-                <img src="7.jpg" alt="Luxury Watches" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 img-zoom transition-opacity duration-700 object-center">
+                <img src="https://drive.google.com/file/d/1-5vs57EmUxoebqK0TZiF4Mfn9XcWu0SH/view?usp=drive_link" alt="Luxury Watches" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 img-zoom transition-opacity duration-700 object-center">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
                 <div class="absolute bottom-12 left-12 right-12 z-10">
                     <h2 class="text-3xl md:text-4xl font-serif mb-3 drop-shadow-md">Fine Watches</h2>
@@ -772,7 +774,7 @@
                 </div>
             </a>
             <a href="#eyewear-collection" id="eyewear" class="group relative h-[70vh] img-zoom-container block bg-zoga-dark">
-                <img src="3.jpg" alt="Luxury Eyewear" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 img-zoom transition-opacity duration-700 object-top">
+                <img src="https://drive.google.com/file/d/1iHS25xms5feDscLQ2Ku_UOw6zoF4Qny9/view?usp=drive_link" alt="Luxury Eyewear" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 img-zoom transition-opacity duration-700 object-top">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
                 <div class="absolute bottom-12 left-12 right-12 z-10">
                     <h2 class="text-3xl md:text-4xl font-serif mb-3 drop-shadow-md">Luxury Eyewear</h2>
@@ -800,12 +802,10 @@
             <!-- Watches Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- SINGLE FRAME TRIO SLIDESHOW WATCH CARD (3 Reference Images in 1 Interactive Frame) -->
                 <div class="product-item reveal group" id="trio-watch-card" style="transition-delay: 100ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">New Stock</div>
 
-                        <!-- Slideshow Arrows -->
                         <button class="slideshow-arrow prev" onclick="changeTrioSlide(-1)" aria-label="Previous Slide">
                             <i data-lucide="chevron-left" class="w-5 h-5"></i>
                         </button>
@@ -813,34 +813,29 @@
                             <i data-lucide="chevron-right" class="w-5 h-5"></i>
                         </button>
 
-                        <!-- Frame Image Slides -->
                         <div class="frame-slideshow-container">
                             <img src="product photos/IMG_6940.PNG" alt="Denvosi Obsidian Diamond Chrono" class="frame-slide active-slide" data-title="Obsidian Diamond Chrono" data-color="Obsidian Black">
                             <img src="product photos/IMG_6941.PNG" alt="Denvosi Pearl Diamond Chrono" class="frame-slide" data-title="Pearl Diamond Chrono" data-color="Pearl White">
                             <img src="product photos/IMG_6942.PNG" alt="Denvosi Auburn Diamond Chrono" class="frame-slide" data-title="Auburn Diamond Chrono" data-color="Auburn Brown">
                         </div>
 
-                        <!-- Slide Dot Indicators -->
                         <div class="slideshow-controls">
                             <button class="slideshow-dot active-dot" onclick="setTrioSlide(0)" aria-label="Slide 1"></button>
                             <button class="slideshow-dot" onclick="setTrioSlide(1)" aria-label="Slide 2"></button>
                             <button class="slideshow-dot" onclick="setTrioSlide(2)" aria-label="Slide 3"></button>
                         </div>
 
-                        <!-- Quick View Overlay -->
                         <div class="product-overlay">
                             <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
                         </div>
                     </div>
 
-                    <!-- Dynamic Card Details -->
                     <div class="mt-6 text-center">
                         <h3 id="trio-card-title" class="text-xl font-serif text-white group-hover:text-zoga-red transition-colors">DENVOSI Tonneau Watch</h3>
                         <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">DENVOSI &bull; Rose Gold & White</p>
                         <p class="text-sm text-gray-400 mt-2">Dial: Crystal-studded Skeleton-style • Strap: White leather</p>
                         <p class="text-sm text-gray-400 mt-1">Features: Date Display • Rhinestone bezel</p>
                         
-                        <!-- Color Swatches for Direct Selection -->
                         <div class="color-swatch-bar">
                             <button class="swatch-btn active-swatch bg-black" onclick="setTrioSlide(0)" title="Obsidian Black"></button>
                             <button class="swatch-btn bg-stone-100" onclick="setTrioSlide(1)" title="Pearl White"></button>
@@ -851,11 +846,10 @@
                     </div>
                 </div>
 
-                <!-- Watch Item 2 -->
                 <div class="product-item reveal" style="transition-delay: 200ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">New Stock</div>
-                        <img src="product photos/IMG_6986.PNG" alt="Seiko Rose Gold Diver" class="product-img">[cite: 3]
+                        <img src="product photos/IMG_6986.PNG" alt="Seiko Rose Gold Diver" class="product-img">
                         <div class="product-overlay">
                             <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
                         </div>
@@ -868,11 +862,10 @@
                     </div>
                 </div>
 
-                <!-- Watch Item 3 -->
                 <div class="product-item reveal" style="transition-delay: 300ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">New Stock</div>
-                        <img src="product photos/IMG_6987.PNG" alt="Casio Classic Silver" class="product-img">[cite: 3]
+                        <img src="product photos/IMG_6987.PNG" alt="Casio Classic Silver" class="product-img">
                         <div class="product-overlay">
                             <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
                         </div>
@@ -900,30 +893,27 @@
                 </a>
             </div>
 
-            <!-- Eyewear Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- Eyewear Item 1 -->
                 <div class="product-item reveal" style="transition-delay: 100ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">New Stock</div>
-                        <img src="product photos/IMG_6934.PNG" alt="Classic Gold Aviator" class="product-img">[cite: 3]
+                        <img src="product photos/IMG_6934.PNG" alt="Classic Gold Aviator" class="product-img">
                         <div class="product-overlay">
                             <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
                         </div>
                     </div>
                     <div class="mt-6 text-center">
-                        <h3 class="text-xl font-serif text-white">Classic Gold Aviator</h3>[cite: 3]
-                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">Polarized</p>[cite: 3]
-                        <p class="text-zoga-red font-medium mt-3">$320</p>[cite: 3]
+                        <h3 class="text-xl font-serif text-white">Classic Gold Aviator</h3>
+                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">Polarized</p>
+                        <p class="text-zoga-red font-medium mt-3">$320</p>
                     </div>
                 </div>
 
-                <!-- Eyewear Item 2 -->
                 <div class="product-item reveal" style="transition-delay: 200ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">New Stock</div>
-                        <img src="product photos/IMG_6935.PNG" alt="Shades" class="product-img">[cite: 3]
+                        <img src="product photos/IMG_6935.PNG" alt="Shades" class="product-img">
                         <div class="product-overlay">
                             <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
                         </div>
@@ -936,67 +926,63 @@
                     </div>
                 </div>
 
-                <!-- Eyewear Item 3 -->
                 <div class="product-item reveal" style="transition-delay: 300ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">New Stock</div>
-                        <img src="product photos/IMG_6936.PNG" alt="Silver Chrome Aviator" class="product-img">[cite: 3]
+                        <img src="product photos/IMG_6936.PNG" alt="Silver Chrome Aviator" class="product-img">
                         <div class="product-overlay">
                             <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
                         </div>
                     </div>
                     <div class="mt-6 text-center">
-                        <h3 class="text-xl font-serif text-white">Silver Chrome Aviator</h3>[cite: 3]
-                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">UV Protection</p>[cite: 3]
-                        <p class="text-zoga-red font-medium mt-3">$310</p>[cite: 3]
+                        <h3 class="text-xl font-serif text-white">Silver Chrome Aviator</h3>
+                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">UV Protection</p>
+                        <p class="text-zoga-red font-medium mt-3">$310</p>
                     </div>
                 </div>
 
-                <!-- Eyewear Item 4 -->
                 <div class="product-item reveal" style="transition-delay: 400ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">New Stock</div>
-                        <img src="product photos/IMG_6937.PNG" alt="Onyx Gold Hex" class="product-img">[cite: 3]
+                        <img src="product photos/IMG_6937.PNG" alt="Onyx Gold Hex" class="product-img">
                         <div class="product-overlay">
                             <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
                         </div>
                     </div>
                     <div class="mt-6 text-center">
-                        <h3 class="text-xl font-serif text-white">Onyx Gold Hex</h3>[cite: 3]
-                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">Statement Series</p>[cite: 3]
-                        <p class="text-zoga-red font-medium mt-3">$340</p>[cite: 3]
+                        <h3 class="text-xl font-serif text-white">Onyx Gold Hex</h3>
+                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">Statement Series</p>
+                        <p class="text-zoga-red font-medium mt-3">$340</p>
                     </div>
                 </div>
 
-                <!-- Eyewear Item 5 -->
                 <div class="product-item reveal" style="transition-delay: 500ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">New Stock</div>
-                        <img src="product photos/IMG_6938.PNG" alt="Bronze Rimless Elegance" class="product-img">[cite: 3]
+                        <img src="product photos/IMG_6938.PNG" alt="Bronze Rimless Elegance" class="product-img">
                         <div class="product-overlay">
                             <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
                         </div>
                     </div>
                     <div class="mt-6 text-center">
-                        <h3 class="text-xl font-serif text-white">Bronze Rimless Elegance</h3>[cite: 3]
-                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">Gradient Tint</p>[cite: 3]
-                        <p class="text-zoga-red font-medium mt-3">$360</p>[cite: 3]
+                        <h3 class="text-xl font-serif text-white">Bronze Rimless Elegance</h3>
+                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">Gradient Tint</p>
+                        <p class="text-zoga-red font-medium mt-3">$360</p>
                     </div>
                 </div>
 
-                <!-- Eyewear Item 6 -->
                 <div class="product-item reveal" style="transition-delay: 600ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">New Stock</div>
-                        <img src="product photos/IMG_6939.PNG" alt="Stealth Matte Aviator" class="product-img">[cite: 3]
+                        <img src="product photos/IMG_6939.PNG" alt="Stealth Matte Aviator" class="product-img">
                         <div class="product-overlay">
                             <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
                         </div>
                     </div>
                     <div class="mt-6 text-center">
-                        <h3 class="text-xl font-serif text-white">Stealth Matte Aviator</h3>[cite: 3]
-                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">Matte Finish</p>[cite: 3]
-                        <p class="text-zoga-red font-medium mt-3">$320</p>[cite: 3]
+                        <h3 class="text-xl font-serif text-white">Stealth Matte Aviator</h3>
+                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">Matte Finish</p>
+                        <p class="text-zoga-red font-medium mt-3">$320</p>
                     </div>
                 </div>
 
@@ -1007,10 +993,17 @@
         <section id="heritage" class="py-24 bg-zoga-dark mt-12">
             <div class="max-w-[1400px] mx-auto px-6 md:px-12">
                 <div class="flex flex-col lg:flex-row items-center gap-16">
-                    <div class="lg:w-1/2 img-zoom-container reveal rounded-xl overflow-hidden shadow-2xl">
-                        <div class="relative w-full aspect-[4/3] min-h-[320px] overflow-hidden rounded-xl bg-black/15">
-                            <div class="absolute inset-0 bg-[url('2.jpg')] bg-cover bg-center blur-2xl opacity-75 scale-110"></div>
-                            <img src="2.jpg" alt="Creative Craftsmanship" class="absolute inset-0 w-full h-full object-contain z-10 opacity-100 transition-opacity duration-1000">
+                    <div class="lg:w-1/2 reveal">
+                        <div id="heritage-slideshow" class="relative w-full aspect-[4/3] min-h-[320px] rounded-xl overflow-hidden shadow-2xl bg-black/15 group">
+                            <!-- Slides -->
+                            <img src="https://lh3.googleusercontent.com/d/1wNk25XTzxlBWpcTb0gu9fQpzNs3S9wAU" alt="Heritage Craft 1" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-100 active-slide frame-slide">
+                            <img src="https://lh3.googleusercontent.com/d/18SgN_UhedWTuFHR4vJWgnUlRewLjiIQ1" alt="Heritage Craft 2" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0 frame-slide">
+                            
+                            <!-- Controls -->
+                            <div class="slideshow-controls">
+                                <button class="slideshow-dot active-dot" onclick="setHeritageSlide(0)" aria-label="Slide 1"></button>
+                                <button class="slideshow-dot" onclick="setHeritageSlide(1)" aria-label="Slide 2"></button>
+                            </div>
                         </div>
                     </div>
                     <div class="lg:w-1/2 space-y-8 reveal" style="transition-delay: 200ms;">
@@ -1033,8 +1026,9 @@
             </div>
         </section>
 
+        <!-- Editorial Section -->
         <section class="w-full h-[60vh] relative flex items-center justify-center img-zoom-container">
-            <img src="8.jpg" alt="Editorial" class="absolute inset-0 w-full h-full object-cover object-top opacity-70 img-zoom">
+            <img src="https://lh3.googleusercontent.com/d/1u5BdQpYuaDpstUkto_ejwkvkb1gdlvH9" alt="Editorial" class="absolute inset-0 w-full h-full object-cover object-top opacity-70 img-zoom">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/80 pointer-events-none"></div>
             <div class="relative z-10 text-center text-white px-4 reveal">
                 <h2 class="text-3xl md:text-5xl lg:text-6xl font-serif italic mb-8 drop-shadow-lg">"Elegance is an attitude."</h2>
@@ -1116,31 +1110,30 @@
                         <textarea id="newsletter-message" rows="3" placeholder="Write your message..." class="w-full bg-transparent border border-white/10 rounded-xl px-3 py-2 text-sm text-white placeholder-gray-500 outline-none focus:border-zoga-red transition-colors"></textarea>
                     </form>
                     <div class="flex space-x-6 mt-8">
-                        <a href="https://www.instagram.com/zogafashions?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="insta-link" target="_blank" rel="noopener noreferrer">
-                            <i data-lucide="instagram" class="w-5 h-5 insta-icon"></i>
-                            <span class="insta-badge">@zogafashions</span>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-zoga-red transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-zoga-red transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-                    </div>
-                </div>
-            </div>
+        <script>
+        let currentHeritageIndex = 0;
+        function setHeritageSlide(index) {
+            const slides = document.querySelectorAll('#heritage-slideshow .frame-slide');
+            const dots = document.querySelectorAll('#heritage-slideshow .slideshow-dot');
+            
+            slides.forEach((s, i) => {
+                s.style.opacity = (i === index) ? '1' : '0';
+                s.classList.toggle('active-slide', i === index);
+            });
+            dots.forEach((d, i) => {
+                d.classList.toggle('active-dot', i === index);
+            });
+            currentHeritageIndex = index;
+        }
 
-            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-                <p>&copy; 2026 Zoga Luxury. All Rights Reserved.</p>
-                <div class="flex space-x-6">
-                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+        // Auto-play for heritage
+        setInterval(() => {
+            const next = (currentHeritageIndex + 1) % 2;
+            setHeritageSlide(next);
+        }, 5000);
 
-    <script>
-        // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Navbar Scroll Effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -1154,7 +1147,6 @@
             }
         });
 
-        // Scroll Reveal Animation (Intersection Observer)
         const revealElements = document.querySelectorAll('.reveal');
         const revealCallback = (entries, observer) => {
             entries.forEach(entry => {
@@ -1172,7 +1164,6 @@
         const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
         revealElements.forEach(el => revealObserver.observe(el));
         
-        // Trigger initial reveal for elements in viewport on load
         setTimeout(() => {
             revealElements.forEach(el => {
                 const rect = el.getBoundingClientRect();
@@ -1182,7 +1173,6 @@
             });
         }, 100);
 
-        // Newsletter form: open mail client with the entered email and message
         const newsletterForm = document.getElementById('newsletter-form');
         const newsletterEmail = document.getElementById('newsletter-email');
         const newsletterMessage = document.getElementById('newsletter-message');
@@ -1204,7 +1194,6 @@
             });
         }
 
-        // Splash overlay logic
         (function() {
             const splash = document.getElementById('splash-overlay');
             const splashLogo = document.getElementById('splash-logo');
@@ -1234,7 +1223,6 @@
             });
         })();
 
-        // Interactive Single-Frame Trio Slideshow Logic
         let currentTrioIndex = 0;
         let trioAutoplayTimer = null;
 
@@ -1243,7 +1231,6 @@
             const dots = document.querySelectorAll('#trio-watch-card .slideshow-dot');
             const swatches = document.querySelectorAll('#trio-watch-card .swatch-btn');
             const cardTitle = document.getElementById('trio-card-title');
-            const cardColor = document.getElementById('trio-card-color');
 
             if (!slides.length) return;
 
@@ -1256,9 +1243,6 @@
                     slide.classList.add('active-slide');
                     if (cardTitle && slide.dataset.title) {
                         cardTitle.textContent = slide.dataset.title;
-                    }
-                    if (cardColor && slide.dataset.color) {
-                        cardColor.textContent = slide.dataset.color;
                     }
                 } else {
                     slide.classList.remove('active-slide');
@@ -1295,7 +1279,6 @@
             startTrioAutoplay();
         }
 
-        // Initialize frame slideshow and pause on hover
         const trioCard = document.getElementById('trio-watch-card');
         if (trioCard) {
             startTrioAutoplay();
@@ -1303,7 +1286,6 @@
             trioCard.addEventListener('mouseleave', () => startTrioAutoplay());
         }
 
-        // Watch preview modal logic
         const watchModalBackdrop = document.getElementById('watch-modal-backdrop');
         const watchModalWindow = document.querySelector('.watch-modal-window');
         const watchModalSlides = document.querySelector('.watch-modal-slides');
