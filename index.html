@@ -10,7 +10,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" type="image/svg+xml" href="zoga-icon.svg">
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;0,900;1,400;1,600;1,800;1,900&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -193,27 +193,6 @@
             box-shadow: 0 18px 50px rgba(0,0,0,0.25);
             min-height: 220px;
             height: min(60vh, 360px);
-        }
-
-        .video-card video,
-        .video-card iframe {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            border: 0;
-            background: #000;
-        }
-
-        .video-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 1.25rem;
-            background: #000;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 18px 50px rgba(0,0,0,0.25);
-            min-height: 220px;
-            height: min(60vh, 360px);
             isolation: isolate;
         }
 
@@ -224,7 +203,8 @@
             background: #000;
         }
 
-        .video-shell video {
+        .video-shell video,
+        .video-shell iframe {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -424,7 +404,7 @@
             position: relative;
             overflow: hidden;
             border-radius: 1rem;
-            aspect-ratio: 4/5;
+            aspect-ratio: 3/4; /* Adjusted for better grid presentation */
             background: #f0ebe4;
         }
 
@@ -722,39 +702,6 @@
             opacity: 1;
             transform: scale(1);
         }
-        .insta-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            color: #d1d1d1;
-            text-decoration: none;
-            transition: transform .25s ease, color .25s ease;
-        }
-        .insta-link .insta-icon {
-            width: 1.25rem;
-            height: 1.25rem;
-            display: inline-block;
-            transition: transform .35s cubic-bezier(.2,.8,.2,1);
-        }
-        .insta-link:hover {
-            color: #e60000;
-            transform: translateY(-3px);
-        }
-        .insta-badge {
-            font-size: 0.9rem;
-            opacity: 0;
-            transform: translateY(6px);
-            animation: fadeUp 600ms ease forwards 400ms;
-        }
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulseInsta {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.06); }
-            100% { transform: scale(1); }
-        }
-        .insta-link:hover .insta-icon { animation: pulseInsta 600ms ease; }
 
         /* Watch Quick Overview Modal */
         .watch-modal-backdrop {
@@ -1041,14 +988,13 @@
         </div>
         
         <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
-            <a href="#watches" class="text-white/50 hover:text-white transition-colors">
+            <a href="#watches-collection" class="text-white/50 hover:text-white transition-colors">
                 <i data-lucide="chevron-down" class="w-6 h-6"></i>
             </a>
         </div>
     </header>
 
     <main>
-      
         <section class="py-6 px-6 md:px-12 max-w-[1400px] mx-auto">
             <div class="video-showcase">
                 <div class="video-card reveal">
@@ -1098,8 +1044,8 @@
         </section>
 
         <!-- Watches Product Collection -->
-        <section id="watches-collection" class="py-24 px-6 md:px-12 max-w-[1400px] mx-auto content-panel mt-12">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+        <section id="watches-collection" class="py-24 px-4 md:px-12 max-w-[1400px] mx-auto content-panel mt-12">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal px-2">
                 <div>
                     <p class="text-zoga-red tracking-widest uppercase text-sm mb-2 font-medium">Crafted Precision</p>
                     <h2 class="text-4xl md:text-5xl font-serif italic section-heading">Timeless Watches</h2>
@@ -1110,18 +1056,18 @@
                 </a>
             </div>
 
-            <!-- Watches Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Watches Grid - UPDATED to grid-cols-2 -->
+            <div class="grid grid-cols-2 gap-4 md:gap-8">
                 
-                <div class="product-item reveal group" id="trio-watch-card" style="transition-delay: 100ms;">
-                    <div class="product-img-wrap">
-                        <div class="tag-new">New Stock</div>
+                <div class="product-item p-3 md:p-5 reveal group" id="trio-watch-card" style="transition-delay: 100ms;">
+                    <div class="product-img-wrap rounded-lg">
+                        <div class="tag-new hidden sm:block">New Stock</div>
 
-                        <button class="slideshow-arrow prev" onclick="changeTrioSlide(-1)" aria-label="Previous Slide">
-                            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                        <button class="slideshow-arrow prev opacity-0 sm:opacity-100" onclick="changeTrioSlide(-1)" aria-label="Previous Slide">
+                            <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i>
                         </button>
-                        <button class="slideshow-arrow next" onclick="changeTrioSlide(1)" aria-label="Next Slide">
-                            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                        <button class="slideshow-arrow next opacity-0 sm:opacity-100" onclick="changeTrioSlide(1)" aria-label="Next Slide">
+                            <i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i>
                         </button>
 
                         <div class="frame-slideshow-container">
@@ -1130,70 +1076,82 @@
                             <img src="product photos/IMG_6942.PNG" alt="Denvosi Auburn Diamond Chrono" class="frame-slide" data-title="Auburn Diamond Chrono" data-color="Auburn Brown">
                         </div>
 
-                        <div class="slideshow-controls">
+                        <div class="slideshow-controls scale-75 md:scale-100 bottom-2">
                             <button class="slideshow-dot active-dot" onclick="setTrioSlide(0)" aria-label="Slide 1"></button>
                             <button class="slideshow-dot" onclick="setTrioSlide(1)" aria-label="Slide 2"></button>
                             <button class="slideshow-dot" onclick="setTrioSlide(2)" aria-label="Slide 3"></button>
                         </div>
 
                         <div class="product-overlay">
-                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick View</button>
                         </div>
                     </div>
 
-                    <div class="mt-6 text-center">
-                        <h3 id="trio-card-title" class="text-xl font-serif text-white group-hover:text-zoga-red transition-colors">DENVOSI Tonneau Watch</h3>
-                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">DENVOSI &bull; Rose Gold & White</p>
-                        <p class="text-sm text-gray-400 mt-2">Dial: Crystal-studded Skeleton-style • Strap: White leather</p>
-                        <p class="text-sm text-gray-400 mt-1">Features: Date Display • Rhinestone bezel</p>
+                    <div class="mt-4 text-center">
+                        <h3 id="trio-card-title" class="text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors truncate px-1">DENVOSI Tonneau Watch</h3>
+                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest truncate">DENVOSI</p>
                         
-                        <div class="color-swatch-bar">
+                        <div class="color-swatch-bar mt-2 mb-2 scale-75 md:scale-100">
                             <button class="swatch-btn active-swatch bg-black" onclick="setTrioSlide(0)" title="Obsidian Black"></button>
                             <button class="swatch-btn bg-stone-100" onclick="setTrioSlide(1)" title="Pearl White"></button>
                             <button class="swatch-btn bg-amber-900" onclick="setTrioSlide(2)" title="Auburn Brown"></button>
                         </div>
 
-                        <p class="text-zoga-red font-medium mt-3">₹1,900/-</p>
+                        <p class="text-zoga-red text-sm md:text-base font-medium mt-1">₹1,900/-</p>
                     </div>
                 </div>
 
-                <div class="product-item reveal" style="transition-delay: 200ms;">
-                    <div class="product-img-wrap">
-                        <div class="tag-new">New Stock</div>
+                <div class="product-item p-3 md:p-5 reveal" style="transition-delay: 200ms;">
+                    <div class="product-img-wrap rounded-lg">
+                        <div class="tag-new hidden sm:block">New Stock</div>
                         <img src="product photos/IMG_6986.PNG" alt="Seiko Rose Gold Diver" class="product-img">
                         <div class="product-overlay">
-                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick View</button>
                         </div>
                     </div>
-                    <div class="mt-6 text-center">
-                        <h3 class="text-xl font-serif text-white group-hover:text-zoga-red transition-colors">SEIKO Diver-style Watch</h3>
-                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">SEIKO</p>
-                        <p class="text-sm text-gray-400 mt-2">Dial: Brown • Case: Rose Gold • Bezel: Rotating-style • Strap: Silicone/Rubber</p>
-                        <p class="text-zoga-red font-medium mt-3">₹1,100/-</p>
+                    <div class="mt-4 text-center">
+                        <h3 class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">SEIKO Diver-style</h3>
+                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest">SEIKO</p>
+                        <p class="text-zoga-red text-sm md:text-base font-medium mt-2">₹1,100/-</p>
                     </div>
                 </div>
 
-                <div class="product-item reveal" style="transition-delay: 300ms;">
-                    <div class="product-img-wrap">
-                        <div class="tag-new">New Stock</div>
+                <div class="product-item p-3 md:p-5 reveal" style="transition-delay: 300ms;">
+                    <div class="product-img-wrap rounded-lg">
                         <img src="product photos/IMG_6987.PNG" alt="Casio Classic Silver" class="product-img">
                         <div class="product-overlay">
-                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick View</button>
                         </div>
                     </div>
-                    <div class="mt-6 text-center">
-                        <h3 class="text-xl font-serif text-white group-hover:text-zoga-red transition-colors">Casio</h3>
-                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">Casio</p>
-                        <p class="text-zoga-red font-medium mt-3">₹500/-</p>
+                    <div class="mt-4 text-center">
+                        <h3 class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">Casio Classic</h3>
+                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest">Casio</p>
+                        <p class="text-zoga-red text-sm md:text-base font-medium mt-2">₹500/-</p>
+                    </div>
+                </div>
+                
+                 <!-- Placeholder to keep the grid even if needed -->
+                 <div class="product-item p-3 md:p-5 reveal opacity-50 border-dashed" style="transition-delay: 400ms;">
+                    <div class="product-img-wrap rounded-lg flex items-center justify-center bg-gray-900">
+                        <span class="text-gray-500 text-sm">More coming soon</span>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <h3 class="text-sm md:text-xl font-serif text-gray-500 truncate px-1">Upcoming Collection</h3>
                     </div>
                 </div>
 
             </div>
+            
+            <div class="mt-10 text-center md:hidden">
+                <a href="watch.html" class="btn-secondary w-full">
+                    View All Watches
+                </a>
+            </div>
         </section>
 
         <!-- Eyewear Product Collection -->
-        <section id="eyewear-collection" class="py-24 px-6 md:px-12 max-w-[1400px] mx-auto content-panel mt-12">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+        <section id="eyewear-collection" class="py-24 px-4 md:px-12 max-w-[1400px] mx-auto content-panel mt-12 mb-12">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal px-2">
                 <div>
                     <p class="text-zoga-red tracking-widest uppercase text-sm mb-2 font-medium">Visionary Design</p>
                     <h2 class="text-4xl md:text-5xl font-serif italic section-heading">Luxury Eyewear</h2>
@@ -1204,99 +1162,73 @@
                 </a>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Eyewear Grid - UPDATED to grid-cols-2 -->
+            <div class="grid grid-cols-2 gap-4 md:gap-8">
                 
-                <div class="product-item reveal" style="transition-delay: 100ms;">
-                    <div class="product-img-wrap">
-                        <div class="tag-new">New Stock</div>
+                <div class="product-item p-3 md:p-5 reveal" style="transition-delay: 100ms;">
+                    <div class="product-img-wrap rounded-lg">
+                        <div class="tag-new hidden sm:block">New Stock</div>
                         <img src="product photos/IMG_6934.PNG" alt="Classic Gold Aviator" class="product-img">
                         <div class="product-overlay">
-                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick View</button>
                         </div>
                     </div>
-                    <div class="mt-6 text-center">
-                        <h3 class="text-xl font-serif text-white">Classic Gold Aviator</h3>
-                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">Polarized</p>
-                        <p class="text-zoga-red font-medium mt-3">$320</p>
+                    <div class="mt-4 text-center">
+                        <h3 class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">Classic Gold Aviator</h3>
+                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest truncate">Polarized</p>
+                        <p class="text-zoga-red text-sm md:text-base font-medium mt-2">$320</p>
                     </div>
                 </div>
 
-                <div class="product-item reveal" style="transition-delay: 200ms;">
-                    <div class="product-img-wrap">
-                        <div class="tag-new">New Stock</div>
-                        <img src="product photos/IMG_6935.PNG" alt="Shades" class="product-img">
+                <div class="product-item p-3 md:p-5 reveal" style="transition-delay: 200ms;">
+                    <div class="product-img-wrap rounded-lg">
+                        <img src="product photos/IMG_6935.PNG" alt="Clear Frame Shades" class="product-img">
                         <div class="product-overlay">
-                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick View</button>
                         </div>
                     </div>
-                    <div class="mt-6 text-center">
-                        <h3 class="text-xl font-serif text-white">Shades</h3>
-                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">Clear Frame</p>
-                        <p class="text-zoga-red font-medium mt-3">₹500</p>
-                        <a href="https://www.instagram.com/zogafashions/p/DbIVfkpEZeW/?" target="_blank" rel="noopener noreferrer" class="btn-secondary inline-flex items-center justify-center mt-4">Buy</a>
+                    <div class="mt-4 text-center flex flex-col items-center">
+                        <h3 class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1 w-full">Clear Shades</h3>
+                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest">Clear Frame</p>
+                        <p class="text-zoga-red text-sm md:text-base font-medium mt-2">₹500</p>
                     </div>
                 </div>
 
-                <div class="product-item reveal" style="transition-delay: 300ms;">
-                    <div class="product-img-wrap">
-                        <div class="tag-new">New Stock</div>
+                <div class="product-item p-3 md:p-5 reveal" style="transition-delay: 300ms;">
+                    <div class="product-img-wrap rounded-lg">
                         <img src="product photos/IMG_6936.PNG" alt="Silver Chrome Aviator" class="product-img">
                         <div class="product-overlay">
-                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick View</button>
                         </div>
                     </div>
-                    <div class="mt-6 text-center">
-                        <h3 class="text-xl font-serif text-white">Silver Chrome Aviator</h3>
-                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">UV Protection</p>
-                        <p class="text-zoga-red font-medium mt-3">$310</p>
+                    <div class="mt-4 text-center">
+                        <h3 class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">Silver Chrome</h3>
+                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest truncate">UV Protection</p>
+                        <p class="text-zoga-red text-sm md:text-base font-medium mt-2">$310</p>
                     </div>
                 </div>
 
-                <div class="product-item reveal" style="transition-delay: 400ms;">
-                    <div class="product-img-wrap">
-                        <div class="tag-new">New Stock</div>
+                <div class="product-item p-3 md:p-5 reveal" style="transition-delay: 400ms;">
+                    <div class="product-img-wrap rounded-lg">
+                        <div class="tag-new hidden sm:block">New Stock</div>
                         <img src="product photos/IMG_6937.PNG" alt="Onyx Gold Hex" class="product-img">
                         <div class="product-overlay">
-                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick View</button>
                         </div>
                     </div>
-                    <div class="mt-6 text-center">
-                        <h3 class="text-xl font-serif text-white">Onyx Gold Hex</h3>
-                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">Statement Series</p>
-                        <p class="text-zoga-red font-medium mt-3">$340</p>
+                    <div class="mt-4 text-center">
+                        <h3 class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">Onyx Gold Hex</h3>
+                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest truncate">Statement Series</p>
+                        <p class="text-zoga-red text-sm md:text-base font-medium mt-2">$340</p>
                     </div>
                 </div>
 
-                <div class="product-item reveal" style="transition-delay: 500ms;">
-                    <div class="product-img-wrap">
-                        <div class="tag-new">New Stock</div>
-                        <img src="product photos/IMG_6938.PNG" alt="Bronze Rimless Elegance" class="product-img">
-                        <div class="product-overlay">
-                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
-                        </div>
-                    </div>
-                    <div class="mt-6 text-center">
-                        <h3 class="text-xl font-serif text-white">Bronze Rimless Elegance</h3>
-                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">Gradient Tint</p>
-                        <p class="text-zoga-red font-medium mt-3">$360</p>
-                    </div>
-                </div>
-
-                <div class="product-item reveal" style="transition-delay: 600ms;">
-                    <div class="product-img-wrap">
-                        <div class="tag-new">New Stock</div>
-                        <img src="product photos/IMG_6939.PNG" alt="Stealth Matte Aviator" class="product-img">
-                        <div class="product-overlay">
-                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
-                        </div>
-                    </div>
-                    <div class="mt-6 text-center">
-                        <h3 class="text-xl font-serif text-white">Stealth Matte Aviator</h3>
-                        <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">Matte Finish</p>
-                        <p class="text-zoga-red font-medium mt-3">$320</p>
-                    </div>
-                </div>
-
+            </div>
+            
+            <div class="mt-10 text-center md:hidden">
+                <a href="eyewear.html" class="btn-secondary w-full">
+                    View All Eyewear
+                </a>
             </div>
         </section>
 
@@ -1304,7 +1236,7 @@
         <section id="heritage" class="py-24 bg-zoga-dark mt-12">
             <div class="max-w-[1400px] mx-auto px-6 md:px-12">
                 <div class="flex flex-col lg:flex-row items-center gap-16">
-                    <div class="lg:w-1/2 reveal">
+                    <div class="lg:w-1/2 reveal w-full">
                         <div id="heritage-slideshow" class="relative w-full aspect-[4/3] min-h-[320px] rounded-xl overflow-hidden shadow-2xl bg-black/15 group">
                             <!-- Slides -->
                             <img src="https://lh3.googleusercontent.com/d/1wNk25XTzxlBWpcTb0gu9fQpzNs3S9wAU" alt="Heritage Craft 1" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-100 active-slide frame-slide">
@@ -1420,8 +1352,19 @@
                         </div>
                         <textarea id="newsletter-message" rows="3" placeholder="Write your message..." class="w-full bg-transparent border border-white/10 rounded-xl px-3 py-2 text-sm text-white placeholder-gray-500 outline-none focus:border-zoga-red transition-colors"></textarea>
                     </form>
-                    <div class="flex space-x-6 mt-8">
-        <script>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-xs tracking-widest uppercase">© 2024 Zoga. All Rights Reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors text-xs uppercase tracking-widest">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors text-xs uppercase tracking-widest">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
         let currentHeritageIndex = 0;
         function setHeritageSlide(index) {
             const slides = document.querySelectorAll('#heritage-slideshow .frame-slide');
@@ -1770,7 +1713,7 @@
             }
         });
 
-        document.querySelectorAll('#watches-collection .quick-view-btn').forEach(button => {
+        document.querySelectorAll('#watches-collection .quick-view-btn, #eyewear-collection .quick-view-btn').forEach(button => {
             button.addEventListener('click', event => {
                 const card = event.target.closest('.product-item');
                 if (card) {
