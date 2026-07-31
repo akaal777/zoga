@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#050505">
+    <title>Zoga | The Watch Collection</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;0,900;1,400;1,600;1,800;1,900&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Jost', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        zoga: {
+                            red: '#e60000',
+                            black: '#050505',
+                            dark: '#111111',
+                            gray: '#222222',
+                            light: '#f4f4f4'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            color-scheme: dark;
+            --zoga-red: #e60000;
+            --zoga-black: #050505;
+        }
+
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+        body {
+            min-height: 100vh;
+            background-color: #050505;
+            background-image: radial-gradient(circle at 20% 10%, rgba(230,0,0,0.12), transparent 18%), radial-gradient(circle at 85% 90%, rgba(255,255,255,0.05), transparent 18%), linear-gradient(135deg, #050505 0%, #090909 100%);
+            color: #f5f5f5;
+            overflow-x: hidden;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 30% 22%, rgba(230,0,0,0.12), transparent 22%), radial-gradient(circle at 82% 75%, rgba(255,255,255,0.04), transparent 20%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Buttons & Typography */
+        .btn-accent {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            border: 1px solid rgba(255,255,255,0.18);
+            background: rgba(255,255,255,0.08);
+            color: #ffffff;
+            text-transform: uppercase;
+            font-weight: 700;
+            border-radius: 999px;
+            box-shadow: 0 18px 45px rgba(0,0,0,0.24);
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+            
+            /* Responsive Sizing */
+            padding: 0.75rem 1.5rem;
+            letter-spacing: 0.15em;
+            font-size: 0.65rem;
+        }
+        @media (min-width: 768px) {
+            .btn-accent {
+                padding: 0.95rem 2rem;
+                letter-spacing: 0.24em;
+                font-size: 0.8rem;
+            }
+        }
+        
+        .btn-accent:hover {
+            color: #050505;
+            background: var(--zoga-red);
+            border-color: var(--zoga-red);
+            transform: translateY(-2px);
+            box-shadow: 0 22px 55px rgba(230,0,0,0.38);
+        }
+
+        .section-heading { position: relative; }
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.75rem;
+            width: 3rem;
+            height: 2px;
+            border-radius: 999px;
+            background: rgba(230,0,0,0.85);
+        }
+        @media (min-width: 768px) {
+            .section-heading::after { bottom: -1rem; width: 4rem; }
+        }
+
+        .brand-logo {
+            font-family: 'Playfair Display', serif;
+            color: var(--zoga-red);
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: -0.05em;
+            text-transform: lowercase;
+            line-height: 1;
+            transform: scaleY(1.1);
+            text-shadow: 0 16px 40px rgba(230,0,0,0.12);
+        }
+
+        .content-panel {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+            backdrop-filter: blur(18px);
+            border-radius: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .content-panel { border-radius: 2rem; }
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Slideshow */
+        .hero-overlay {
+            background: linear-gradient(to top, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.25) 50%, rgba(5,5,5,0.75) 100%);
+        }
+        .hero-slideshow {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0;
+            animation: kenburns 30s infinite;
+            transition: opacity 1s ease-in-out, transform 8s ease-in-out;
+        }
+        .slide:nth-child(1) { animation-delay: 0s; }
+        .slide:nth-child(2) { animation-delay: 6s; }
+        .slide:nth-child(3) { animation-delay: 12s; }
+        .slide:nth-child(4) { animation-delay: 18s; }
+
+        @keyframes kenburns {
+            0% { opacity: 0; transform: scale(1.05); }
+            5% { opacity: 0.92; transform: scale(1.08); }
+            20% { opacity: 0.92; transform: scale(1.12); }
+            25% { opacity: 0; transform: scale(1.15); }
+            100% { opacity: 0; transform: scale(1.15); }
+        }
+
+        /* Splash Screen */
+        #splash-overlay { transition: opacity 800ms ease, visibility 800ms ease; }
+        #splash-logo { will-change: transform, opacity; animation: splash-zoom 2200ms cubic-bezier(.2,.9,.2,1) forwards; }
+        @keyframes splash-zoom {
+            0% { transform: scale(1); opacity: 1; }
+            30% { transform: scale(1.05); opacity: 1; }
+            70% { transform: scale(3.6); opacity: 0.9; }
+            100% { transform: scale(8); opacity: 0; }
+        }
+
+        /* Product Cards - Mobile Optimized */
+        .product-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 0.5rem; /* Tighter padding for mobile grid */
+            border-radius: 1rem;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        @media (min-width: 768px) {
+            .product-item {
+                padding: 1.25rem;
+                border-radius: 1.5rem;
+            }
+        }
+        .product-item:hover {
+            transform: translateY(-8px);
+            border-color: rgba(230, 0, 0, 0.35);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+        .product-img-wrap {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            aspect-ratio: 4/5;
+            background: #f0ebe4;
+        }
+        @media (min-width: 768px) {
+            .product-img-wrap { border-radius: 1rem; }
+        }
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .product-item:hover .product-img { transform: scale(1.08); }
+        
+        .product-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 15;
+        }
+        /* Make overlays slightly visible or activate on touch for mobile */
+        @media (hover: none) {
+            .product-overlay { opacity: 0; }
+            .product-item:active .product-overlay { opacity: 1; }
+        }
+        .product-item:hover .product-overlay { opacity: 1; }
+
+        .quick-view-btn {
+            transform: translateY(15px);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            /* Scale for smaller grid */
+            padding: 0.5rem 1rem;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+        }
+        @media (min-width: 768px) {
+            .quick-view-btn {
+                padding: 0.95rem 2rem;
+                font-size: 0.8rem;
+                letter-spacing: 0.24em;
+            }
+        }
+        .product-item:hover .quick-view-btn, .product-item:active .quick-view-btn { transform: translateY(0); }
+        
+        .tag-new {
+            position: absolute;
+            top: 0.5rem;
+            left: 0.5rem;
+            background: var(--zoga-red);
+            color: #ffffff;
+            font-size: 0.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            z-index: 20;
+            box-shadow: 0 4px 18px rgba(230,0,0,0.4);
+            backdrop-filter: blur(6px);
+        }
+        @media (min-width: 768px) {
+            .tag-new {
+                top: 1rem;
+                left: 1rem;
+                font-size: 0.65rem;
+                letter-spacing: 0.22em;
+                padding: 0.4rem 0.85rem;
+                border-radius: 0.35rem;
+            }
+        }
+
+        /* Frame Slideshow inside product card */
+        .frame-slideshow-container { position: relative; width: 100%; height: 100%; }
+        .frame-slide {
+            position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+            opacity: 0; transform: scale(1.04);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+        .frame-slide.active-slide { opacity: 1; transform: scale(1); pointer-events: auto; }
+        
+        .slideshow-controls {
+            position: absolute; bottom: 0.5rem; left: 50%; transform: translateX(-50%);
+            display: flex; align-items: center; gap: 0.3rem; z-index: 25;
+            background: rgba(5, 5, 5, 0.6); padding: 0.3rem 0.5rem; border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.15); backdrop-filter: blur(12px);
+        }
+        @media (min-width: 768px) {
+            .slideshow-controls { bottom: 1rem; gap: 0.6rem; padding: 0.4rem 0.8rem; }
+        }
+
+        .slideshow-dot {
+            width: 0.35rem; height: 0.35rem; border-radius: 999px;
+            background: rgba(255, 255, 255, 0.35); transition: all 0.4s ease; cursor: pointer; border: none; padding: 0;
+        }
+        .slideshow-dot.active-dot { background: var(--zoga-red); width: 1rem; }
+        @media (min-width: 768px) {
+            .slideshow-dot { width: 0.5rem; height: 0.5rem; }
+            .slideshow-dot.active-dot { width: 1.5rem; }
+        }
+        
+        .slideshow-arrow {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 1.75rem; height: 1.75rem; border-radius: 999px;
+            background: rgba(5, 5, 5, 0.5); border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff; display: flex; align-items: center; justify-content: center;
+            z-index: 25; opacity: 0; transition: all 0.3s ease; backdrop-filter: blur(8px); cursor: pointer;
+        }
+        @media (min-width: 768px) { .slideshow-arrow { width: 2.25rem; height: 2.25rem; } }
+
+        .product-img-wrap:hover .slideshow-arrow { opacity: 1; }
+        .slideshow-arrow:hover { background: var(--zoga-red); border-color: var(--zoga-red); transform: translateY(-50%) scale(1.1); }
+        .slideshow-arrow.prev { left: 0.5rem; }
+        .slideshow-arrow.next { right: 0.5rem; }
+
+        .color-swatch-bar { display: flex; align-items: center; justify-content: center; gap: 0.4rem; margin-top: 0.5rem; }
+        @media (min-width: 768px) { .color-swatch-bar { gap: 0.6rem; margin-top: 0.85rem; } }
+
+        .swatch-btn {
+            width: 0.6rem; height: 0.6rem; border-radius: 999px; border: 2px solid transparent;
+            outline: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.3s ease; cursor: pointer;
+        }
+        @media (min-width: 768px) { .swatch-btn { width: 0.85rem; height: 0.85rem; } }
+        .swatch-btn.active-swatch { outline: 2px solid var(--zoga-red); outline-offset: 2px; transform: scale(1.2); }
+
+        /* Modal Styles */
+        .watch-modal-backdrop {
+            position: fixed; inset: 0; z-index: 80; display: flex; align-items: center; justify-content: center;
+            padding: 1.25rem; background: rgba(0, 0, 0, 0.82);
+        }
+        .watch-modal-window {
+            position: relative; width: min(90vw, 520px); max-width: 100%; border-radius: 1.75rem; overflow: hidden;
+            background: rgba(5, 5, 5, 0.96); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
+        }
+        .watch-modal-content { position: relative; width: 100%; background: #050505; }
+        .watch-modal-slide { width: 100%; display: none; object-fit: cover; aspect-ratio: 1 / 1; background: #050505; }
+        .watch-modal-slide.active-modal-slide { display: block; }
+        .watch-modal-footer { padding: 1rem 1.25rem 1.25rem; text-align: center; background: rgba(5,5,5,0.95); border-top: 1px solid rgba(255,255,255,0.08); }
+        .watch-modal-footer p { margin: 0; color: #d1d1d1; letter-spacing: 0.18em; text-transform: uppercase; font-size: 0.85rem; }
+        .watch-modal-close {
+            position: absolute; top: 0.85rem; right: 0.85rem; width: 2.5rem; height: 2.5rem;
+            display: inline-flex; align-items: center; justify-content: center; border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.18); background: rgba(0,0,0,0.62); color: #ffffff; cursor: pointer; z-index: 2; transition: all 0.25s ease;
+        }
+        .watch-modal-close:hover { background: rgba(230,0,0,0.9); transform: scale(1.05); }
+        .watch-modal-nav {
+            position: absolute; top: 50%; transform: translateY(-50%); width: 3rem; height: 3rem;
+            display: inline-flex; align-items: center; justify-content: center; border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.18); background: rgba(0,0,0,0.6); color: #ffffff; cursor: pointer; z-index: 2; transition: all 0.25s ease;
+        }
+        .watch-modal-nav:hover { background: rgba(230,0,0,0.9); transform: translateY(-50%) scale(1.05); }
+        .watch-modal-prev { left: 0.85rem; }
+        .watch-modal-next { right: 0.85rem; }
+        .watch-modal-backdrop.hidden { display: none; }
+
+        /* Mobile Menu */
+        .mobile-menu-panel {
+            position: fixed; top: 0; right: 0; width: min(84vw, 320px); height: 100vh; padding: 5.5rem 1.25rem 1.5rem;
+            background: rgba(5, 5, 5, 0.72); backdrop-filter: blur(24px); border-left: 1px solid rgba(255,255,255,0.14);
+            box-shadow: -12px 0 40px rgba(0, 0, 0, 0.35); transform: translateX(100%); transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1); z-index: 60; display: flex; flex-direction: column; gap: 1rem;
+        }
+        .mobile-menu-panel.open { transform: translateX(0); }
+        .mobile-menu-panel .mobile-nav-link { opacity: 0; transform: translateX(18px); transition: all 0.25s ease; }
+        .mobile-menu-panel.open .mobile-nav-link { opacity: 1; transform: translateX(0); }
+        .mobile-menu-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.62); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; z-index: 55; }
+        .mobile-menu-overlay.open { opacity: 1; pointer-events: auto; }
+        .mobile-menu-toggle {
+            width: 2.7rem; height: 2.7rem; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.28rem;
+            border-radius: 999px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); transition: all 0.25s ease; padding: 0;
+        }
+        .mobile-menu-toggle .hamburger-line { display: block; width: 1.1rem; height: 2px; border-radius: 999px; background: #fff; transition: all 0.28s ease; }
+        .mobile-menu-toggle.active .hamburger-line:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .mobile-menu-toggle.active .hamburger-line:nth-child(2) { opacity: 0; transform: translateX(-4px); }
+        .mobile-menu-toggle.active .hamburger-line:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="splash-overlay" aria-hidden="true" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#050505;z-index:9999;">
+        <div id="splash-logo" class="brand-logo" style="color:#e60000;font-size:4rem;letter-spacing:-0.05em;transform-origin:center;">
+            zoga
+        </div>
+    </div>
+
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay" aria-hidden="true"></div>
+
+    <div id="mobile-menu-panel" class="mobile-menu-panel" aria-label="Mobile navigation">
+        <button id="mobile-menu-close" class="self-end text-white hover:text-zoga-red transition-colors" aria-label="Close menu">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+        <a href="index.html" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Home</a>
+        <a href="#all-watches" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Watches</a>        <a href="#girls-watches" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Girls Watches</a>
+        <a href="#footer-contact" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Contact</a>
+    </div>
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 bg-transparent py-4">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="hidden md:flex space-x-8 items-center text-sm font-medium tracking-widest uppercase">
+                <a href="index.html" class="hover:text-zoga-red transition-colors duration-300">Home</a>
+                <a href="#all-watches" class="text-zoga-red transition-colors duration-300">Watches</a>
+                <a href="#girls-watches" class="hover:text-zoga-red transition-colors duration-300">Girls Watches</a>
+            </div>
+
+            <button id="mobile-menu-toggle" class="mobile-menu-toggle md:hidden" aria-label="Open menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <div class="absolute left-1/2 transform -translate-x-1/2">
+                <a href="index.html" class="brand-logo text-4xl md:text-5xl drop-shadow-lg">zoga</a>
+            </div>
+
+            <div class="flex space-x-5 items-center">
+                <button class="hover:text-zoga-red transition-colors duration-300 hidden sm:block">
+                    <i data-lucide="search" class="w-5 h-5"></i>
+                </button>
+                <button class="hover:text-zoga-red transition-colors duration-300 hidden sm:block">
+                    <i data-lucide="user" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECTION 1: HEADER (Shoot Photos) -->
+    <header class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
+        <div class="hero-slideshow">
+            <img src="second person/DSC_4863.JPG.jpeg" class="slide" alt="Lifestyle Watch Shoot 1" onerror="this.src='https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=1200&q=80'">
+            <img src="second person/DSC_4956.JPG" class="slide" alt="Lifestyle Watch Shoot 2" onerror="this.src='https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1200&q=80'">
+            <img src="second person/DSC_4933.JPG.jpeg" class="slide" alt="Macro Watch Details Shoot" onerror="this.src='https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?auto=format&fit=crop&w=1200&q=80'">
+            <img src="first person/DSC_4897.JPG" class="slide" alt="Elegant Wrist Watch Shoot" onerror="this.src='https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=1200&q=80'">
+            <img src="first person/DSC_4815.JPG" class="slide" alt="Elegant Wrist Watch Shoot" onerror="this.src='https://images.unsplash.com/photo-1587836374828-cb4387df3eb7?auto=format&fit=crop&w=1200&q=80'">
+        </div>
+        <div class="absolute inset-0 hero-overlay z-10 pointer-events-none"></div>
+
+        <div class="relative z-20 text-center px-4 mb-48 md:mb-0 md:mt-20 hero-info">
+            <p class="text-sm md:text-base tracking-[0.3em] uppercase mb-4 text-gray-300 reveal">The Masterpieces</p>
+            <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-medium mb-8 text-white tracking-tight reveal drop-shadow-2xl section-heading" style="transition-delay: 200ms;">
+                Horological <span class="italic text-zoga-red">Excellence</span>
+            </h1>
+            <div class="reveal" style="transition-delay: 400ms;">
+                <a href="#all-watches" class="btn-accent">
+                    View Entire Collection
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
+            <a href="#all-watches" class="text-white/50 hover:text-white transition-colors">
+                <i data-lucide="chevron-down" class="w-6 h-6"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- SECTION 2: BODY (All Watch Photos Grid) -->
+    <main>
+        <!-- Notice tighter mobile padding px-3 to maximize grid width like reference image -->
+        <section id="all-watches" class="py-16 md:py-24 px-3 sm:px-6 md:px-12 max-w-[1400px] mx-auto content-panel mt-12 mb-16 md:mb-24">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 px-2 md:px-0 reveal">
+                <div>
+                    <p class="text-zoga-red tracking-widest uppercase text-xs sm:text-sm mb-2 font-medium">Curated Selection</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif italic section-heading">All Watches</h2>
+                </div>
+                <div class="hidden md:flex items-center gap-4 mt-6 md:mt-0 text-sm text-gray-400">
+                    <span>Showing 8 Timepieces</span>
+                    <i data-lucide="sliders-horizontal" class="w-4 h-4 cursor-pointer hover:text-white transition-colors"></i>
+                </div>
+            </div>
+
+            <!-- Watches Grid - Forced 2-column on mobile, smaller gaps -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 md:gap-8">
+                
+                <!-- 1. Forest Tiger Skeleton Watch -->
+                <div class="product-item reveal group" id="trio-watch-card" style="transition-delay: 100ms;">
+                    <div class="product-img-wrap">
+                        <div class="tag-new">Bestseller</div>
+
+                        <button class="slideshow-arrow prev" aria-label="Previous Slide">
+                            <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i>
+                        </button>
+                        <button class="slideshow-arrow next" aria-label="Next Slide">
+                            <i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i>
+                        </button>
+
+                        <div class="frame-slideshow-container">
+                            <img src="boys watches/Forest2.PNG" alt="Forest Gold Tiger Skeleton" class="frame-slide active-slide" data-title="Forest Gold Tiger Skeleton" data-color="Gold">
+                            <img src="boys watches/Forest3.PNG" alt="Forest Silver Tiger Skeleton" class="frame-slide" data-title="Forest Silver Tiger Skeleton" data-color="Silver">
+                            <img src="boys watches/Forestboy.PNG" alt="Forest Black Tiger Skeleton" class="frame-slide" data-title="Forest Black Tiger Skeleton" data-color="Black">
+                            <img src="boys watches/Forest4.PNG" alt="Forest Gold Tiger Skeleton" class="frame-slide" data-title="Forest Gold Tiger Skeleton" data-color="Gold">
+                        </div>
+
+                        <div class="slideshow-controls">
+                            <button class="slideshow-dot active-dot" aria-label="Slide 1"></button>
+                            <button class="slideshow-dot" aria-label="Slide 2"></button>
+                            <button class="slideshow-dot" aria-label="Slide 3"></button>
+                            <button class="slideshow-dot" aria-label="Slide 4"></button>
+                        </div>
+
+                        <div class="product-overlay">
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
+                        <h3 id="trio-card-title" class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Forest Gold Tiger Skeleton</h3>
+                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">FOREST TIMEPIECES</p>
+                        
+                        <div class="color-swatch-bar mt-2 md:mt-4">
+                            <button class="swatch-btn active-swatch bg-[#d4af37]" title="Gold"></button>
+                            <button class="swatch-btn bg-gray-300" title="Silver"></button>
+                        </div>
+
+                        <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-4">₹1,400/-</p>
+                    </div>
+                </div>
+
+                <!-- 2. Seiko Style -->
+                <div class="product-item reveal" style="transition-delay: 200ms;">
+                    <div class="product-img-wrap">
+                        <img src="boys watches/zogaedition.PNG" alt="Seiko Rose Gold Diver" class="product-img">
+                        <div class="product-overlay">
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
+                        <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Luxery Zoga Edition</h3>
+                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Zoga Special Editon</p>
+                        <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-4">₹550/-</p>
+                    </div>
+                </div>
+
+                <!-- 3. Hublot Slideshow (Dynamic Pricing) -->
+                <div class="product-item reveal group" id="third-watch-card" style="transition-delay: 300ms;">
+                    <div class="product-img-wrap">
+                        <div class="tag-new">Exclusive</div>
+
+                        <button class="slideshow-arrow prev" aria-label="Previous Slide">
+                            <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i>
+                        </button>
+                        <button class="slideshow-arrow next" aria-label="Next Slide">
+                            <i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i>
+                        </button>
+
+                        <div class="frame-slideshow-container">
+                            <img src="boys watches/hubolt11.PNG" alt="Hublot Geneve Titanium" class="frame-slide active-slide" data-title="Hublot Geneve Titanium" data-price="1100" onerror="this.src='https://images.unsplash.com/photo-1587836374828-cb4387df3eb7?auto=format&fit=crop&w=600&q=80'">
+                            <img src="boys watches/2hubolt11.PNG" alt="Hublot Geneve White Ceramic" class="frame-slide" data-title="Hublot Geneve White Ceramic" data-price="1100" onerror="this.src='https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=600&q=80'">
+                            <img src="boys watches/hubolt12.PNG" alt="Hublot Geneve Classic Green" class="frame-slide" data-title="Hublot Geneve Classic Green" data-price="1200" onerror="this.src='https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80'">
+                            <img src="boys watches/2hubolt12.PNG" alt="Hublot Geneve Classic Black" class="frame-slide" data-title="Hublot Geneve Classic Black" data-price="1200" onerror="this.src='https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=600&q=80'">
+                        </div>
+
+                        <div class="slideshow-controls">
+                            <button class="slideshow-dot active-dot" aria-label="Slide 1"></button>
+                            <button class="slideshow-dot" aria-label="Slide 2"></button>
+                            <button class="slideshow-dot" aria-label="Slide 3"></button>
+                            <button class="slideshow-dot" aria-label="Slide 4"></button>
+                        </div>
+
+                        <div class="product-overlay">
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
+                        <h3 id="third-watch-title" class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Hublot Geneve Titanium</h3>
+                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Hublot Collection</p>
+                        
+                        <div class="color-swatch-bar mt-2 md:mt-4 opacity-0 pointer-events-none h-2">
+                        </div>
+
+                        <p id="third-watch-price" class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-4">₹1,100/-</p>
+                    </div>
+                </div>
+
+                <!-- 4. Casio Collection Slideshow (Dynamic Pricing) -->
+                <div class="product-item reveal group" id="fourth-watch-card" style="transition-delay: 400ms;">
+                    <div class="product-img-wrap">
+                        <div class="tag-new">Classic</div>
+
+                        <button class="slideshow-arrow prev" aria-label="Previous Slide">
+                            <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i>
+                        </button>
+                        <button class="slideshow-arrow next" aria-label="Next Slide">
+                            <i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i>
+                        </button>
+
+                        <div class="frame-slideshow-container">
+                            <img src="boys watches/casio-st.PNG" alt="Casio Black Leather" class="frame-slide active-slide" data-title="Casio Black Leather" data-price="1000" onerror="this.src='https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80'">
+                            <img src="boys watches/casio-st2.PNG" alt="Casio Brown Leather" class="frame-slide" data-title="Casio Brown Leather" data-price="1000" onerror="this.src='https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?auto=format&fit=crop&w=600&q=80'">
+                            <img src="boys watches/Casio-Chain.PNG" alt="Casio Silver Chain" class="frame-slide" data-title="Casio Silver Chain" data-price="500" onerror="this.src='https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=600&q=80'">
+                            <img src="boys watches/casio-st3.PNG" alt="Casio Silver Chain" class="frame-slide" data-title="Casio Silver Chain" data-price="1000" onerror="this.src='https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=600&q=80'">
+                            <img src="boys watches/casioi-4.PNG" alt="Casio Silver Chain" class="frame-slide" data-title="Casio Silver Chain" data-price="1000" onerror="this.src='https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=600&q=80'">
+                        </div>
+
+                        <div class="slideshow-controls">
+                            <button class="slideshow-dot active-dot" aria-label="Slide 1"></button>
+                            <button class="slideshow-dot" aria-label="Slide 2"></button>
+                            <button class="slideshow-dot" aria-label="Slide 3"></button>
+                            <button class="slideshow-dot" aria-label="Slide 4"></button>
+                            <button class="slideshow-dot" aria-label="Slide 5"></button>
+                        </div>
+
+                        <div class="product-overlay">
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
+                        <h3 id="fourth-watch-title" class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Casio Black Leather</h3>
+                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Casio Series</p>
+                        
+                        <div class="color-swatch-bar mt-2 md:mt-4 opacity-0 pointer-events-none h-2">
+                        </div>
+
+                        <p id="fourth-watch-price" class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-4">₹1,000/-</p>
+                    </div>
+                </div>
+                
+                <!-- 5. Aero Silver -->
+                <div class="product-item reveal" style="transition-delay: 100ms;">
+                    <div class="product-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=600&q=80" alt="Silver Chronograph" class="product-img">
+                        <div class="product-overlay">
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
+                        <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Aero Silver Chrono</h3>
+                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Aviation Series</p>
+                        <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-4">₹2,200/-</p>
+                    </div>
+                </div>
+
+                <!-- 6. Vintage Leather -->
+                <div class="product-item reveal" style="transition-delay: 200ms;">
+                    <div class="product-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?auto=format&fit=crop&w=600&q=80" alt="Vintage Leather" class="product-img">
+                        <div class="product-overlay">
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
+                        <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Heritage Brown Leather</h3>
+                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Classic Series</p>
+                        <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-4">₹1,600/-</p>
+                    </div>
+                </div>
+
+                <!-- 7. Gold Skeleton -->
+                <div class="product-item reveal" style="transition-delay: 300ms;">
+                    <div class="product-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1585123334904-845d60e97b29?auto=format&fit=crop&w=600&q=80" alt="Gold Skeleton" class="product-img">
+                        <div class="product-overlay">
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
+                        <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Royal Gold Skeleton</h3>
+                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Prestige Series</p>
+                        <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-4">₹3,500/-</p>
+                    </div>
+                </div>
+
+                <!-- 8. Smart Hybrid -->
+                <div class="product-item reveal" style="transition-delay: 400ms;">
+                    <div class="product-img-wrap">
+                        <div class="tag-new">New</div>
+                        <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=600&q=80" alt="Modern Smart Hybrid" class="product-img">
+                        <div class="product-overlay">
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
+                        <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Nexus Smart Hybrid</h3>
+                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Tech Series</p>
+                        <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-4">₹2,800/-</p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="text-center mt-12 md:mt-16 reveal">
+                <button class="btn-secondary text-gray-300 hover:text-white transition-colors underline tracking-widest uppercase text-xs md:text-sm">Load More Timepieces</button>
+            </div>
+        </section>
+
+      
+        <!-- SECTION: GIRLS WATCHES -->
+        <section id="girls-watches" class="py-16 md:py-24 px-3 sm:px-6 md:px-12 max-w-[1400px] mx-auto content-panel mb-16 md:mb-24">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 px-2 md:px-0 reveal">
+                <div>
+                    <p class="text-zoga-red tracking-widest uppercase text-xs sm:text-sm mb-2 font-medium">Elegant & Graceful</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif italic section-heading">Girls Watches</h2>
+                </div>
+                <div class="hidden md:flex items-center gap-4 mt-6 md:mt-0 text-sm text-gray-400">
+                    <span>Showing 2 Timepieces</span>
+                    <i data-lucide="sliders-horizontal" class="w-4 h-4 cursor-pointer hover:text-white transition-colors"></i>
+                </div>
+            </div>
+
+            <!-- Girls Watches Grid - Using same 2-column forced class set -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 md:gap-8">
+                
+                <!-- Girls Watch 1 -->
+                <div class="product-item reveal group" id="girls-watch-card" style="transition-delay: 100ms;">
+                    <div class="product-img-wrap">
+                        <div class="tag-new">Trending</div>
+
+                        <button class="slideshow-arrow prev" aria-label="Previous Slide">
+                            <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i>
+                        </button>
+                        <button class="slideshow-arrow next" aria-label="Next Slide">
+                            <i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i>
+                        </button>
+
+                        <div class="frame-slideshow-container">
+                           <img src="girls watches/1band.jpeg" alt="Jaina Rose Gold Chevron" class="frame-slide active-slide" data-title="Jaina Rose Gold Chevron" data-color="Chevron" onerror="this.src='https://images.unsplash.com/photo-1584208643198-4c6e9f2b879a?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/2band.jpeg" alt="Jaina Rose Gold Cross" class="frame-slide" data-title="Jaina Rose Gold Cross" data-color="Cross" onerror="this.src='https://images.unsplash.com/photo-1594534475808-b18fc33b045e?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/3band.jpeg" alt="Jaina Rose Gold Square" class="frame-slide" data-title="Jaina Rose Gold Square" data-color="Square" onerror="this.src='https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/4band.jpeg" alt="Jaina Rose Gold Oval" class="frame-slide" data-title="Jaina Rose Gold Oval" data-color="Oval" onerror="this.src='https://images.unsplash.com/photo-1622434641406-a158123450f9?auto=format&fit=crop&w=600&q=80'">
+                        </div>
+
+                        <div class="slideshow-controls">
+                            <button class="slideshow-dot active-dot" aria-label="Slide 1"></button>
+                            <button class="slideshow-dot" aria-label="Slide 2"></button>
+                            <button class="slideshow-dot" aria-label="Slide 3"></button>
+                            <button class="slideshow-dot" aria-label="Slide 4"></button>
+                        </div>
+
+                        <div class="product-overlay">
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
+                        <h3 id="girls-card-title" class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Titan Emerald Gold</h3>
+                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Titan Series</p>
+                        
+                        <div class="color-swatch-bar mt-2 md:mt-4">
+                            <button class="swatch-btn active-swatch bg-[#084523]" title="Emerald"></button>
+                            <button class="swatch-btn bg-[#f0ebd8]" title="Pearl"></button>
+                            <button class="swatch-btn bg-[#4a332d]" title="Bronze"></button>
+                            <button class="swatch-btn bg-[#d4af37]" title="Champagne"></button>
+                        </div>
+
+                        <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-4">₹450/-</p>
+                    </div>
+                </div>
+
+                <!-- Girls Watch 2 -->
+                <div class="product-item reveal group" style="transition-delay: 200ms;">
+                    <div class="product-img-wrap">
+                        <button class="slideshow-arrow prev" aria-label="Previous Slide">
+                            <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i>
+                        </button>
+                        <button class="slideshow-arrow next" aria-label="Next Slide">
+                            <i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i>
+                        </button>
+
+                        <div class="frame-slideshow-container">
+                            <img src="girls watches/11girl.jpeg" alt="Luna Pure White" class="frame-slide active-slide" data-title="Luna Pure White" data-color="White" onerror="this.src='https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/12girls.jpeg" alt="Luna Rose Gold" class="frame-slide" data-title="Luna Rose Gold" data-color="Rose Gold" onerror="this.src='https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/13girls.jpeg" alt="Luna Midnight" class="frame-slide" data-title="Luna Midnight" data-color="Midnight" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/14girls.jpeg" alt="Luna Champagne" class="frame-slide" data-title="Luna Champagne" data-color="Champagne" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/15girls.jpeg" alt="Luna Bronze" class="frame-slide" data-title="Luna Bronze" data-color="Bronze" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/16girls.jpeg" alt="Luna Pearl" class="frame-slide" data-title="Luna Pearl" data-color="Pearl" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/17girls.jpeg" alt="Luna Sapphire" class ="frame-slide" data-title="Luna Sapphire" data-color="Sapphire" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/18girls.jpeg" alt="Luna Emerald" class="frame-slide" data-title="Luna Emerald" data-color="Emerald" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/19girls.jpeg" alt="Luna Diamond" class="frame-slide" data-title="Luna Diamond" data-color="Diamond" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                            <img src ="girls watches/20girls.jpeg" alt="Luna Ruby" class="frame-slide" data-title="Luna Ruby" data-color="Ruby" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                        </div>
+
+                        <div class="slideshow-controls">
+                            <button class="slideshow-dot active-dot" aria-label="Slide 1"></button>
+                            <button class="slideshow-dot" aria-label="Slide 2"></button>
+                            <button class="slideshow-dot" aria-label="Slide 3"></button>
+                            <button class="slideshow-dot" aria-label="Slide 4"></button>
+                            <button class="slideshow-dot" aria-label="Slide 5"></button>
+                            <button class="slideshow-dot" aria-label="Slide 6"></button>
+                            <button class="slideshow-dot" aria-label="Slide 7"></button>
+                            <button class="slideshow-dot" aria-label="Slide 8"></button>
+                            <button class="slideshow-dot" aria-label="Slide 9"></button>
+                            <button class="slideshow-dot" aria-label="Slide 10"></button>
+                        </div>
+
+                        <div class="product-overlay">
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
+                        <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">TITAN Watch</h3>
+                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Minimalist Women</p>
+                        
+                        <div class="color-swatch-bar mt-2 md:mt-4">
+                            <button class="swatch-btn active-swatch bg-gray-100" title="White"></button>
+                            <button class="swatch-btn bg-[#b76e79]" title="Rose Gold"></button>
+                            <button class="swatch-btn bg-gray-900" title="Midnight"></button>
+                        </div>
+
+                        <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-4">₹500/-</p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="text-center mt-12 md:mt-16 reveal">
+                <button class="btn-secondary text-gray-300 hover:text-white transition-colors underline tracking-widest uppercase text-xs md:text-sm">Explore Girls Collection</button>
+            </div>
+        </section>
+
+        <!-- Quick View Modal Container -->
+        <div id="watch-modal-backdrop" class="watch-modal-backdrop hidden" aria-hidden="true">
+            <div class="watch-modal-window" role="dialog" aria-modal="true" aria-labelledby="watch-modal-title">
+                <button type="button" class="watch-modal-close" aria-label="Close preview">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+                <div class="watch-modal-content">
+                    <div class="watch-modal-slides"></div>
+                    <button type="button" class="watch-modal-nav watch-modal-prev" aria-label="Previous image">
+                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    </button>
+                    <button type="button" class="watch-modal-nav watch-modal-next" aria-label="Next image">
+                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                    <div class="watch-modal-footer">
+                        <p id="watch-modal-title">Watch Preview</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="footer-contact" class="bg-black pt-16 md:pt-24 pb-8 md:pb-12 border-t border-white/10">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 md:mb-20">
+                
+                <div class="space-y-4 md:space-y-6">
+                    <a href="index.html" class="brand-logo text-3xl md:text-4xl block mb-4 md:mb-6">zoga</a>
+                    <p class="text-gray-400 text-xs md:text-sm leading-relaxed max-w-xs">
+                        Defining luxury through meticulous craftsmanship and visionary design. The ultimate destination for premium watches.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs md:text-sm font-medium uppercase tracking-widest mb-4 md:mb-6 text-white">Collections</h4>
+                    <ul class="space-y-3 md:space-y-4 text-gray-400 text-xs md:text-sm">
+                        <li><a href="#all-watches" class="hover:text-zoga-red transition-colors">Men's Watches</a></li>
+                        <li><a href="#mens-premium" class="hover:text-zoga-red transition-colors">Premium Men's</a></li>
+                        <li><a href="#girls-watches" class="hover:text-zoga-red transition-colors">Girls Watches</a></li>
+                        <li><a href="#" class="hover:text-zoga-red transition-colors">Limited Editions</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs md:text-sm font-medium uppercase tracking-widest mb-4 md:mb-6 text-white">Client Care</h4>
+                    <ul class="space-y-3 md:space-y-4 text-gray-400 text-xs md:text-sm">
+                        <li><a href="#" class="hover:text-zoga-red transition-colors" aria-label="Contact us"><i data-lucide="instagram" class="w-3.5 h-3.5 md:w-4 md:h-4 inline mr-2"></i>Contact Us</a></li>
+                        <li><a href="mailto:Fashionzoga@gmail.com" class="hover:text-zoga-red transition-colors"><i data-lucide="mail" class="w-3.5 h-3.5 md:w-4 md:h-4 inline mr-2"></i>Fashionzoga@gmail.com</a></li>
+                        <li><a href="tel:+919876378181" class="hover:text-zoga-red transition-colors"><i data-lucide="phone" class="w-3.5 h-3.5 md:w-4 md:h-4 inline mr-2"></i>9876378181</a></li>
+                        <li><a href="#" class="hover:text-zoga-red transition-colors">Shipping & Returns</a></li>
+                        <li><a href="#" class="hover:text-zoga-red transition-colors">Warranty</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs md:text-sm font-medium uppercase tracking-widest mb-4 md:mb-6 text-white">Direct Inquiry</h4>
+                    <p class="text-gray-400 text-xs md:text-sm mb-4">Send us your requirements and delivery address details directly.</p>
+                    <form id="contact-form" class="space-y-3">
+                        <div class="border-b border-gray-600 focus-within:border-zoga-red transition-colors group">
+                            <input id="contact-email" type="email" placeholder="Your email address" class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500" required>
+                        </div>
+                        <div class="flex items-end border-b border-gray-600 focus-within:border-zoga-red transition-colors group">
+                            <textarea id="contact-message" rows="2" placeholder="Message & Address details..." class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500 resize-none" required></textarea>
+                            <button id="contact-submit" type="submit" class="text-gray-500 pb-2 group-focus-within:text-zoga-red hover:text-white transition-colors" aria-label="Send email">
+                                <i data-lucide="arrow-right" class="w-4 h-4 md:w-5 md:h-5"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] md:text-xs text-gray-500 uppercase tracking-widest">
+                <p>&copy; 2026 Zoga. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Mobile Menu Logic
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        const toggleMobileMenu = () => {
+            if (!mobileMenuPanel || !mobileMenuOverlay || !mobileMenuToggle) return;
+            const isOpen = mobileMenuPanel.classList.toggle('open');
+            mobileMenuOverlay.classList.toggle('open', isOpen);
+            mobileMenuToggle.classList.toggle('active', isOpen);
+            mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        };
+
+        if (mobileMenuToggle) mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+        if (mobileMenuClose) mobileMenuClose.addEventListener('click', toggleMobileMenu);
+        if (mobileMenuOverlay) mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
+        
+        mobileNavLinks.forEach((link) => {
+            link.addEventListener('click', () => {
+                if (mobileMenuPanel) mobileMenuPanel.classList.remove('open');
+                if (mobileMenuOverlay) mobileMenuOverlay.classList.remove('open');
+                if (mobileMenuToggle) {
+                    mobileMenuToggle.classList.remove('active');
+                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                }
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black/95', 'backdrop-blur-sm', 'shadow-lg');
+                navbar.classList.remove('bg-transparent', 'py-4');
+                navbar.classList.add('py-2');
+            } else {
+                navbar.classList.remove('bg-black/95', 'backdrop-blur-sm', 'shadow-lg');
+                navbar.classList.add('bg-transparent', 'py-4');
+                navbar.classList.remove('py-2');
+            }
+        });
+
+        // Scroll Reveal Intersection Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealCallback = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        };
+        const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+        revealElements.forEach(el => revealObserver.observe(el));
+        
+        setTimeout(() => {
+            revealElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight) el.classList.add('active');
+            });
+        }, 100);
+
+        // Splash Screen Logic
+        (function() {
+            const splash = document.getElementById('splash-overlay');
+            const splashLogo = document.getElementById('splash-logo');
+            if (!splash || !splashLogo) return;
+
+            const prevOverflow = document.body.style.overflow;
+            document.body.style.overflow = 'hidden';
+
+            const removeSplash = () => {
+                splash.style.opacity = '0';
+                splash.style.visibility = 'hidden';
+                setTimeout(() => {
+                    try { splash.remove(); } catch (e) {}
+                    document.body.style.overflow = prevOverflow || '';
+                }, 900);
+            };
+
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                removeSplash();
+                return;
+            }
+
+            const maxTimeout = setTimeout(removeSplash, 2600);
+            splashLogo.addEventListener('animationend', () => {
+                clearTimeout(maxTimeout);
+                setTimeout(removeSplash, 200);
+            });
+        })();
+
+        // Generic Product Slideshow Logic
+        document.querySelectorAll('.product-item').forEach(card => {
+            const slides = card.querySelectorAll('.frame-slide');
+            if (slides.length <= 1) return;
+
+            let currentIndex = 0;
+            let autoplayTimer = null;
+            const dots = card.querySelectorAll('.slideshow-dot');
+            const swatches = card.querySelectorAll('.swatch-btn');
+            const cardTitle = card.querySelector('h3');
+            const priceElement = card.querySelector('p[id$="-price"]'); // Target dynamic price elements
+            const prevBtn = card.querySelector('.slideshow-arrow.prev');
+            const nextBtn = card.querySelector('.slideshow-arrow.next');
+
+            function updateFrame(index) {
+                if (index >= slides.length) currentIndex = 0;
+                else if (index < 0) currentIndex = slides.length - 1;
+                else currentIndex = index;
+
+                slides.forEach((slide, idx) => {
+                    slide.classList.toggle('active-slide', idx === currentIndex);
+                    if (idx === currentIndex) {
+                        if (cardTitle && slide.dataset.title) {
+                            cardTitle.textContent = slide.dataset.title;
+                        }
+                        // Update price if data attribute is present
+                        if (priceElement && slide.dataset.price) {
+                            priceElement.textContent = `₹${slide.dataset.price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}/-`;
+                        }
+                    }
+                });
+                dots.forEach((dot, idx) => dot.classList.toggle('active-dot', idx === currentIndex));
+                swatches.forEach((swatch, idx) => swatch.classList.toggle('active-swatch', idx === currentIndex));
+            }
+
+            if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); updateFrame(currentIndex - 1); restartAutoplay(); });
+            if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); updateFrame(currentIndex + 1); restartAutoplay(); });
+
+            dots.forEach((dot, idx) => dot.addEventListener('click', (e) => { e.stopPropagation(); updateFrame(idx); restartAutoplay(); }));
+            swatches.forEach((swatch, idx) => swatch.addEventListener('click', (e) => { e.stopPropagation(); updateFrame(idx); restartAutoplay(); }));
+
+            function startAutoplay() {
+                autoplayTimer = setInterval(() => updateFrame(currentIndex + 1), 3500);
+            }
+            function restartAutoplay() {
+                clearInterval(autoplayTimer);
+                startAutoplay();
+            }
+
+            startAutoplay();
+            card.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
+            card.addEventListener('mouseleave', () => startAutoplay());
+        });
+
+        // Quick View Modal Logic
+        const watchModalBackdrop = document.getElementById('watch-modal-backdrop');
+        const watchModalWindow = document.querySelector('.watch-modal-window');
+        const watchModalSlides = document.querySelector('.watch-modal-slides');
+        const watchModalTitle = document.getElementById('watch-modal-title');
+        const watchModalClose = document.querySelector('.watch-modal-close');
+        const watchModalPrev = document.querySelector('.watch-modal-prev');
+        const watchModalNext = document.querySelector('.watch-modal-next');
+
+        let watchModalImages = [];
+        let watchModalIndex = 0;
+
+        function setWatchModalSlide(index) {
+            if (!watchModalImages.length) return;
+            if (index < 0) index = watchModalImages.length - 1;
+            if (index >= watchModalImages.length) index = 0;
+            watchModalIndex = index;
+
+            const slides = watchModalSlides.querySelectorAll('.watch-modal-slide');
+            slides.forEach((slide, idx) => {
+                slide.classList.toggle('active-modal-slide', idx === watchModalIndex);
+            });
+        }
+
+        function buildWatchModal(images, title, widthPx) {
+            watchModalImages = images;
+            watchModalSlides.innerHTML = '';
+            watchModalTitle.textContent = title || 'Watch Preview';
+
+            images.forEach((image, idx) => {
+                const img = document.createElement('img');
+                img.src = image.src;
+                img.alt = image.alt || `${title} image ${idx + 1}`;
+                img.className = 'watch-modal-slide';
+                if (idx === 0) img.classList.add('active-modal-slide');
+                watchModalSlides.appendChild(img);
+            });
+
+            if (widthPx && watchModalWindow) {
+                watchModalWindow.style.width = `${Math.min(widthPx, window.innerWidth - 36)}px`;
+            }
+
+            setWatchModalSlide(0);
+            watchModalBackdrop.classList.remove('hidden');
+            watchModalBackdrop.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeWatchModal() {
+            watchModalBackdrop.classList.add('hidden');
+            watchModalBackdrop.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        function getWatchImages(card) {
+            const imageNodes = [];
+            if (card.querySelector('.frame-slide')) {
+                card.querySelectorAll('.frame-slide').forEach(img => {
+                    imageNodes.push({ src: img.src, alt: img.alt || img.dataset.title || 'Watch detail' });
+                });
+            } else {
+                const image = card.querySelector('.product-img');
+                if (image) imageNodes.push({ src: image.src, alt: image.alt || 'Watch image' });
+            }
+            return imageNodes.length ? imageNodes : [{ src: card.querySelector('.product-img')?.src || '', alt: 'Watch preview' }];
+        }
+
+        function openWatchModal(card) {
+            if (!card) return;
+            const title = card.querySelector('h3')?.textContent || 'Watch Preview';
+            const images = getWatchImages(card);
+            const rect = card.getBoundingClientRect();
+            buildWatchModal(images, title, rect.width);
+        }
+
+        watchModalClose.addEventListener('click', closeWatchModal);
+        watchModalPrev.addEventListener('click', () => setWatchModalSlide(watchModalIndex - 1));
+        watchModalNext.addEventListener('click', () => setWatchModalSlide(watchModalIndex + 1));
+        watchModalBackdrop.addEventListener('click', event => {
+            if (event.target === watchModalBackdrop) closeWatchModal();
+        });
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) {
+                closeWatchModal();
+            }
+            if (event.key === 'ArrowRight' && !watchModalBackdrop.classList.contains('hidden')) {
+                setWatchModalSlide(watchModalIndex + 1);
+            }
+            if (event.key === 'ArrowLeft' && !watchModalBackdrop.classList.contains('hidden')) {
+                setWatchModalSlide(watchModalIndex - 1);
+            }
+        });
+
+        document.querySelectorAll('.product-item .quick-view-btn').forEach(button => {
+            button.addEventListener('click', event => {
+                const card = event.target.closest('.product-item');
+                if (card) openWatchModal(card);
+            });
+        });
+
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('contact-email').value;
+                const message = document.getElementById('contact-message').value;
+                
+                const targetEmail = 'Fashionzoga@gmail.com';
+                const subject = encodeURIComponent('New Inquiry/Order from Zoga Website');
+                const body = encodeURIComponent(`Sender Email: ${email}\n\nMessage & Details:\n${message}`);
+                
+                window.location.href = `mailto:${targetEmail}?subject=${subject}&body=${body}`;
+                contactForm.reset();
+            });
+        }
+    </script>
+</body>
+</html>
