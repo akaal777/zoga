@@ -194,11 +194,85 @@
             100% { transform: scale(8); opacity: 0; }
         }
 
+        /* Promotional Offer Pop-Up Modal */
+        .promo-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 990;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .promo-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .promo-card {
+            position: relative;
+            width: min(92vw, 540px);
+            background: linear-gradient(145deg, rgba(18, 18, 18, 0.96) 0%, rgba(8, 8, 8, 0.98) 100%);
+            border: 1px solid rgba(230, 0, 0, 0.35);
+            border-radius: 1.75rem;
+            padding: 2.25rem 1.5rem 1.75rem;
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.8), 0 0 50px rgba(230, 0, 0, 0.15);
+            transform: scale(0.88) translateY(20px);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+        @media (min-width: 640px) {
+            .promo-card {
+                padding: 2.75rem 2.25rem 2.25rem;
+                border-radius: 2rem;
+            }
+        }
+        .promo-backdrop.active .promo-card {
+            transform: scale(1) translateY(0);
+        }
+        .promo-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 0%, rgba(230,0,0,0.18), transparent 45%);
+            pointer-events: none;
+        }
+        .promo-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        .promo-close-btn:hover {
+            background: var(--zoga-red);
+            border-color: var(--zoga-red);
+            transform: rotate(90deg) scale(1.05);
+            box-shadow: 0 0 20px rgba(230,0,0,0.5);
+        }
+
         /* Product Cards - Mobile Optimized */
         .product-item {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 0.5rem; /* Tighter padding for mobile grid */
+            padding: 0.5rem;
             border-radius: 1rem;
             transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
             display: flex;
@@ -245,7 +319,6 @@
             transition: opacity 0.4s ease;
             z-index: 15;
         }
-        /* Make overlays slightly visible or activate on touch for mobile */
         @media (hover: none) {
             .product-overlay { opacity: 0; }
             .product-item:active .product-overlay { opacity: 1; }
@@ -255,7 +328,6 @@
         .quick-view-btn {
             transform: translateY(15px);
             transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            /* Scale for smaller grid */
             padding: 0.5rem 1rem;
             font-size: 0.6rem;
             letter-spacing: 0.1em;
@@ -404,9 +476,59 @@
 </head>
 <body class="antialiased">
 
+    <!-- Splash Screen -->
     <div id="splash-overlay" aria-hidden="true" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#050505;z-index:9999;">
         <div id="splash-logo" class="brand-logo" style="color:#e60000;font-size:4rem;letter-spacing:-0.05em;transform-origin:center;">
             zoga
+        </div>
+    </div>
+
+    <!-- Promotional Pop-Up Modal (Appears after splash screen loads) -->
+    <div id="promo-modal-backdrop" class="promo-backdrop" aria-hidden="true">
+        <div class="promo-card text-center" role="dialog" aria-modal="true" aria-labelledby="promo-modal-title">
+            <!-- Close Cross Button -->
+            <button id="promo-modal-close" class="promo-close-btn" aria-label="Close promotion message">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Decorative Icon / Badge -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zoga-red/10 border border-zoga-red/30 text-zoga-red text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold mb-4">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Limited Time Offer
+            </div>
+
+            <!-- Title -->
+            <h2 id="promo-modal-title" class="text-2xl sm:text-3xl md:text-4xl font-serif text-white mb-3 tracking-tight">
+                Exclusive <span class="italic text-zoga-red">Gift Offer</span>
+            </h2>
+
+            <!-- Main Promotional Copy -->
+            <p class="text-gray-300 text-xs sm:text-sm md:text-base leading-relaxed max-w-md mx-auto mb-6">
+                Buy <span class="text-white font-semibold underline decoration-zoga-red/80 underline-offset-4">2 watches</span> up to <span class="text-white font-semibold">₹1,000</span> and receive <span class="text-zoga-red font-semibold">ANY 1 luxury eyewear</span> completely free.
+            </p>
+
+            <!-- Visual Offer Highlight Box -->
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3.5 sm:p-4 mb-6 flex items-center justify-between gap-3 text-left">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-zoga-red/20 border border-zoga-red/40 flex items-center justify-center shrink-0 text-zoga-red">
+                        <i data-lucide="glasses" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <p class="text-white text-xs sm:text-sm font-medium">Complimentary Eyewear</p>
+                        <p class="text-gray-400 text-[10px] sm:text-xs">Applied automatically on qualifying cart order</p>
+                    </div>
+                </div>
+                <span class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-zoga-red bg-zoga-red/10 px-2.5 py-1 rounded border border-zoga-red/30 shrink-0">FREE</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a href="#all-watches" id="promo-claim-btn" class="btn-accent w-full sm:w-auto py-3 px-6 text-xs tracking-widest">
+                    Shop Collection
+                </a>
+                <button id="promo-dismiss-btn" class="text-xs uppercase tracking-widest text-gray-400 hover:text-white transition-colors py-2 px-4">
+                    Dismiss
+                </button>
+            </div>
         </div>
     </div>
 
@@ -417,7 +539,8 @@
             <i data-lucide="x" class="w-6 h-6"></i>
         </button>
         <a href="index.html" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Home</a>
-        <a href="#all-watches" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Watches</a>        <a href="#girls-watches" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Girls Watches</a>
+        <a href="#all-watches" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Watches</a>
+        <a href="#girls-watches" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Girls Watches</a>
         <a href="#footer-contact" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Contact</a>
     </div>
 
@@ -482,7 +605,6 @@
 
     <!-- SECTION 2: BODY (All Watch Photos Grid) -->
     <main>
-        <!-- Notice tighter mobile padding px-3 to maximize grid width like reference image -->
         <section id="all-watches" class="py-16 md:py-24 px-3 sm:px-6 md:px-12 max-w-[1400px] mx-auto content-panel mt-12 mb-16 md:mb-24">
             <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 px-2 md:px-0 reveal">
                 <div>
@@ -495,7 +617,7 @@
                 </div>
             </div>
 
-            <!-- Watches Grid - Forced 2-column on mobile, smaller gaps -->
+            <!-- Watches Grid -->
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 md:gap-8">
                 
                 <!-- 1. Forest Tiger Skeleton Watch -->
@@ -551,13 +673,13 @@
                         </div>
                     </div>
                     <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
-                        <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Luxery Zoga Edition</h3>
-                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Zoga Special Editon</p>
+                        <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Luxury Zoga Edition</h3>
+                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Zoga Special Edition</p>
                         <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-4">₹550/-</p>
                     </div>
                 </div>
 
-                <!-- 3. Hublot Slideshow (Dynamic Pricing) -->
+                <!-- 3. Hublot Slideshow -->
                 <div class="product-item reveal group" id="third-watch-card" style="transition-delay: 300ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">Exclusive</div>
@@ -599,7 +721,7 @@
                     </div>
                 </div>
 
-                <!-- 4. Casio Collection Slideshow (Dynamic Pricing) -->
+                <!-- 4. Casio Collection Slideshow -->
                 <div class="product-item reveal group" id="fourth-watch-card" style="transition-delay: 400ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">Classic</div>
@@ -711,7 +833,6 @@
             </div>
         </section>
 
-      
         <!-- SECTION: GIRLS WATCHES -->
         <section id="girls-watches" class="py-16 md:py-24 px-3 sm:px-6 md:px-12 max-w-[1400px] mx-auto content-panel mb-16 md:mb-24">
             <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 px-2 md:px-0 reveal">
@@ -725,7 +846,7 @@
                 </div>
             </div>
 
-            <!-- Girls Watches Grid - Using same 2-column forced class set -->
+            <!-- Girls Watches Grid -->
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 md:gap-8">
                 
                 <!-- Girls Watch 1 -->
@@ -791,10 +912,10 @@
                             <img src="girls watches/14girls.jpeg" alt="Luna Champagne" class="frame-slide" data-title="Luna Champagne" data-color="Champagne" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
                             <img src="girls watches/15girls.jpeg" alt="Luna Bronze" class="frame-slide" data-title="Luna Bronze" data-color="Bronze" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
                             <img src="girls watches/16girls.jpeg" alt="Luna Pearl" class="frame-slide" data-title="Luna Pearl" data-color="Pearl" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
-                            <img src="girls watches/17girls.jpeg" alt="Luna Sapphire" class ="frame-slide" data-title="Luna Sapphire" data-color="Sapphire" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/17girls.jpeg" alt="Luna Sapphire" class="frame-slide" data-title="Luna Sapphire" data-color="Sapphire" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
                             <img src="girls watches/18girls.jpeg" alt="Luna Emerald" class="frame-slide" data-title="Luna Emerald" data-color="Emerald" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
                             <img src="girls watches/19girls.jpeg" alt="Luna Diamond" class="frame-slide" data-title="Luna Diamond" data-color="Diamond" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
-                            <img src ="girls watches/20girls.jpeg" alt="Luna Ruby" class="frame-slide" data-title="Luna Ruby" data-color="Ruby" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/20girls.jpeg" alt="Luna Ruby" class="frame-slide" data-title="Luna Ruby" data-color="Ruby" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
                         </div>
 
                         <div class="slideshow-controls">
@@ -986,11 +1107,45 @@
             });
         }, 100);
 
-        // Splash Screen Logic
+        // Promotional Modal Logic
+        const promoBackdrop = document.getElementById('promo-modal-backdrop');
+        const promoCloseBtn = document.getElementById('promo-modal-close');
+        const promoDismissBtn = document.getElementById('promo-dismiss-btn');
+        const promoClaimBtn = document.getElementById('promo-claim-btn');
+
+        function openPromoModal() {
+            if (!promoBackdrop) return;
+            promoBackdrop.classList.add('active');
+            promoBackdrop.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePromoModal() {
+            if (!promoBackdrop) return;
+            promoBackdrop.classList.remove('active');
+            promoBackdrop.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        if (promoCloseBtn) promoCloseBtn.addEventListener('click', closePromoModal);
+        if (promoDismissBtn) promoDismissBtn.addEventListener('click', closePromoModal);
+        if (promoClaimBtn) promoClaimBtn.addEventListener('click', closePromoModal);
+        
+        if (promoBackdrop) {
+            promoBackdrop.addEventListener('click', (e) => {
+                if (e.target === promoBackdrop) closePromoModal();
+            });
+        }
+
+        // Splash Screen Logic -> Opens Promo Modal after completion
         (function() {
             const splash = document.getElementById('splash-overlay');
             const splashLogo = document.getElementById('splash-logo');
-            if (!splash || !splashLogo) return;
+            if (!splash || !splashLogo) {
+                // If splash element is not present, open promo after brief delay
+                setTimeout(openPromoModal, 600);
+                return;
+            }
 
             const prevOverflow = document.body.style.overflow;
             document.body.style.overflow = 'hidden';
@@ -1001,6 +1156,9 @@
                 setTimeout(() => {
                     try { splash.remove(); } catch (e) {}
                     document.body.style.overflow = prevOverflow || '';
+                    
+                    // Trigger the offer pop-up modal smoothly after logo splash disappears
+                    setTimeout(openPromoModal, 400);
                 }, 900);
             };
 
@@ -1026,7 +1184,7 @@
             const dots = card.querySelectorAll('.slideshow-dot');
             const swatches = card.querySelectorAll('.swatch-btn');
             const cardTitle = card.querySelector('h3');
-            const priceElement = card.querySelector('p[id$="-price"]'); // Target dynamic price elements
+            const priceElement = card.querySelector('p[id$="-price"]');
             const prevBtn = card.querySelector('.slideshow-arrow.prev');
             const nextBtn = card.querySelector('.slideshow-arrow.next');
 
@@ -1041,7 +1199,6 @@
                         if (cardTitle && slide.dataset.title) {
                             cardTitle.textContent = slide.dataset.title;
                         }
-                        // Update price if data attribute is present
                         if (priceElement && slide.dataset.price) {
                             priceElement.textContent = `₹${slide.dataset.price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}/-`;
                         }
@@ -1145,20 +1302,28 @@
             buildWatchModal(images, title, rect.width);
         }
 
-        watchModalClose.addEventListener('click', closeWatchModal);
-        watchModalPrev.addEventListener('click', () => setWatchModalSlide(watchModalIndex - 1));
-        watchModalNext.addEventListener('click', () => setWatchModalSlide(watchModalIndex + 1));
-        watchModalBackdrop.addEventListener('click', event => {
-            if (event.target === watchModalBackdrop) closeWatchModal();
-        });
+        if (watchModalClose) watchModalClose.addEventListener('click', closeWatchModal);
+        if (watchModalPrev) watchModalPrev.addEventListener('click', () => setWatchModalSlide(watchModalIndex - 1));
+        if (watchModalNext) watchModalNext.addEventListener('click', () => setWatchModalSlide(watchModalIndex + 1));
+        if (watchModalBackdrop) {
+            watchModalBackdrop.addEventListener('click', event => {
+                if (event.target === watchModalBackdrop) closeWatchModal();
+            });
+        }
+        
         document.addEventListener('keydown', event => {
-            if (event.key === 'Escape' && watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) {
-                closeWatchModal();
+            if (event.key === 'Escape') {
+                if (promoBackdrop && promoBackdrop.classList.contains('active')) {
+                    closePromoModal();
+                }
+                if (watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) {
+                    closeWatchModal();
+                }
             }
-            if (event.key === 'ArrowRight' && !watchModalBackdrop.classList.contains('hidden')) {
+            if (event.key === 'ArrowRight' && watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) {
                 setWatchModalSlide(watchModalIndex + 1);
             }
-            if (event.key === 'ArrowLeft' && !watchModalBackdrop.classList.contains('hidden')) {
+            if (event.key === 'ArrowLeft' && watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) {
                 setWatchModalSlide(watchModalIndex - 1);
             }
         });
