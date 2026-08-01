@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -472,6 +473,16 @@
         .mobile-menu-toggle.active .hamburger-line:nth-child(1) { transform: translateY(6px) rotate(45deg); }
         .mobile-menu-toggle.active .hamburger-line:nth-child(2) { opacity: 0; transform: translateX(-4px); }
         .mobile-menu-toggle.active .hamburger-line:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+        /* Hide scrollbar for select options in some browsers */
+        select option {
+            background-color: #111;
+            color: white;
+            padding: 10px;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="antialiased">
@@ -483,7 +494,7 @@
         </div>
     </div>
 
-    <!-- Promotional Pop-Up Modal (Appears after splash screen loads) -->
+    <!-- Promotional Pop-Up Modal -->
     <div id="promo-modal-backdrop" class="promo-backdrop" aria-hidden="true">
         <div class="promo-card text-center" role="dialog" aria-modal="true" aria-labelledby="promo-modal-title">
             <!-- Close Cross Button -->
@@ -849,43 +860,8 @@
                     </div>
                 </div>
 
-              <!-- 7. Gold Skeleton -->
-                <!-- <div class="product-item reveal" style="transition-delay: 300ms;"> -->
-                    <!-- <div class="product-img-wrap"> -->
-                        <!-- <img src="https://images.unsplash.com/photo-1585123334904-845d60e97b29?auto=format&fit=crop&w=600&q=80" alt="Gold Skeleton" class="product-img"> -->
-                        <!-- <div class="product-overlay"> -->
-                            <!-- <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button> -->
-                        <!-- </div> -->
-                    <!-- </div> -->
-                    <!-- <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end"> -->
-                        <!-- <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Royal Gold Skeleton</h3> -->
-                        <!-- <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Prestige Series</p> -->
-                        <!-- <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-4">₹3,500/-</p> -->
-                    </div>
-                <!-- </div> -->
-<!--  -->
-                <!-- 8. Smart Hybrid -->
-                <!-- <div class="product-item reveal" style="transition-delay: 400ms;"> -->
-                    <!-- <div class="product-img-wrap"> -->
-                        <!-- <div class="tag-new">New</div> -->
-                        <!-- <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=600&q=80" alt="Modern Smart Hybrid" class="product-img"> -->
-                        <!-- <div class="product-overlay"> -->
-                            <!-- <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white">Quick View</button> -->
-                        <!-- </div> -->
-                    <!-- </div> -->
-                    <!-- <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end"> -->
-                        <!-- <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Nexus Smart Hybrid</h3> -->
-                        <!-- <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Tech Series</p> -->
-                        <!-- <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-4">₹2,800/-</p> -->
-                    <!-- </div> -->
-                <!-- </div> -->
-<!--  -->
-            <!-- </div> -->
-            <!--  -->
-            <!-- <div class="text-center mt-12 md:mt-16 reveal"> -->
-                <!-- <button class="btn-secondary text-gray-300 hover:text-white transition-colors underline tracking-widest uppercase text-xs md:text-sm">Load More Timepieces</button> -->
-            <!-- </div> -->
-        <!-- </section> -->
+            </div>
+        </section>
 
         <!-- SECTION: GIRLS WATCHES -->
         <section id="girls-watches" class="py-16 md:py-24 px-3 sm:px-6 md:px-12 max-w-[1400px] mx-auto content-panel mb-16 md:mb-24">
@@ -1064,19 +1040,50 @@
                     </ul>
                 </div>
 
+                <!-- Updated Direct WhatsApp Inquiry Section with Dropdown Product Selector -->
                 <div>
                     <h4 class="text-xs md:text-sm font-medium uppercase tracking-widest mb-4 md:mb-6 text-white">Direct Inquiry</h4>
-                    <p class="text-gray-400 text-xs md:text-sm mb-4">Send us your requirements and delivery address details directly.</p>
-                    <form id="contact-form" class="space-y-3">
+                    <p class="text-gray-400 text-xs md:text-sm mb-4">Select your preferred timepiece for a direct consultation via WhatsApp.</p>
+                    
+                    <form id="whatsapp-form" class="space-y-4">
                         <div class="border-b border-gray-600 focus-within:border-zoga-red transition-colors group">
-                            <input id="contact-email" type="email" placeholder="Your email address" class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500" required>
+                            <input id="wa-name" type="text" placeholder="Your Name" class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500" required>
                         </div>
-                        <div class="flex items-end border-b border-gray-600 focus-within:border-zoga-red transition-colors group">
-                            <textarea id="contact-message" rows="2" placeholder="Message & Address details..." class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500 resize-none" required></textarea>
-                            <button id="contact-submit" type="submit" class="text-gray-500 pb-2 group-focus-within:text-zoga-red hover:text-white transition-colors" aria-label="Send email">
-                                <i data-lucide="arrow-right" class="w-4 h-4 md:w-5 md:h-5"></i>
-                            </button>
+                        <div class="border-b border-gray-600 focus-within:border-zoga-red transition-colors group">
+                            <input id="wa-phone" type="tel" placeholder="Phone Number" class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500" required>
                         </div>
+                        <div class="border-b border-gray-600 focus-within:border-zoga-red transition-colors group">
+                            <textarea id="wa-address" rows="2" placeholder="Delivery Address" class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500 resize-none" required></textarea>
+                        </div>
+                        
+                        <div class="mt-4 space-y-3">
+                            <!-- Category Dropdown -->
+                            <div class="relative">
+                                <select id="wa-category-select" class="w-full bg-[#111] border border-gray-700 text-white text-xs md:text-sm rounded p-3 outline-none focus:border-zoga-red transition-all cursor-pointer" required>
+                                    <option value="" disabled selected>Select Watch Category</option>
+                                    <option value="Forest Timepieces">Forest Timepieces: The Art of Precision</option>
+                                    <option value="Zoga Luxury Edition">Zoga Luxury Edition</option>
+                                    <option value="Hublot Collection">Hublot Collection</option>
+                                    <option value="Casio Series">Casio Series</option>
+                                    <option value="RM Watch Collection">RM Watch Collection</option>
+                                    <option value="Rolex Masterpieces">Rolex Masterpieces</option>
+                                </select>
+                            </div>
+
+                            <!-- Variant Dropdown -->
+                            <div class="relative">
+                                <select id="wa-variant-select" class="w-full bg-[#111] border border-gray-700 text-white text-xs md:text-sm rounded p-3 outline-none focus:border-zoga-red transition-all cursor-pointer disabled:opacity-50" disabled required>
+                                    <option value="" disabled selected>Select Color / Model Variant</option>
+                                </select>
+                            </div>
+                            
+                            <input type="hidden" id="wa-selected-product">
+                        </div>
+
+                        <button type="submit" class="w-full mt-4 btn-accent bg-[#25D366]/10 border-[#25D366]/30 hover:bg-[#25D366] hover:border-[#25D366] hover:text-white text-[#25D366] flex items-center justify-center gap-2 py-3">
+                            <i data-lucide="message-circle" class="w-4 h-4 md:w-5 md:h-5"></i> 
+                            <span class="tracking-widest">Send on WhatsApp</span>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -1094,6 +1101,100 @@
     <script>
         // Initialize Icons
         lucide.createIcons();
+
+        // Professional Cascading Dropdown Data Structure for Direct Inquiry
+        const productCatalog = {
+            "Forest Timepieces": [
+                "Silver",
+                "Gold"
+            ],
+            "Zoga Luxury Edition": [
+                "Luxury Edition Standard"
+            ],
+            "Hublot Collection": [
+                "Grey Dial With Brown Straps",
+                "White Dial With Black Straps",
+                "Interior Green With Silver Dial With Green Straps",
+                "Luxury Edition: Metal Dial With Metal Chain Interior Is Black"
+            ],
+            "Casio Series": [
+                "Casio [AE-1200WHL-5AV] Leather Straps",
+                "Casio AE 1200 WHD Series Watch With Black Leather Strap",
+                "Casio Series Round Dial Black Leather Strap",
+                "Casio Series Round Dial Brown Straps",
+                "Casio Classic Edition With Metal Straps"
+            ],
+            "RM Watch Collection": [
+                "RM Dragon Edition",
+                "RM 30-01 Green Edition",
+                "RM 30-01 Orange Edition",
+                "RM 30-01 Yellow Edition"
+            ],
+            "Rolex Masterpieces": [
+                "Rolex With Gold Chain With Black Interior Luxury Edition",
+                "Rolex With Gold Chain With Green Interior Luxury Edition",
+                "Rolex Full Gold Edition",
+                "Rolex With Gold Chain Interior Silver Edition",
+                "Rolex With Gold Chain Interior Light Gold Special Edition"
+            ]
+        };
+
+        const categorySelect = document.getElementById('wa-category-select');
+        const variantSelect = document.getElementById('wa-variant-select');
+        const selectedProductInput = document.getElementById('wa-selected-product');
+
+        if (categorySelect && variantSelect) {
+            categorySelect.addEventListener('change', (e) => {
+                const selectedCategory = e.target.value;
+                variantSelect.innerHTML = '<option value="" disabled selected>Select Color / Model Variant</option>';
+                
+                if (productCatalog[selectedCategory]) {
+                    productCatalog[selectedCategory].forEach(variant => {
+                        const option = document.createElement('option');
+                        option.value = variant;
+                        option.textContent = variant;
+                        variantSelect.appendChild(option);
+                    });
+                    variantSelect.disabled = false;
+                } else {
+                    variantSelect.disabled = true;
+                }
+                selectedProductInput.value = '';
+            });
+
+            variantSelect.addEventListener('change', (e) => {
+                const category = categorySelect.value;
+                const variant = e.target.value;
+                selectedProductInput.value = `${category} - ${variant}`;
+            });
+        }
+
+        const whatsappForm = document.getElementById('whatsapp-form');
+        if (whatsappForm) {
+            whatsappForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('wa-name').value.trim();
+                const phone = document.getElementById('wa-phone').value.trim();
+                const address = document.getElementById('wa-address').value.trim();
+                const product = selectedProductInput.value;
+                
+                if (!product) {
+                    alert('Please select both a watch category and a specific variant option.');
+                    return;
+                }
+                
+                const targetNumber = '919878173681'; 
+                const messageText = `*New Zoga Direct Order Inquiry* 🛍️\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Address:* ${address}\n*Selected Timepiece:* ${product}\n\nHi! I am interested in this item. Please share availability, additional details, and actual pictures.`;
+                const whatsappUrl = `https://wa.me/${targetNumber}?text=${encodeURIComponent(messageText)}`;
+                
+                window.open(whatsappUrl, '_blank');
+                whatsappForm.reset();
+                variantSelect.innerHTML = '<option value="" disabled selected>Select Color / Model Variant</option>';
+                variantSelect.disabled = true;
+                selectedProductInput.value = '';
+            });
+        }
 
         // Mobile Menu Logic
         const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
@@ -1191,12 +1292,11 @@
             });
         }
 
-        // Splash Screen Logic -> Opens Promo Modal after completion
+        // Splash Screen Logic
         (function() {
             const splash = document.getElementById('splash-overlay');
             const splashLogo = document.getElementById('splash-logo');
             if (!splash || !splashLogo) {
-                // If splash element is not present, open promo after brief delay
                 setTimeout(openPromoModal, 600);
                 return;
             }
@@ -1210,8 +1310,6 @@
                 setTimeout(() => {
                     try { splash.remove(); } catch (e) {}
                     document.body.style.overflow = prevOverflow || '';
-                    
-                    // Trigger the offer pop-up modal smoothly after logo splash disappears
                     setTimeout(openPromoModal, 400);
                 }, 900);
             };
@@ -1381,29 +1479,6 @@
                 setWatchModalSlide(watchModalIndex - 1);
             }
         });
-
-        document.querySelectorAll('.product-item .quick-view-btn').forEach(button => {
-            button.addEventListener('click', event => {
-                const card = event.target.closest('.product-item');
-                if (card) openWatchModal(card);
-            });
-        });
-
-        const contactForm = document.getElementById('contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const email = document.getElementById('contact-email').value;
-                const message = document.getElementById('contact-message').value;
-                
-                const targetEmail = 'Fashionzoga@gmail.com';
-                const subject = encodeURIComponent('New Inquiry/Order from Zoga Website');
-                const body = encodeURIComponent(`Sender Email: ${email}\n\nMessage & Details:\n${message}`);
-                
-                window.location.href = `mailto:${targetEmail}?subject=${subject}&body=${body}`;
-                contactForm.reset();
-            });
-        }
     </script>
 </body>
 </html>
