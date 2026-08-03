@@ -1118,8 +1118,8 @@
                             <textarea id="wa-address" rows="2" placeholder="Delivery Address" class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500 resize-none" required></textarea>
                         </div>
                         
-                        <div class="mt-4 space-y-3">
-                            <!-- Category Dropdown -->
+                     <div class="mt-4 space-y-3">
+                            <!-- Main Category Dropdown -->
                             <div class="relative">
                                 <select id="wa-category-select" class="w-full bg-[#111] border border-gray-700 text-white text-xs md:text-sm rounded p-3 outline-none focus:border-zoga-red transition-all cursor-pointer" required>
                                     <option value="" disabled selected>Select Watch Category</option>
@@ -1130,11 +1130,18 @@
                                     <option value="RM Watch Collection">RM Watch Collection</option>
                                     <option value="Rolex Masterpieces">Rolex Masterpieces</option>
                                     <option value="SEIKO Series">SEIKO Series</option>
-                                    <option value="DENVOSI Series">DENVOSI Series</option>
+                                    <option value="Girls Watch">Girls Watch</option>
                                 </select>
                             </div>
 
-                            <!-- Variant Dropdown -->
+                            <!-- Conditional Sub-Category Dropdown (e.g. for "Watch with band") -->
+                            <div class="relative hidden" id="wa-sub-category-container">
+                                <select id="wa-sub-category-select" class="w-full bg-[#111] border border-gray-700 text-white text-xs md:text-sm rounded p-3 outline-none focus:border-zoga-red transition-all cursor-pointer disabled:opacity-50" disabled>
+                                    <option value="" disabled selected>Select Style / Type</option>
+                                </select>
+                            </div>
+
+                            <!-- Final Variant Dropdown -->
                             <div class="relative">
                                 <select id="wa-variant-select" class="w-full bg-[#111] border border-gray-700 text-white text-xs md:text-sm rounded p-3 outline-none focus:border-zoga-red transition-all cursor-pointer disabled:opacity-50" disabled required>
                                     <option value="" disabled selected>Select Color / Model Variant</option>
@@ -1162,11 +1169,12 @@
         </div>
     </footer>
 
-    <script>
+
+     <script>
         // Initialize Icons
         lucide.createIcons();
 
-        // Professional Cascading Dropdown Data Structure for Direct Inquiry
+        // Advanced Cascading Dropdown Data Structure supporting multiple depth levels
         const productCatalog = {
             "Forest Timepieces": [
                 "Silver",
@@ -1204,40 +1212,111 @@
             "SEIKO Series": [
               "Style: Diver- Syle watch, Dial Color: brown, Strap: Black Silicone"
             ],
-            "DENVOSI Series": [
-                "Denvosi Quare Watch (White Edition): Showcases a rose-gold crystal-paved case paired with a clean white dial featuring intricate compass artwork, rose-gold accents",
-                "Denvosi Quare Watch (Black Edition): Features a tonneau-shaped rose-gold case encrusted with crystals, a black textured compass-style dial with prominent Roman numerals",
-                "Denvosi Quare Watch (Brown Edition): Sports a rose-gold crystal-set tonneau case combined with a rich brown compass-patterned dial, crystal-accented oversized numeric details"
-            ]
+            // Complex structure to support secondary dropdown for "Girls Watch"
+            "Girls Watch": {
+                "Watch with band": [
+                    "Jaina Crystal Round Watch Set (1band.jpeg): A rose-gold-toned round quartz watch featuring a crystal-studded bezel, a patterned pink dial, and a matching stone-embellished cuff bracelet.",
+                    "Jaina Roman Numeral Watch Set (2band.jpeg): An elegant rose-gold-toned watch with a faceted bezel, Roman numerals, a crystal ring dial, and a pink-accented crystal bangle.",
+                    "Jaina Square Quartz Watch Set (3band.jpeg): A sleek rose-gold-toned square watch paired with geometric link bands and a matching crystal-bordered square stone bracelet.",
+                    "Jaina Link-Chain Watch Set (4band.jpeg): A minimalist rose-gold-toned round watch with interlocking pink-and-gold chain links and a coordinating oval-stone cluster bangle."
+                ],
+  
+            }
         };
 
-        const categorySelect = document.getElementById('wa-category-select');
+          const categorySelect = document.getElementById('wa-category-select');
+        const subCategoryContainer = document.getElementById('wa-sub-category-container');
+        const subCategorySelect = document.getElementById('wa-sub-category-select');
         const variantSelect = document.getElementById('wa-variant-select');
         const selectedProductInput = document.getElementById('wa-selected-product');
 
-        if (categorySelect && variantSelect) {
+        // Logic for Dynamic Multilevel Cascading Dropdowns
+        if (categorySelect && variantSelect && subCategorySelect) {
+            
+            // 1. Category Change
             categorySelect.addEventListener('change', (e) => {
                 const selectedCategory = e.target.value;
-                variantSelect.innerHTML = '<option value="" disabled selected>Select Color / Model Variant</option>';
                 
+                // Reset variant dropdown
+                variantSelect.innerHTML = '<option value="" disabled selected>Select Color / Model Variant</option>';
+                variantSelect.disabled = true;
+                
+                // Reset sub-category dropdown
+                subCategorySelect.innerHTML = '<option value="" disabled selected>Select Style / Type</option>';
+                subCategorySelect.disabled = true;
+                subCategoryContainer.classList.add('hidden');
+                subCategorySelect.required = false;
+
                 if (productCatalog[selectedCategory]) {
-                    productCatalog[selectedCategory].forEach(variant => {
-                        const option = document.createElement('option');
-                        option.value = variant;
-                        option.textContent = variant;
-                        variantSelect.appendChild(option);
-                    });
-                    variantSelect.disabled = false;
-                } else {
-                    variantSelect.disabled = true;
+                    const catalogItem = productCatalog[selectedCategory];
+                    
+                    // Case A: Flat Array of variants (like Boys Watches, Rolex, etc.)
+                    if (Array.isArray(catalogItem)) {
+                        catalogItem.forEach(variant => {
+                            const option = document.createElement('option');
+                            option.value = variant;
+                            option.textContent = variant;
+                            variantSelect.appendChild(option);
+                        });
+                        variantSelect.disabled = false;
+                        
+                    // Case B: Nested Object needing Sub-Category (like Girls Watch -> Watch with band)
+                    } else if (typeof catalogItem === 'object') {
+                        subCategoryContainer.classList.remove('hidden');
+                        subCategorySelect.disabled = false;
+                        subCategorySelect.required = true;
+                        
+                        Object.keys(catalogItem).forEach(subCat => {
+                            const option = document.createElement('option');
+                            option.value = subCat;
+                            option.textContent = subCat;
+                            subCategorySelect.appendChild(option);
+                        });
+                    }
                 }
                 selectedProductInput.value = '';
             });
 
+            // 2. Sub-Category Change
+            subCategorySelect.addEventListener('change', (e) => {
+                const selectedCategory = categorySelect.value;
+                const selectedSubCat = e.target.value;
+                
+                // Reset variant dropdown
+                variantSelect.innerHTML = '<option value="" disabled selected>Select Color / Model Variant</option>';
+                variantSelect.disabled = true;
+                
+                if (productCatalog[selectedCategory] && productCatalog[selectedCategory][selectedSubCat]) {
+                    const variantsArray = productCatalog[selectedCategory][selectedSubCat];
+                    
+                    variantsArray.forEach(variant => {
+                        const option = document.createElement('option');
+                        option.value = variant; 
+                        
+                        // Truncate ultra-long descriptions for the dropdown UI text to maintain neatness
+                        // The full string remains in the "value" so it goes to WhatsApp
+                        if (variant.length > 70) {
+                            option.textContent = variant.substring(0, 67) + '...';
+                        } else {
+                            option.textContent = variant;
+                        }
+                        
+                        variantSelect.appendChild(option);
+                    });
+                    variantSelect.disabled = false;
+                }
+                selectedProductInput.value = '';
+            });
+
+            // 3. Variant Change
             variantSelect.addEventListener('change', (e) => {
                 const category = categorySelect.value;
+                // Check if sub-category is active to construct the final title cleanly
+                const subCategory = (!subCategoryContainer.classList.contains('hidden') && subCategorySelect.value) 
+                                     ? `${subCategorySelect.value} - ` 
+                                     : '';
                 const variant = e.target.value;
-                selectedProductInput.value = `${category} - ${variant}`;
+                selectedProductInput.value = `${category} - ${subCategory}${variant}`;
             });
         }
 
