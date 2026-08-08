@@ -79,7 +79,6 @@
             backdrop-filter: blur(12px);
             transition: all 0.3s ease;
             
-            /* Responsive Sizing */
             padding: 0.75rem 1.5rem;
             letter-spacing: 0.15em;
             font-size: 0.65rem;
@@ -138,7 +137,6 @@
             .content-panel { border-radius: 2rem; }
         }
 
-        /* Animations */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -149,7 +147,6 @@
             transform: translateY(0);
         }
 
-        /* Hero Slideshow */
         .hero-overlay {
             background: linear-gradient(to top, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.25) 50%, rgba(5,5,5,0.75) 100%);
         }
@@ -184,7 +181,6 @@
             100% { opacity: 0; transform: scale(1.15); }
         }
 
-        /* Splash Screen */
         #splash-overlay { transition: opacity 800ms ease, visibility 800ms ease; }
         #splash-logo { will-change: transform, opacity; animation: splash-zoom 2200ms cubic-bezier(.2,.9,.2,1) forwards; }
         @keyframes splash-zoom {
@@ -194,7 +190,6 @@
             100% { transform: scale(8); opacity: 0; }
         }
 
-        /* Promotional Offer Pop-Up Modal */
         .promo-backdrop {
             position: fixed;
             inset: 0;
@@ -215,21 +210,19 @@
         }
         .promo-card {
             position: relative;
-            width: min(92vw, 540px);
+            width: min(92vw, 580px);
             background: linear-gradient(145deg, rgba(18, 18, 18, 0.96) 0%, rgba(8, 8, 8, 0.98) 100%);
             border: 1px solid rgba(230, 0, 0, 0.35);
             border-radius: 1.75rem;
-            padding: 2.25rem 1.5rem 1.75rem;
+            padding: 2.5rem 1.5rem;
             box-shadow: 0 30px 90px rgba(0, 0, 0, 0.8), 0 0 50px rgba(230, 0, 0, 0.15);
             transform: scale(0.88) translateY(20px);
             transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             overflow: hidden;
+            text-align: center;
         }
         @media (min-width: 640px) {
-            .promo-card {
-                padding: 2.75rem 2.25rem 2.25rem;
-                border-radius: 2rem;
-            }
+            .promo-card { padding: 3rem 2.5rem; border-radius: 2rem; }
         }
         .promo-backdrop.active .promo-card {
             transform: scale(1) translateY(0);
@@ -243,6 +236,7 @@
             height: 200%;
             background: radial-gradient(circle at 50% 0%, rgba(230,0,0,0.18), transparent 45%);
             pointer-events: none;
+            z-index: 0;
         }
         .promo-close-btn {
             position: absolute;
@@ -251,7 +245,7 @@
             width: 2.5rem;
             height: 2.5rem;
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: #ffffff;
             display: flex;
@@ -260,6 +254,7 @@
             cursor: pointer;
             z-index: 10;
             transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
         }
         .promo-close-btn:hover {
             background: var(--zoga-red);
@@ -268,7 +263,35 @@
             box-shadow: 0 0 20px rgba(230,0,0,0.5);
         }
 
-        /* Product Cards */
+        /* Hide Number Input Spinners & Custom Select Arrow */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        
+        .card-variant-select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            background-size: 0.8em;
+            padding-right: 1.5rem;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .card-variant-select option {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            padding: 8px;
+        }
+
         .product-item {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -280,10 +303,7 @@
             justify-content: space-between;
         }
         @media (min-width: 768px) {
-            .product-item {
-                padding: 1.25rem;
-                border-radius: 1.5rem;
-            }
+            .product-item { padding: 1.25rem; border-radius: 1.5rem; }
         }
         .product-item:hover {
             transform: translateY(-8px);
@@ -296,7 +316,7 @@
             border-radius: 0.75rem;
             aspect-ratio: 4/5;
             background: #f0ebe4;
-            cursor: pointer; /* Suggest interactivity on mobile */
+            cursor: pointer; 
         }
         @media (min-width: 768px) {
             .product-img-wrap { border-radius: 1rem; cursor: default; }
@@ -308,18 +328,10 @@
             transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .product-item:hover .product-img { transform: scale(1.08); }
-        
-        /* Removed old product-overlay CSS */
 
-        /* Mobile specific touch styles - Disables normal hover, relies on JS touch-active class */
         @media (hover: none) {
-            /* Disable normal hover effects on touch devices to prevent sticky hover bug */
             .product-img-wrap:hover .slideshow-arrow { opacity: 0; }
-            
-            /* Apply these only when JS adds the touch-active class */
-            .product-item.touch-active .slideshow-arrow { 
-                opacity: 1; 
-            }
+            .product-item.touch-active .slideshow-arrow { opacity: 1; }
         }
         
         .tag-new {
@@ -339,30 +351,14 @@
             backdrop-filter: blur(6px);
         }
         @media (min-width: 768px) {
-            .tag-new {
-                top: 1rem;
-                left: 1rem;
-                font-size: 0.65rem;
-                letter-spacing: 0.22em;
-                padding: 0.4rem 0.85rem;
-                border-radius: 0.35rem;
-            }
+            .tag-new { top: 1rem; left: 1rem; font-size: 0.65rem; letter-spacing: 0.22em; padding: 0.4rem 0.85rem; border-radius: 0.35rem; }
         }
 
-        /* Failsafe to hide splash screen after 3.5 seconds */
-@keyframes failsafe-hide {
-    to {
-        opacity: 0;
-        visibility: hidden;
-        z-index: -1;
-    }
-}
-#splash-overlay {
-    /* Retain your existing transitions, but add the failsafe animation */
-    animation: failsafe-hide 0.5s ease 3.5s forwards; 
-}
+        @keyframes failsafe-hide {
+            to { opacity: 0; visibility: hidden; z-index: -1; }
+        }
+        #splash-overlay { animation: failsafe-hide 0.5s ease 3.5s forwards; }
 
-        /* Frame Slideshow inside product card */
         .frame-slideshow-container { position: relative; width: 100%; height: 100%; }
         .frame-slide {
             position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
@@ -406,17 +402,6 @@
         .slideshow-arrow.prev { left: 0.5rem; }
         .slideshow-arrow.next { right: 0.5rem; }
 
-        .color-swatch-bar { display: flex; align-items: center; justify-content: center; gap: 0.4rem; margin-top: 0.5rem; }
-        @media (min-width: 768px) { .color-swatch-bar { gap: 0.6rem; margin-top: 0.85rem; } }
-
-        .swatch-btn {
-            width: 0.6rem; height: 0.6rem; border-radius: 999px; border: 2px solid transparent;
-            outline: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.3s ease; cursor: pointer;
-        }
-        @media (min-width: 768px) { .swatch-btn { width: 0.85rem; height: 0.85rem; } }
-        .swatch-btn.active-swatch { outline: 2px solid var(--zoga-red); outline-offset: 2px; transform: scale(1.2); }
-
-        /* Modal Styles */
         .watch-modal-backdrop {
             position: fixed; inset: 0; z-index: 80; display: flex; align-items: center; justify-content: center;
             padding: 1.25rem; background: rgba(0, 0, 0, 0.82);
@@ -466,7 +451,6 @@
         .mobile-menu-toggle.active .hamburger-line:nth-child(2) { opacity: 0; transform: translateX(-4px); }
         .mobile-menu-toggle.active .hamburger-line:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-        /* Hide scrollbar for select options in some browsers */
         select option {
             background-color: #111;
             color: white;
@@ -479,51 +463,39 @@
 </head>
 <body class="antialiased">
 
-    <!-- Splash Screen -->
     <div id="splash-overlay" aria-hidden="true" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#050505;z-index:9999;">
         <div id="splash-logo" class="brand-logo" style="color:#e60000;font-size:4rem;letter-spacing:-0.05em;transform-origin:center;">
             zoga
         </div>
     </div>
 
-    <!-- Promotional Pop-Up Modal -->
+    <!-- Promotional Pop-Up Modal (Elegant Text-Focused Layout) -->
     <div id="promo-modal-backdrop" class="promo-backdrop" aria-hidden="true">
-        <div class="promo-card text-center" role="dialog" aria-modal="true" aria-labelledby="promo-modal-title">
+        <div class="promo-card flex flex-col items-center justify-center relative z-10" role="dialog" aria-modal="true" aria-labelledby="promo-modal-title">
             <button id="promo-modal-close" class="promo-close-btn" aria-label="Close promotion message">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
 
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zoga-red/10 border border-zoga-red/30 text-zoga-red text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold mb-4">
+            <div class="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-zoga-red/10 border border-zoga-red/30 text-zoga-red text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold mb-6">
                 <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Limited Time Offer
             </div>
 
-            <h2 id="promo-modal-title" class="text-2xl sm:text-3xl md:text-4xl font-serif text-white mb-3 tracking-tight">
-                Exclusive <span class="italic text-zoga-red">Gift Offer</span>
+            <h2 id="promo-modal-title" class="text-3xl sm:text-4xl md:text-5xl font-serif text-white mb-4 tracking-tight leading-tight">
+                Luxury <span class="italic text-zoga-red drop-shadow-[0_0_15px_rgba(230,0,0,0.3)]">Eyewear</span> Free
             </h2>
 
-            <p class="text-gray-300 text-xs sm:text-sm md:text-base leading-relaxed max-w-md mx-auto mb-6">
-                Buy <span class="text-white font-semibold underline decoration-zoga-red/80 underline-offset-4">2 watches</span> up to <span class="text-white font-semibold">₹1,000</span> and receive <span class="text-zoga-red font-semibold">ANY 1 luxury eyewear</span> completely free.
+            <p class="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-8 font-light max-w-sm mx-auto">
+                Buy <span class="text-white font-medium underline decoration-zoga-red underline-offset-4">ANY 2 watches</span> up to <span class="text-white font-medium">₹1,000</span> and receive a premium eyewear piece completely complimentary.
             </p>
 
-            <div class="bg-white/5 border border-white/10 rounded-xl p-3.5 sm:p-4 mb-6 flex items-center justify-between gap-3 text-left">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-lg bg-zoga-red/20 border border-zoga-red/40 flex items-center justify-center shrink-0 text-zoga-red">
-                        <i data-lucide="glasses" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                        <p class="text-white text-xs sm:text-sm font-medium">Complimentary Eyewear</p>
-                        <p class="text-gray-400 text-[10px] sm:text-xs">Applied automatically on qualifying cart order</p>
-                    </div>
-                </div>
-                <span class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-zoga-red bg-zoga-red/10 px-2.5 py-1 rounded border border-zoga-red/30 shrink-0">FREE</span>
-            </div>
-
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <a href="#all-watches" id="promo-claim-btn" class="btn-accent w-full sm:w-auto py-3 px-6 text-xs tracking-widest">
-                    Shop Collection
-                </a>
-                <button id="promo-dismiss-btn" class="text-xs uppercase tracking-widest text-gray-400 hover:text-white transition-colors py-2 px-4">
-                    Dismiss
+            <!-- Action Buttons -->
+            <div class="flex flex-col w-full max-w-xs mx-auto gap-3">
+                <button id="promo-direct-buy-btn" class="btn-accent w-full py-3.5 sm:py-4 text-[10px] sm:text-xs tracking-[0.2em] flex items-center justify-center gap-2 group">
+                    <span>Inquire Now</span>
+                    <i data-lucide="arrow-down" class="w-4 h-4 transform group-hover:translate-y-1 transition-transform"></i>
+                </button>
+                <button id="promo-dismiss-btn" class="text-[10px] sm:text-xs uppercase tracking-widest text-gray-500 hover:text-white transition-colors py-3 px-4">
+                    Continue Browsing
                 </button>
             </div>
         </div>
@@ -616,52 +588,46 @@
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 md:gap-8">
                 
                 <!-- 1. Forest Tiger Skeleton Watch -->
-                <div class="product-item reveal group" id="trio-watch-card" style="transition-delay: 100ms;">
+                <div class="product-item reveal group">
                     <div class="product-img-wrap">
                         <div class="tag-new">Bestseller</div>
-
-                        <button class="slideshow-arrow prev" aria-label="Previous Slide">
-                            <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i>
-                        </button>
-                        <button class="slideshow-arrow next" aria-label="Next Slide">
-                            <i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i>
-                        </button>
+                        <button class="slideshow-arrow prev" aria-label="Previous Slide"><i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i></button>
+                        <button class="slideshow-arrow next" aria-label="Next Slide"><i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i></button>
 
                         <div class="frame-slideshow-container">
-                            <img src="boys watches/Forest2.PNG" alt="Forest Gold Tiger Skeleton" class="frame-slide active-slide" data-title="Forest Gold Tiger Skeleton" data-color="Gold">
-                            <img src="boys watches/Forest3.PNG" alt="Forest Silver Tiger Skeleton" class="frame-slide" data-title="Forest Silver Tiger Skeleton" data-color="Silver">
-                            <img src="boys watches/Forestboy.PNG" alt="Forest Black Tiger Skeleton" class="frame-slide" data-title="Forest Black Tiger Skeleton" data-color="Black">
-                            <img src="boys watches/Forest4.PNG" alt="Forest Gold Tiger Skeleton" class="frame-slide" data-title="Forest Gold Tiger Skeleton" data-color="Gold">
+                            <img src="boys watches/Forest2.PNG" alt="Forest Gold Tiger Skeleton" class="frame-slide active-slide" data-title="Forest Gold Tiger Skeleton">
+                            <img src="boys watches/Forest3.PNG" alt="Forest Silver Tiger Skeleton" class="frame-slide" data-title="Forest Silver Tiger Skeleton">
                         </div>
 
                         <div class="slideshow-controls">
                             <button class="slideshow-dot active-dot" aria-label="Slide 1"></button>
                             <button class="slideshow-dot" aria-label="Slide 2"></button>
-                            <button class="slideshow-dot" aria-label="Slide 3"></button>
-                            <button class="slideshow-dot" aria-label="Slide 4"></button>
                         </div>
                     </div>
-
                     <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
-                        <h3 id="trio-card-title" class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Forest Gold Tiger Skeleton</h3>
+                        <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Forest Tiger Skeleton</h3>
                         <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">FOREST TIMEPIECES</p>
                         
-                        <div class="color-swatch-bar mt-2 md:mt-4">
-                            <button class="swatch-btn active-swatch bg-[#d4af37]" title="Gold"></button>
-                            <button class="swatch-btn bg-gray-300" title="Silver"></button>
+                        <div class="flex items-center gap-1.5 w-full mt-2 md:mt-3 px-1">
+                            <select class="card-variant-select w-[70%] bg-black/40 border border-white/10 text-gray-300 text-[9px] sm:text-[10px] rounded px-2 py-1.5 outline-none focus:border-zoga-red transition-colors">
+                                <option value="Gold">Gold</option>
+                                <option value="Silver">Silver</option>
+                            </select>
+                            <div class="relative w-[30%]">
+                                <input type="number" min="1" value="1" class="card-quantity-input w-full bg-black/40 border border-white/10 text-white text-[10px] text-center rounded px-1 py-1.5 outline-none focus:border-zoga-red transition-colors" placeholder="Qty" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value === '0') this.value = '1';">
+                            </div>
                         </div>
 
                         <div class="flex items-center justify-center gap-1.5 sm:gap-2 md:gap-3 w-full mt-3 md:mt-4 mb-1">
                             <button class="quick-view-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-medium tracking-widest uppercase border border-white/20 hover:border-white py-1.5 sm:py-2 rounded-full transition-colors bg-transparent hover:bg-white/10 text-white whitespace-nowrap">View</button>
                             <button class="buy-action-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-bold tracking-widest uppercase bg-zoga-red text-white border border-zoga-red hover:bg-white hover:border-white hover:text-black py-1.5 sm:py-2 rounded-full transition-all shadow-[0_4px_10px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_15px_rgba(255,255,255,0.4)] whitespace-nowrap" data-category="Forest Timepieces">Buy</button>
                         </div>
-
                         <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-3">₹1,400/-</p>
                     </div>
                 </div>
 
                 <!-- 2. Zoga Edition -->
-                <div class="product-item reveal" style="transition-delay: 200ms;">
+                <div class="product-item reveal group" style="transition-delay: 200ms;">
                     <div class="product-img-wrap">
                         <img src="boys watches/zogaedition.PNG" alt="Seiko Rose Gold Diver" class="product-img">
                     </div>
@@ -669,26 +635,29 @@
                         <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Luxury Zoga Edition</h3>
                         <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Zoga Special Edition</p>
                         
+                        <div class="flex items-center gap-1.5 w-full mt-2 md:mt-3 px-1">
+                            <select class="card-variant-select w-[70%] bg-black/40 border border-white/10 text-gray-300 text-[9px] sm:text-[10px] rounded px-2 py-1.5 outline-none focus:border-zoga-red transition-colors">
+                                <option value="Luxury Edition Standard">Standard Edition</option>
+                            </select>
+                            <div class="relative w-[30%]">
+                                <input type="number" min="1" value="1" class="card-quantity-input w-full bg-black/40 border border-white/10 text-white text-[10px] text-center rounded px-1 py-1.5 outline-none focus:border-zoga-red transition-colors" placeholder="Qty" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value === '0') this.value = '1';">
+                            </div>
+                        </div>
+
                         <div class="flex items-center justify-center gap-1.5 sm:gap-2 md:gap-3 w-full mt-3 md:mt-4 mb-1">
                             <button class="quick-view-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-medium tracking-widest uppercase border border-white/20 hover:border-white py-1.5 sm:py-2 rounded-full transition-colors bg-transparent hover:bg-white/10 text-white whitespace-nowrap">View</button>
                             <button class="buy-action-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-bold tracking-widest uppercase bg-zoga-red text-white border border-zoga-red hover:bg-white hover:border-white hover:text-black py-1.5 sm:py-2 rounded-full transition-all shadow-[0_4px_10px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_15px_rgba(255,255,255,0.4)] whitespace-nowrap" data-category="Zoga Luxury Edition">Buy</button>
                         </div>
-
                         <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-3">₹550/-</p>
                     </div>
                 </div>
 
                 <!-- 3. Hublot Slideshow -->
-                <div class="product-item reveal group" id="third-watch-card" style="transition-delay: 300ms;">
+                <div class="product-item reveal group" style="transition-delay: 300ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">Exclusive</div>
-
-                        <button class="slideshow-arrow prev" aria-label="Previous Slide">
-                            <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i>
-                        </button>
-                        <button class="slideshow-arrow next" aria-label="Next Slide">
-                            <i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i>
-                        </button>
+                        <button class="slideshow-arrow prev" aria-label="Previous Slide"><i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i></button>
+                        <button class="slideshow-arrow next" aria-label="Next Slide"><i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i></button>
 
                         <div class="frame-slideshow-container">
                             <img src="boys watches/hubolt11.PNG" alt="Hublot Geneve Titanium" class="frame-slide active-slide" data-title="Hublot Geneve Titanium" data-price="1100" onerror="this.src='https://images.unsplash.com/photo-1587836374828-cb4387df3eb7?auto=format&fit=crop&w=600&q=80'">
@@ -704,34 +673,36 @@
                             <button class="slideshow-dot" aria-label="Slide 4"></button>
                         </div>
                     </div>
-
                     <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
-                        <h3 id="third-watch-title" class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Hublot Geneve Titanium</h3>
+                        <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Hublot Geneve Edition</h3>
                         <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Hublot Collection</p>
                         
-                        <div class="color-swatch-bar mt-2 md:mt-4 opacity-0 pointer-events-none h-2 hidden md:block">
+                        <div class="flex items-center gap-1.5 w-full mt-2 md:mt-3 px-1">
+                            <select class="card-variant-select w-[70%] bg-black/40 border border-white/10 text-gray-300 text-[9px] sm:text-[10px] rounded px-2 py-1.5 outline-none focus:border-zoga-red transition-colors">
+                                <option value="Grey Dial With Brown Straps">Grey/Brown</option>
+                                <option value="White Dial With Black Straps">White/Black</option>
+                                <option value="Interior Green With Silver Dial With Green Straps">Silver/Green</option>
+                                <option value="Luxury Edition: Metal Dial With Metal Chain Interior Is Black">Metal/Black</option>
+                            </select>
+                            <div class="relative w-[30%]">
+                                <input type="number" min="1" value="1" class="card-quantity-input w-full bg-black/40 border border-white/10 text-white text-[10px] text-center rounded px-1 py-1.5 outline-none focus:border-zoga-red transition-colors" placeholder="Qty" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value === '0') this.value = '1';">
+                            </div>
                         </div>
 
                         <div class="flex items-center justify-center gap-1.5 sm:gap-2 md:gap-3 w-full mt-3 md:mt-4 mb-1">
                             <button class="quick-view-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-medium tracking-widest uppercase border border-white/20 hover:border-white py-1.5 sm:py-2 rounded-full transition-colors bg-transparent hover:bg-white/10 text-white whitespace-nowrap">View</button>
                             <button class="buy-action-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-bold tracking-widest uppercase bg-zoga-red text-white border border-zoga-red hover:bg-white hover:border-white hover:text-black py-1.5 sm:py-2 rounded-full transition-all shadow-[0_4px_10px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_15px_rgba(255,255,255,0.4)] whitespace-nowrap" data-category="Hublot Collection">Buy</button>
                         </div>
-
-                        <p id="third-watch-price" class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-3">₹1,100/-</p>
+                        <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-3">₹1,100/-</p>
                     </div>
                 </div>
 
                 <!-- 4. Casio Collection Slideshow -->
-                <div class="product-item reveal group" id="fourth-watch-card" style="transition-delay: 400ms;">
+                <div class="product-item reveal group" style="transition-delay: 400ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">Classic</div>
-
-                        <button class="slideshow-arrow prev" aria-label="Previous Slide">
-                            <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i>
-                        </button>
-                        <button class="slideshow-arrow next" aria-label="Next Slide">
-                            <i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i>
-                        </button>
+                        <button class="slideshow-arrow prev" aria-label="Previous Slide"><i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i></button>
+                        <button class="slideshow-arrow next" aria-label="Next Slide"><i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i></button>
 
                         <div class="frame-slideshow-container">
                             <img src="boys watches/casio-st.PNG" alt="Casio Black Leather" class="frame-slide active-slide" data-title="Casio Black Leather" data-price="1000" onerror="this.src='https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80'">
@@ -749,34 +720,37 @@
                             <button class="slideshow-dot" aria-label="Slide 5"></button>
                         </div>
                     </div>
-
                     <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
-                        <h3 id="fourth-watch-title" class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Casio Black Leather</h3>
+                        <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Casio Masterpiece</h3>
                         <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Casio Series</p>
                         
-                        <div class="color-swatch-bar mt-2 md:mt-4 opacity-0 pointer-events-none h-2 hidden md:block">
+                        <div class="flex items-center gap-1.5 w-full mt-2 md:mt-3 px-1">
+                            <select class="card-variant-select w-[70%] bg-black/40 border border-white/10 text-gray-300 text-[9px] sm:text-[10px] rounded px-2 py-1.5 outline-none focus:border-zoga-red transition-colors">
+                                <option value="Casio [AE-1200WHL-5AV] Leather Straps">AE-1200 Leather</option>
+                                <option value="Casio AE 1200 WHD Series Watch With Black Leather Strap">AE-1200 Black Lth</option>
+                                <option value="Casio Series Round Dial Black Leather Strap">Round Black Lth</option>
+                                <option value="Casio Series Round Dial Brown Straps">Round Brown Lth</option>
+                                <option value="Casio Classic Edition With Metal Straps">Classic Metal</option>
+                            </select>
+                            <div class="relative w-[30%]">
+                                <input type="number" min="1" value="1" class="card-quantity-input w-full bg-black/40 border border-white/10 text-white text-[10px] text-center rounded px-1 py-1.5 outline-none focus:border-zoga-red transition-colors" placeholder="Qty" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value === '0') this.value = '1';">
+                            </div>
                         </div>
 
                         <div class="flex items-center justify-center gap-1.5 sm:gap-2 md:gap-3 w-full mt-3 md:mt-4 mb-1">
                             <button class="quick-view-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-medium tracking-widest uppercase border border-white/20 hover:border-white py-1.5 sm:py-2 rounded-full transition-colors bg-transparent hover:bg-white/10 text-white whitespace-nowrap">View</button>
                             <button class="buy-action-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-bold tracking-widest uppercase bg-zoga-red text-white border border-zoga-red hover:bg-white hover:border-white hover:text-black py-1.5 sm:py-2 rounded-full transition-all shadow-[0_4px_10px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_15px_rgba(255,255,255,0.4)] whitespace-nowrap" data-category="Casio Series">Buy</button>
                         </div>
-
-                        <p id="fourth-watch-price" class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-3">₹1,000/-</p>
+                        <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-3">₹1,000/-</p>
                     </div>
                 </div>
                 
                  <!-- 5. RM Dragon Edition Slideshow -->
-                <div class="product-item reveal group" id="fifth-watch-card" style="transition-delay: 100ms;">
+                <div class="product-item reveal group" style="transition-delay: 100ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">Limited</div>
-
-                        <button class="slideshow-arrow prev" aria-label="Previous Slide">
-                            <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i>
-                        </button>
-                        <button class="slideshow-arrow next" aria-label="Next Slide">
-                            <i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i>
-                        </button>
+                        <button class="slideshow-arrow prev" aria-label="Previous Slide"><i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i></button>
+                        <button class="slideshow-arrow next" aria-label="Next Slide"><i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i></button>
 
                         <div class="frame-slideshow-container">
                             <img src="boys watches/RM Dragon edition.jpeg" alt="RM Dragon Edition" class="frame-slide active-slide" data-title="RM Dragon Edition" data-price="1700" onerror="this.src='https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=600&q=80'">
@@ -792,34 +766,36 @@
                             <button class="slideshow-dot" aria-label="Slide 4"></button>
                         </div>
                     </div>
-
                     <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
-                        <h3 id="fifth-watch-title" class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">RM Dragon Edition</h3>
-                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">RM Masterpiece</p>
+                        <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">RM Masterpiece Series</h3>
+                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">RM Watch Collection</p>
                         
-                        <div class="color-swatch-bar mt-2 md:mt-4 opacity-0 pointer-events-none h-2 hidden md:block">
+                        <div class="flex items-center gap-1.5 w-full mt-2 md:mt-3 px-1">
+                            <select class="card-variant-select w-[70%] bg-black/40 border border-white/10 text-gray-300 text-[9px] sm:text-[10px] rounded px-2 py-1.5 outline-none focus:border-zoga-red transition-colors">
+                                <option value="RM Dragon Edition">Dragon Edition</option>
+                                <option value="RM 30-01 Green Edition">Green Edition</option>
+                                <option value="RM 30-01 Orange Edition">Orange Edition</option>
+                                <option value="RM 30-01 Yellow Edition">Yellow Edition</option>
+                            </select>
+                            <div class="relative w-[30%]">
+                                <input type="number" min="1" value="1" class="card-quantity-input w-full bg-black/40 border border-white/10 text-white text-[10px] text-center rounded px-1 py-1.5 outline-none focus:border-zoga-red transition-colors" placeholder="Qty" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value === '0') this.value = '1';">
+                            </div>
                         </div>
 
                         <div class="flex items-center justify-center gap-1.5 sm:gap-2 md:gap-3 w-full mt-3 md:mt-4 mb-1">
                             <button class="quick-view-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-medium tracking-widest uppercase border border-white/20 hover:border-white py-1.5 sm:py-2 rounded-full transition-colors bg-transparent hover:bg-white/10 text-white whitespace-nowrap">View</button>
                             <button class="buy-action-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-bold tracking-widest uppercase bg-zoga-red text-white border border-zoga-red hover:bg-white hover:border-white hover:text-black py-1.5 sm:py-2 rounded-full transition-all shadow-[0_4px_10px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_15px_rgba(255,255,255,0.4)] whitespace-nowrap" data-category="RM Watch Collection">Buy</button>
                         </div>
-
-                        <p id="fifth-watch-price" class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-3">₹1,700/-</p>
+                        <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-3">₹1,700/-</p>
                     </div>
                 </div>
 
                 <!-- 6. Rolex Collection Slideshow -->
-                <div class="product-item reveal group" id="sixth-watch-card" style="transition-delay: 200ms;">
+                <div class="product-item reveal group" style="transition-delay: 200ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">Premium</div>
-
-                        <button class="slideshow-arrow prev" aria-label="Previous Slide">
-                            <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i>
-                        </button>
-                        <button class="slideshow-arrow next" aria-label="Next Slide">
-                            <i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i>
-                        </button>
+                        <button class="slideshow-arrow prev" aria-label="Previous Slide"><i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i></button>
+                        <button class="slideshow-arrow next" aria-label="Next Slide"><i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i></button>
 
                         <div class="frame-slideshow-container">
                             <img src="boys watches/Rolex lux .jpeg" alt="Rolex Silver Oyster" class="frame-slide active-slide" data-title="Rolex Silver Oyster" data-price="1300" onerror="this.src='https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=600&q=80'">
@@ -835,59 +811,64 @@
                             <button class="slideshow-dot" aria-label="Slide 4"></button>
                         </div>
                     </div>
-
                     <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
-                        <h3 id="sixth-watch-title" class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Rolex Silver Oyster</h3>
-                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Rolex Series</p>
+                        <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Rolex Elegance</h3>
+                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Rolex Masterpieces</p>
                         
-                        <div class="color-swatch-bar mt-2 md:mt-4 opacity-0 pointer-events-none h-2 hidden md:block">
+                        <div class="flex items-center gap-1.5 w-full mt-2 md:mt-3 px-1">
+                            <select class="card-variant-select w-[70%] bg-black/40 border border-white/10 text-gray-300 text-[9px] sm:text-[10px] rounded px-2 py-1.5 outline-none focus:border-zoga-red transition-colors">
+                                <option value="Rolex With Gold Chain With Black Interior Luxury Edition">Gold/Black Int</option>
+                                <option value="Rolex With Gold Chain With Green Interior Luxury Edition">Gold/Green Int</option>
+                                <option value="Rolex Full Gold Edition">Full Gold</option>
+                                <option value="Rolex With Gold Chain Interior Silver Edition">Gold/Silver Int</option>
+                                <option value="Rolex With Gold Chain Interior Light Gold Special Edition">Light Gold Special</option>
+                            </select>
+                            <div class="relative w-[30%]">
+                                <input type="number" min="1" value="1" class="card-quantity-input w-full bg-black/40 border border-white/10 text-white text-[10px] text-center rounded px-1 py-1.5 outline-none focus:border-zoga-red transition-colors" placeholder="Qty" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value === '0') this.value = '1';">
+                            </div>
                         </div>
 
                         <div class="flex items-center justify-center gap-1.5 sm:gap-2 md:gap-3 w-full mt-3 md:mt-4 mb-1">
                             <button class="quick-view-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-medium tracking-widest uppercase border border-white/20 hover:border-white py-1.5 sm:py-2 rounded-full transition-colors bg-transparent hover:bg-white/10 text-white whitespace-nowrap">View</button>
                             <button class="buy-action-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-bold tracking-widest uppercase bg-zoga-red text-white border border-zoga-red hover:bg-white hover:border-white hover:text-black py-1.5 sm:py-2 rounded-full transition-all shadow-[0_4px_10px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_15px_rgba(255,255,255,0.4)] whitespace-nowrap" data-category="Rolex Masterpieces">Buy</button>
                         </div>
-
-                        <p id="sixth-watch-price" class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-3">₹1,300/-</p>
+                        <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-3">₹1,300/-</p>
                     </div>
                 </div>
 
                 <!-- 7th SEIKO Series -->
-                <div class="product-item reveal group" id="seventh-watch-card" style="transition-delay: 300ms;">
+                <div class="product-item reveal group" style="transition-delay: 300ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">New Arrival</div>
-                        
-                        <!-- Directly displaying the provided 7th watch image -->
                         <img src="boys watches/SEIKO.PNG" alt="SEIKO Diver Style Brown Dial" class="product-img" onerror="this.src='https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=600&q=80'">
                     </div>
-
                     <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
                         <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">SEIKO Diver Style</h3>
                         <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">SEIKO Series</p>
                         
-                        <div class="color-swatch-bar mt-2 md:mt-4 opacity-0 pointer-events-none h-2 hidden md:block">
+                        <div class="flex items-center gap-1.5 w-full mt-2 md:mt-3 px-1">
+                            <select class="card-variant-select w-[70%] bg-black/40 border border-white/10 text-gray-300 text-[9px] sm:text-[10px] rounded px-2 py-1.5 outline-none focus:border-zoga-red transition-colors">
+                                <option value="Style: Diver- Syle watch, Dial Color: brown, Strap: Black Silicone">Diver Brown Dial</option>
+                            </select>
+                            <div class="relative w-[30%]">
+                                <input type="number" min="1" value="1" class="card-quantity-input w-full bg-black/40 border border-white/10 text-white text-[10px] text-center rounded px-1 py-1.5 outline-none focus:border-zoga-red transition-colors" placeholder="Qty" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value === '0') this.value = '1';">
+                            </div>
                         </div>
 
                         <div class="flex items-center justify-center gap-1.5 sm:gap-2 md:gap-3 w-full mt-3 md:mt-4 mb-1">
                             <button class="quick-view-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-medium tracking-widest uppercase border border-white/20 hover:border-white py-1.5 sm:py-2 rounded-full transition-colors bg-transparent hover:bg-white/10 text-white whitespace-nowrap">View</button>
                             <button class="buy-action-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-bold tracking-widest uppercase bg-zoga-red text-white border border-zoga-red hover:bg-white hover:border-white hover:text-black py-1.5 sm:py-2 rounded-full transition-all shadow-[0_4px_10px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_15px_rgba(255,255,255,0.4)] whitespace-nowrap" data-category="SEIKO Series">Buy</button>
                         </div>
-
                         <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-3">₹1,100/-</p>
                     </div>
                 </div>
 
-                       <!-- 8. DENVOSI Series -->
-                <div class="product-item reveal group" id="sixth-watch-card" style="transition-delay: 200ms;">
+                <!-- 8. DENVOSI Series -->
+                <div class="product-item reveal group" style="transition-delay: 200ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">Premium</div>
-
-                        <button class="slideshow-arrow prev" aria-label="Previous Slide">
-                            <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i>
-                        </button>
-                        <button class="slideshow-arrow next" aria-label="Next Slide">
-                            <i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i>
-                        </button>
+                        <button class="slideshow-arrow prev" aria-label="Previous Slide"><i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i></button>
+                        <button class="slideshow-arrow next" aria-label="Next Slide"><i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i></button>
 
                         <div class="frame-slideshow-container">
                             <img src="boys watches/DENVOSI-B.PNG" alt="DENVOSI Premium" class="frame-slide active-slide" data-title="DENVOSI Premium" data-price="1900" onerror="this.src='https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=600&q=80'">
@@ -901,29 +882,32 @@
                             <button class="slideshow-dot" aria-label="Slide 3"></button>
                         </div>
                     </div>
-
                     <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
-                        <h3 id="sixth-watch-title" class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">DENVOSI Premium</h3>
+                        <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">DENVOSI Premium</h3>
                         <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">DENVOSI Series</p>
                         
-                        <div class="color-swatch-bar mt-2 md:mt-4 opacity-0 pointer-events-none h-2 hidden md:block">
+                        <div class="flex items-center gap-1.5 w-full mt-2 md:mt-3 px-1">
+                            <select class="card-variant-select w-[70%] bg-black/40 border border-white/10 text-gray-300 text-[9px] sm:text-[10px] rounded px-2 py-1.5 outline-none focus:border-zoga-red transition-colors">
+                                <option value="DENVOSI Premium Black">Premium Black</option>
+                                <option value="DENVOSI Rose Gold">Rose Gold</option>
+                                <option value="DENVOSI Silver">Silver</option>
+                            </select>
+                            <div class="relative w-[30%]">
+                                <input type="number" min="1" value="1" class="card-quantity-input w-full bg-black/40 border border-white/10 text-white text-[10px] text-center rounded px-1 py-1.5 outline-none focus:border-zoga-red transition-colors" placeholder="Qty" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value === '0') this.value = '1';">
+                            </div>
                         </div>
 
                         <div class="flex items-center justify-center gap-1.5 sm:gap-2 md:gap-3 w-full mt-3 md:mt-4 mb-1">
                             <button class="quick-view-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-medium tracking-widest uppercase border border-white/20 hover:border-white py-1.5 sm:py-2 rounded-full transition-colors bg-transparent hover:bg-white/10 text-white whitespace-nowrap">View</button>
-                            <button class="buy-action-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-bold tracking-widest uppercase bg-zoga-red text-white border border-zoga-red hover:bg-white hover:border-white hover:text-black py-1.5 sm:py-2 rounded-full transition-all shadow-[0_4px_10px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_15px_rgba(255,255,255,0.4)] whitespace-nowrap" data-category="Rolex Masterpieces">Buy</button>
+                            <button class="buy-action-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-bold tracking-widest uppercase bg-zoga-red text-white border border-zoga-red hover:bg-white hover:border-white hover:text-black py-1.5 sm:py-2 rounded-full transition-all shadow-[0_4px_10px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_15px_rgba(255,255,255,0.4)] whitespace-nowrap" data-category="DENVOSI Series">Buy</button>
                         </div>
-
-                        <p id="sixth-watch-price" class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-3">₹1,900/-</p>
+                        <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-3">₹1,900/-</p>
                     </div>
                 </div>
-
 
             </div>
         </section>
 
-
-        <!-- SECTION: GIRLS WATCHES -->
         <section id="girls-watches" class="py-16 md:py-24 px-3 sm:px-6 md:px-12 max-w-[1400px] mx-auto content-panel mb-16 md:mb-24">
             <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 px-2 md:px-0 reveal">
                 <div>
@@ -940,22 +924,17 @@
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 md:gap-8">
                 
                 <!-- Girls Watch 1 -->
-                <div class="product-item reveal group" id="girls-watch-card" style="transition-delay: 100ms;">
+                <div class="product-item reveal group" style="transition-delay: 100ms;">
                     <div class="product-img-wrap">
                         <div class="tag-new">Trending</div>
-
-                        <button class="slideshow-arrow prev" aria-label="Previous Slide">
-                            <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i>
-                        </button>
-                        <button class="slideshow-arrow next" aria-label="Next Slide">
-                            <i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i>
-                        </button>
+                        <button class="slideshow-arrow prev" aria-label="Previous Slide"><i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i></button>
+                        <button class="slideshow-arrow next" aria-label="Next Slide"><i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i></button>
 
                         <div class="frame-slideshow-container">
-                           <img src="girls watches/1band.jpeg" alt="Jaina Rose Gold Chevron" class="frame-slide active-slide" data-title="Jaina Rose Gold Chevron" data-color="Chevron" onerror="this.src='https://images.unsplash.com/photo-1584208643198-4c6e9f2b879a?auto=format&fit=crop&w=600&q=80'">
-                            <img src="girls watches/2band.jpeg" alt="Jaina Rose Gold Cross" class="frame-slide" data-title="Jaina Rose Gold Cross" data-color="Cross" onerror="this.src='https://images.unsplash.com/photo-1594534475808-b18fc33b045e?auto=format&fit=crop&w=600&q=80'">
-                            <img src="girls watches/3band.jpeg" alt="Jaina Rose Gold Square" class="frame-slide" data-title="Jaina Rose Gold Square" data-color="Square" onerror="this.src='https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80'">
-                            <img src="girls watches/4band.jpeg" alt="Jaina Rose Gold Oval" class="frame-slide" data-title="Jaina Rose Gold Oval" data-color="Oval" onerror="this.src='https://images.unsplash.com/photo-1622434641406-a158123450f9?auto=format&fit=crop&w=600&q=80'">
+                           <img src="girls watches/1band.jpeg" alt="Jaina Rose Gold Chevron" class="frame-slide active-slide" data-title="Jaina Rose Gold Chevron" onerror="this.src='https://images.unsplash.com/photo-1584208643198-4c6e9f2b879a?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/2band.jpeg" alt="Jaina Rose Gold Cross" class="frame-slide" data-title="Jaina Rose Gold Cross" onerror="this.src='https://images.unsplash.com/photo-1594534475808-b18fc33b045e?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/3band.jpeg" alt="Jaina Rose Gold Square" class="frame-slide" data-title="Jaina Rose Gold Square" onerror="this.src='https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/4band.jpeg" alt="Jaina Rose Gold Oval" class="frame-slide" data-title="Jaina Rose Gold Oval" onerror="this.src='https://images.unsplash.com/photo-1622434641406-a158123450f9?auto=format&fit=crop&w=600&q=80'">
                         </div>
 
                         <div class="slideshow-controls">
@@ -967,46 +946,46 @@
                     </div>
 
                     <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
-                        <h3 id="girls-card-title" class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Titan Emerald Gold</h3>
-                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Titan Series</p>
+                        <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Jaina Watch Sets</h3>
+                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Girls Watch</p>
                         
-                        <div class="color-swatch-bar mt-2 md:mt-4">
-                            <button class="swatch-btn active-swatch bg-[#084523]" title="Emerald"></button>
-                            <button class="swatch-btn bg-[#f0ebd8]" title="Pearl"></button>
-                            <button class="swatch-btn bg-[#4a332d]" title="Bronze"></button>
-                            <button class="swatch-btn bg-[#d4af37]" title="Champagne"></button>
+                        <div class="flex items-center gap-1.5 w-full mt-2 md:mt-3 px-1">
+                            <select class="card-variant-select w-[70%] bg-black/40 border border-white/10 text-gray-300 text-[9px] sm:text-[10px] rounded px-2 py-1.5 outline-none focus:border-zoga-red transition-colors">
+                                <option value="Jaina Crystal Round Watch Set (1band.jpeg): A rose-gold-toned round quartz watch featuring a crystal-studded bezel, a patterned pink dial, and a matching stone-embellished cuff bracelet.">Crystal Round Set</option>
+                                <option value="Jaina Roman Numeral Watch Set (2band.jpeg): An elegant rose-gold-toned watch with a faceted bezel, Roman numerals, a crystal ring dial, and a pink-accented crystal bangle.">Roman Numeral Set</option>
+                                <option value="Jaina Square Quartz Watch Set (3band.jpeg): A sleek rose-gold-toned square watch paired with geometric link bands and a matching crystal-bordered square stone bracelet.">Square Quartz Set</option>
+                                <option value="Jaina Link-Chain Watch Set (4band.jpeg): A minimalist rose-gold-toned round watch with interlocking pink-and-gold chain links and a coordinating oval-stone cluster bangle.">Link-Chain Set</option>
+                            </select>
+                            <div class="relative w-[30%]">
+                                <input type="number" min="1" value="1" class="card-quantity-input w-full bg-black/40 border border-white/10 text-white text-[10px] text-center rounded px-1 py-1.5 outline-none focus:border-zoga-red transition-colors" placeholder="Qty" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value === '0') this.value = '1';">
+                            </div>
                         </div>
 
                         <div class="flex items-center justify-center gap-1.5 sm:gap-2 md:gap-3 w-full mt-3 md:mt-4 mb-1">
                             <button class="quick-view-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-medium tracking-widest uppercase border border-white/20 hover:border-white py-1.5 sm:py-2 rounded-full transition-colors bg-transparent hover:bg-white/10 text-white whitespace-nowrap">View</button>
-                            <button class="buy-action-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-bold tracking-widest uppercase bg-zoga-red text-white border border-zoga-red hover:bg-white hover:border-white hover:text-black py-1.5 sm:py-2 rounded-full transition-all shadow-[0_4px_10px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_15px_rgba(255,255,255,0.4)] whitespace-nowrap" data-category="">Buy</button>
+                            <button class="buy-action-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-bold tracking-widest uppercase bg-zoga-red text-white border border-zoga-red hover:bg-white hover:border-white hover:text-black py-1.5 sm:py-2 rounded-full transition-all shadow-[0_4px_10px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_15px_rgba(255,255,255,0.4)] whitespace-nowrap" data-category="Girls Watch" data-subcategory="Watch with band">Buy</button>
                         </div>
-
                         <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-3">₹500/-</p>
                     </div>
                 </div>
 
-                <!-- Girls Watch 2 -->
+                <!-- Girls Watch 2 - Titan/Guess Updates -->
                 <div class="product-item reveal group" style="transition-delay: 200ms;">
                     <div class="product-img-wrap">
-                        <button class="slideshow-arrow prev" aria-label="Previous Slide">
-                            <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i>
-                        </button>
-                        <button class="slideshow-arrow next" aria-label="Next Slide">
-                            <i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i>
-                        </button>
+                        <button class="slideshow-arrow prev" aria-label="Previous Slide"><i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i></button>
+                        <button class="slideshow-arrow next" aria-label="Next Slide"><i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i></button>
 
                         <div class="frame-slideshow-container">
-                            <img src="girls watches/11girl.jpeg" alt="Luna Pure White" class="frame-slide active-slide" data-title="Luna Pure White" data-color="White" onerror="this.src='https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&w=600&q=80'">
-                            <img src="girls watches/12girls.jpeg" alt="Luna Rose Gold" class="frame-slide" data-title="Luna Rose Gold" data-color="Rose Gold" onerror="this.src='https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=600&q=80'">
-                            <img src="girls watches/13girls.jpeg" alt="Luna Midnight" class="frame-slide" data-title="Luna Midnight" data-color="Midnight" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
-                            <img src="girls watches/14girls.jpeg" alt="Luna Champagne" class="frame-slide" data-title="Luna Champagne" data-color="Champagne" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
-                            <img src="girls watches/15girls.jpeg" alt="Luna Bronze" class="frame-slide" data-title="Luna Bronze" data-color="Bronze" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
-                            <img src="girls watches/16girls.jpeg" alt="Luna Pearl" class="frame-slide" data-title="Luna Pearl" data-color="Pearl" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
-                            <img src="girls watches/17girls.jpeg" alt="Luna Sapphire" class="frame-slide" data-title="Luna Sapphire" data-color="Sapphire" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
-                            <img src="girls watches/18girls.jpeg" alt="Luna Emerald" class="frame-slide" data-title="Luna Emerald" data-color="Emerald" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
-                            <img src="girls watches/19girls.jpeg" alt="Luna Diamond" class="frame-slide" data-title="Luna Diamond" data-color="Diamond" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
-                            <img src="girls watches/20girls.jpeg" alt="Luna Ruby" class="frame-slide" data-title="Luna Ruby" data-color="Ruby" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/11girl.jpeg" alt="Titan Pure White" class="frame-slide active-slide" data-title="Titan Pure White" onerror="this.src='https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/12girls.jpeg" alt="Titan Dual Tone Pink" class="frame-slide" data-title="Titan Dual Tone Pink" onerror="this.src='https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/13girls.jpeg" alt="Titan Silver Elegance" class="frame-slide" data-title="Titan Silver Elegance" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/14girls.jpeg" alt="Guess Rose Gold" class="frame-slide" data-title="Guess Rose Gold" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/15girls.jpeg" alt="Titan Green Dial Drop Lug" class="frame-slide" data-title="Titan Green Dial Drop Lug" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/16girls.jpeg" alt="Titan Champagne Gold" class="frame-slide" data-title="Titan Champagne Gold" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/17girls.jpeg" alt="Titan Bronze & Black" class="frame-slide" data-title="Titan Bronze & Black" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/18girls.jpeg" alt="Titan Gold White Dial Classic" class="frame-slide" data-title="Titan Gold White Dial Classic" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/19girls.jpeg" alt="Titan Gold White Dial Modern" class="frame-slide" data-title="Titan Gold White Dial Modern" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
+                            <img src="girls watches/20girls.jpeg" alt="Titan Gold Emerald Green" class="frame-slide" data-title="Titan Gold Emerald Green" onerror="this.src='https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=600&q=80'">
                         </div>
 
                         <div class="slideshow-controls">
@@ -1023,20 +1002,31 @@
                         </div>
                     </div>
                     <div class="mt-4 md:mt-6 text-center flex-grow flex flex-col justify-end">
-                        <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">TITAN Watch</h3>
-                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Minimalist Women</p>
+                        <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">Titan Collection</h3>
+                        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">Titan Premium Series</p>
                         
-                        <div class="color-swatch-bar mt-2 md:mt-4">
-                            <button class="swatch-btn active-swatch bg-gray-100" title="White"></button>
-                            <button class="swatch-btn bg-[#b76e79]" title="Rose Gold"></button>
-                            <button class="swatch-btn bg-gray-900" title="Midnight"></button>
+                        <div class="flex items-center gap-1.5 w-full mt-2 md:mt-3 px-1">
+                            <select class="card-variant-select w-[70%] bg-black/40 border border-white/10 text-gray-300 text-[9px] sm:text-[10px] rounded px-2 py-1.5 outline-none focus:border-zoga-red transition-colors">
+                                <option value="Titan Pure White (11girl.jpeg)">Pure White (11)</option>
+                                <option value="Titan Dual Tone Pink (12girls.jpeg)">Dual Pink (12)</option>
+                                <option value="Titan Silver Elegance (13girls.jpeg)">Silver Classic (13)</option>
+                                <option value="Guess Rose Gold (14girls.jpeg)">Guess Rose (14)</option>
+                                <option value="Titan Green Dial Drop Lug (15girls.jpeg)">Green/Drop (15)</option>
+                                <option value="Titan Champagne Gold (16girls.jpeg)">Champagne Gold (16)</option>
+                                <option value="Titan Bronze & Black (17girls.jpeg)">Bronze & Black (17)</option>
+                                <option value="Titan Gold White Dial Classic (18girls.jpeg)">White/Gold (18)</option>
+                                <option value="Titan Gold White Dial Modern (19girls.jpeg)">White/Gold v2 (19)</option>
+                                <option value="Titan Gold Emerald Green (20girls.jpeg)">Emerald Green (20)</option>
+                            </select>
+                            <div class="relative w-[30%]">
+                                <input type="number" min="1" value="1" class="card-quantity-input w-full bg-black/40 border border-white/10 text-white text-[10px] text-center rounded px-1 py-1.5 outline-none focus:border-zoga-red transition-colors" placeholder="Qty" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value === '0') this.value = '1';">
+                            </div>
                         </div>
 
                         <div class="flex items-center justify-center gap-1.5 sm:gap-2 md:gap-3 w-full mt-3 md:mt-4 mb-1">
                             <button class="quick-view-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-medium tracking-widest uppercase border border-white/20 hover:border-white py-1.5 sm:py-2 rounded-full transition-colors bg-transparent hover:bg-white/10 text-white whitespace-nowrap">View</button>
-                            <button class="buy-action-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-bold tracking-widest uppercase bg-zoga-red text-white border border-zoga-red hover:bg-white hover:border-white hover:text-black py-1.5 sm:py-2 rounded-full transition-all shadow-[0_4px_10px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_15px_rgba(255,255,255,0.4)] whitespace-nowrap" data-category="">Buy</button>
+                            <button class="buy-action-btn w-1/2 max-w-[110px] text-[9px] md:text-[10px] lg:text-[11px] font-bold tracking-widest uppercase bg-zoga-red text-white border border-zoga-red hover:bg-white hover:border-white hover:text-black py-1.5 sm:py-2 rounded-full transition-all shadow-[0_4px_10px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_15px_rgba(255,255,255,0.4)] whitespace-nowrap" data-category="Girls Watch" data-subcategory="Titan Premium Collection">Buy</button>
                         </div>
-
                         <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-2 md:mt-3">₹500/-</p>
                     </div>
                 </div>
@@ -1048,7 +1038,6 @@
             </div>
         </section>
 
-        <!-- Quick View Modal Container -->
         <div id="watch-modal-backdrop" class="watch-modal-backdrop hidden" aria-hidden="true">
             <div class="watch-modal-window" role="dialog" aria-modal="true" aria-labelledby="watch-modal-title">
                 <button type="button" class="watch-modal-close" aria-label="Close preview">
@@ -1094,7 +1083,7 @@
                 <div>
                     <h4 class="text-xs md:text-sm font-medium uppercase tracking-widest mb-4 md:mb-6 text-white">Client Care</h4>
                     <ul class="space-y-3 md:space-y-4 text-gray-400 text-xs md:text-sm">
-                        <li><a href="#" class="hover:text-zoga-red transition-colors" aria-label="Contact us"><i data-lucide="instagram" class="w-3.5 h-3.5 md:w-4 md:h-4 inline mr-2"></i>Contact Us</a></li>
+                        <li><a href="https://www.instagram.com/zogafashions?igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="hover:text-zoga-red transition-colors" aria-label="Instagram Profile"><i data-lucide="instagram" class="w-3.5 h-3.5 md:w-4 md:h-4 inline mr-2"></i>@zogafashions</a></li>
                         <li><a href="mailto:Fashionzoga@gmail.com" class="hover:text-zoga-red transition-colors"><i data-lucide="mail" class="w-3.5 h-3.5 md:w-4 md:h-4 inline mr-2"></i>Fashionzoga@gmail.com</a></li>
                         <li><a href="tel:+919876378181" class="hover:text-zoga-red transition-colors"><i data-lucide="phone" class="w-3.5 h-3.5 md:w-4 md:h-4 inline mr-2"></i>9876378181</a></li>
                         <li><a href="#" class="hover:text-zoga-red transition-colors">Shipping & Returns</a></li>
@@ -1102,7 +1091,7 @@
                     </ul>
                 </div>
 
-                <!-- Updated Direct WhatsApp Inquiry Section with Dropdown Product Selector -->
+                <!-- Direct WhatsApp Inquiry Section -->
                 <div>
                     <h4 class="text-xs md:text-sm font-medium uppercase tracking-widest mb-4 md:mb-6 text-white">Direct Inquiry For Buying</h4>
                     <p class="text-gray-400 text-xs md:text-sm mb-4">Select your preferred timepiece for a direct consultation via WhatsApp.</p>
@@ -1118,8 +1107,11 @@
                             <textarea id="wa-address" rows="2" placeholder="Delivery Address" class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500 resize-none" required></textarea>
                         </div>
                         
-                     <div class="mt-4 space-y-3">
-                            <!-- Main Category Dropdown -->
+                        <div class="border-b border-gray-600 focus-within:border-zoga-red transition-colors group">
+                            <input id="wa-quantity" type="number" min="1" step="1" placeholder="Quantity (Numbers Only)" class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500 appearance-none" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value === '0') this.value = '1';">
+                        </div>
+                        
+                        <div class="mt-4 space-y-3">
                             <div class="relative">
                                 <select id="wa-category-select" class="w-full bg-[#111] border border-gray-700 text-white text-xs md:text-sm rounded p-3 outline-none focus:border-zoga-red transition-all cursor-pointer" required>
                                     <option value="" disabled selected>Select Watch Category</option>
@@ -1130,18 +1122,17 @@
                                     <option value="RM Watch Collection">RM Watch Collection</option>
                                     <option value="Rolex Masterpieces">Rolex Masterpieces</option>
                                     <option value="SEIKO Series">SEIKO Series</option>
+                                    <option value="DENVOSI Series">DENVOSI Series</option>
                                     <option value="Girls Watch">Girls Watch</option>
                                 </select>
                             </div>
 
-                            <!-- Conditional Sub-Category Dropdown (e.g. for "Watch with band") -->
                             <div class="relative hidden" id="wa-sub-category-container">
                                 <select id="wa-sub-category-select" class="w-full bg-[#111] border border-gray-700 text-white text-xs md:text-sm rounded p-3 outline-none focus:border-zoga-red transition-all cursor-pointer disabled:opacity-50" disabled>
                                     <option value="" disabled selected>Select Style / Type</option>
                                 </select>
                             </div>
 
-                            <!-- Final Variant Dropdown -->
                             <div class="relative">
                                 <select id="wa-variant-select" class="w-full bg-[#111] border border-gray-700 text-white text-xs md:text-sm rounded p-3 outline-none focus:border-zoga-red transition-all cursor-pointer disabled:opacity-50" disabled required>
                                     <option value="" disabled selected>Select Color / Model Variant</option>
@@ -1169,20 +1160,13 @@
         </div>
     </footer>
 
-
-     <script>
-        // Initialize Icons
+    <script>
         lucide.createIcons();
 
-        // Advanced Cascading Dropdown Data Structure supporting multiple depth levels
+        // Advanced Cascading Dropdown Data Structure
         const productCatalog = {
-            "Forest Timepieces": [
-                "Silver",
-                "Gold"
-            ],
-            "Zoga Luxury Edition": [
-                "Luxury Edition Standard"
-            ],
+            "Forest Timepieces": ["Silver", "Gold"],
+            "Zoga Luxury Edition": ["Luxury Edition Standard"],
             "Hublot Collection": [
                 "Grey Dial With Brown Straps",
                 "White Dial With Black Straps",
@@ -1209,10 +1193,8 @@
                 "Rolex With Gold Chain Interior Silver Edition",
                 "Rolex With Gold Chain Interior Light Gold Special Edition"
             ],
-            "SEIKO Series": [
-              "Style: Diver- Syle watch, Dial Color: brown, Strap: Black Silicone"
-            ],
-            // Complex structure to support secondary dropdown for "Girls Watch"
+            "SEIKO Series": ["Style: Diver- Syle watch, Dial Color: brown, Strap: Black Silicone"],
+            "DENVOSI Series": ["DENVOSI Premium Black", "DENVOSI Rose Gold", "DENVOSI Silver"],
             "Girls Watch": {
                 "Watch with band": [
                     "Jaina Crystal Round Watch Set (1band.jpeg): A rose-gold-toned round quartz watch featuring a crystal-studded bezel, a patterned pink dial, and a matching stone-embellished cuff bracelet.",
@@ -1220,28 +1202,32 @@
                     "Jaina Square Quartz Watch Set (3band.jpeg): A sleek rose-gold-toned square watch paired with geometric link bands and a matching crystal-bordered square stone bracelet.",
                     "Jaina Link-Chain Watch Set (4band.jpeg): A minimalist rose-gold-toned round watch with interlocking pink-and-gold chain links and a coordinating oval-stone cluster bangle."
                 ],
-  
+                "Titan Premium Collection": [
+                    "Titan Pure White (11girl.jpeg)", 
+                    "Titan Dual Tone Pink (12girls.jpeg)", 
+                    "Titan Silver Elegance (13girls.jpeg)", 
+                    "Guess Rose Gold (14girls.jpeg)", 
+                    "Titan Green Dial Drop Lug (15girls.jpeg)", 
+                    "Titan Champagne Gold (16girls.jpeg)", 
+                    "Titan Bronze & Black (17girls.jpeg)", 
+                    "Titan Gold White Dial Classic (18girls.jpeg)", 
+                    "Titan Gold White Dial Modern (19girls.jpeg)", 
+                    "Titan Gold Emerald Green (20girls.jpeg)"
+                ]
             }
         };
 
-          const categorySelect = document.getElementById('wa-category-select');
+        const categorySelect = document.getElementById('wa-category-select');
         const subCategoryContainer = document.getElementById('wa-sub-category-container');
         const subCategorySelect = document.getElementById('wa-sub-category-select');
         const variantSelect = document.getElementById('wa-variant-select');
         const selectedProductInput = document.getElementById('wa-selected-product');
 
-        // Logic for Dynamic Multilevel Cascading Dropdowns
         if (categorySelect && variantSelect && subCategorySelect) {
-            
-            // 1. Category Change
             categorySelect.addEventListener('change', (e) => {
                 const selectedCategory = e.target.value;
-                
-                // Reset variant dropdown
                 variantSelect.innerHTML = '<option value="" disabled selected>Select Color / Model Variant</option>';
                 variantSelect.disabled = true;
-                
-                // Reset sub-category dropdown
                 subCategorySelect.innerHTML = '<option value="" disabled selected>Select Style / Type</option>';
                 subCategorySelect.disabled = true;
                 subCategoryContainer.classList.add('hidden');
@@ -1249,27 +1235,20 @@
 
                 if (productCatalog[selectedCategory]) {
                     const catalogItem = productCatalog[selectedCategory];
-                    
-                    // Case A: Flat Array of variants (like Boys Watches, Rolex, etc.)
                     if (Array.isArray(catalogItem)) {
                         catalogItem.forEach(variant => {
                             const option = document.createElement('option');
-                            option.value = variant;
-                            option.textContent = variant;
+                            option.value = variant; option.textContent = variant;
                             variantSelect.appendChild(option);
                         });
                         variantSelect.disabled = false;
-                        
-                    // Case B: Nested Object needing Sub-Category (like Girls Watch -> Watch with band)
                     } else if (typeof catalogItem === 'object') {
                         subCategoryContainer.classList.remove('hidden');
                         subCategorySelect.disabled = false;
                         subCategorySelect.required = true;
-                        
                         Object.keys(catalogItem).forEach(subCat => {
                             const option = document.createElement('option');
-                            option.value = subCat;
-                            option.textContent = subCat;
+                            option.value = subCat; option.textContent = subCat;
                             subCategorySelect.appendChild(option);
                         });
                     }
@@ -1277,30 +1256,17 @@
                 selectedProductInput.value = '';
             });
 
-            // 2. Sub-Category Change
             subCategorySelect.addEventListener('change', (e) => {
                 const selectedCategory = categorySelect.value;
                 const selectedSubCat = e.target.value;
-                
-                // Reset variant dropdown
                 variantSelect.innerHTML = '<option value="" disabled selected>Select Color / Model Variant</option>';
                 variantSelect.disabled = true;
                 
                 if (productCatalog[selectedCategory] && productCatalog[selectedCategory][selectedSubCat]) {
-                    const variantsArray = productCatalog[selectedCategory][selectedSubCat];
-                    
-                    variantsArray.forEach(variant => {
+                    productCatalog[selectedCategory][selectedSubCat].forEach(variant => {
                         const option = document.createElement('option');
                         option.value = variant; 
-                        
-                        // Truncate ultra-long descriptions for the dropdown UI text to maintain neatness
-                        // The full string remains in the "value" so it goes to WhatsApp
-                        if (variant.length > 70) {
-                            option.textContent = variant.substring(0, 67) + '...';
-                        } else {
-                            option.textContent = variant;
-                        }
-                        
+                        option.textContent = variant.length > 70 ? variant.substring(0, 67) + '...' : variant;
                         variantSelect.appendChild(option);
                     });
                     variantSelect.disabled = false;
@@ -1308,15 +1274,10 @@
                 selectedProductInput.value = '';
             });
 
-            // 3. Variant Change
             variantSelect.addEventListener('change', (e) => {
                 const category = categorySelect.value;
-                // Check if sub-category is active to construct the final title cleanly
-                const subCategory = (!subCategoryContainer.classList.contains('hidden') && subCategorySelect.value) 
-                                     ? `${subCategorySelect.value} - ` 
-                                     : '';
-                const variant = e.target.value;
-                selectedProductInput.value = `${category} - ${subCategory}${variant}`;
+                const subCategory = (!subCategoryContainer.classList.contains('hidden') && subCategorySelect.value) ? `${subCategorySelect.value} - ` : '';
+                selectedProductInput.value = `${category} - ${subCategory}${e.target.value}`;
             });
         }
 
@@ -1324,10 +1285,10 @@
         if (whatsappForm) {
             whatsappForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
                 const name = document.getElementById('wa-name').value.trim();
                 const phone = document.getElementById('wa-phone').value.trim();
                 const address = document.getElementById('wa-address').value.trim();
+                const quantity = document.getElementById('wa-quantity').value.trim();
                 const product = selectedProductInput.value;
                 
                 if (!product) {
@@ -1336,7 +1297,7 @@
                 }
                 
                 const targetNumber = '919878173681'; 
-                const messageText = `*New Zoga Direct Order Inquiry* 🛍️\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Address:* ${address}\n*Selected Timepiece:* ${product}\n\nHi! I am interested in this item. Please share availability, additional details, and actual pictures.`;
+                const messageText = `*New Zoga Direct Order Inquiry* 🛍️\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Address:* ${address}\n*Quantity:* ${quantity}\n*Selected Timepiece:* ${product}\n\nHi! I am interested in this item. Please share availability, additional details, and actual pictures.`;
                 const whatsappUrl = `https://wa.me/${targetNumber}?text=${encodeURIComponent(messageText)}`;
                 
                 window.open(whatsappUrl, '_blank');
@@ -1347,7 +1308,6 @@
             });
         }
 
-        // Mobile Menu Logic
         const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
         const mobileMenuClose = document.getElementById('mobile-menu-close');
         const mobileMenuPanel = document.getElementById('mobile-menu-panel');
@@ -1366,7 +1326,6 @@
         if (mobileMenuToggle) mobileMenuToggle.addEventListener('click', toggleMobileMenu);
         if (mobileMenuClose) mobileMenuClose.addEventListener('click', toggleMobileMenu);
         if (mobileMenuOverlay) mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
-        
         mobileNavLinks.forEach((link) => {
             link.addEventListener('click', () => {
                 if (mobileMenuPanel) mobileMenuPanel.classList.remove('open');
@@ -1379,51 +1338,66 @@
             });
         });
 
-        // Navbar Scroll Effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
-                navbar.classList.add('bg-black/95', 'backdrop-blur-sm', 'shadow-lg');
+                navbar.classList.add('bg-black/95', 'backdrop-blur-sm', 'shadow-lg', 'py-2');
                 navbar.classList.remove('bg-transparent', 'py-4');
-                navbar.classList.add('py-2');
             } else {
-                navbar.classList.remove('bg-black/95', 'backdrop-blur-sm', 'shadow-lg');
+                navbar.classList.remove('bg-black/95', 'backdrop-blur-sm', 'shadow-lg', 'py-2');
                 navbar.classList.add('bg-transparent', 'py-4');
-                navbar.classList.remove('py-2');
             }
         });
 
-        // Scroll Reveal Intersection Observer
         const revealElements = document.querySelectorAll('.reveal');
-        const revealCallback = (entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        };
-        const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
-        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
         revealElements.forEach(el => revealObserver.observe(el));
-        
         setTimeout(() => {
             revealElements.forEach(el => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight) el.classList.add('active');
+                if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('active');
             });
         }, 100);
 
-        // Promotional Modal Logic
+        // --- Promotional Modal Logic & Timer ---
         const promoBackdrop = document.getElementById('promo-modal-backdrop');
         const promoCloseBtn = document.getElementById('promo-modal-close');
         const promoDismissBtn = document.getElementById('promo-dismiss-btn');
-        const promoClaimBtn = document.getElementById('promo-claim-btn');
+        const promoDirectBuyBtn = document.getElementById('promo-direct-buy-btn');
+
+        let timerInterval = null;
+        let hasTimerStarted = false;
+
+        function startPromoTimer() {
+            if (hasTimerStarted) return;
+            hasTimerStarted = true;
+            const hoursEl = document.getElementById('promo-hours');
+            const minsEl = document.getElementById('promo-minutes');
+            const secsEl = document.getElementById('promo-seconds');
+            if (!hoursEl || !minsEl || !secsEl) return;
+
+            let timeInSeconds = (2 * 3600) + (45 * 60); 
+            const updateTimer = () => {
+                const h = Math.floor(timeInSeconds / 3600);
+                const m = Math.floor((timeInSeconds % 3600) / 60);
+                const s = timeInSeconds % 60;
+                hoursEl.textContent = h.toString().padStart(2, '0');
+                minsEl.textContent = m.toString().padStart(2, '0');
+                secsEl.textContent = s.toString().padStart(2, '0');
+                if (timeInSeconds > 0) timeInSeconds--;
+                else clearInterval(timerInterval);
+            };
+            updateTimer();
+            timerInterval = setInterval(updateTimer, 1000);
+        }
 
         function openPromoModal() {
             if (!promoBackdrop) return;
             promoBackdrop.classList.add('active');
             promoBackdrop.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
+            startPromoTimer();
         }
 
         function closePromoModal() {
@@ -1435,7 +1409,21 @@
 
         if (promoCloseBtn) promoCloseBtn.addEventListener('click', closePromoModal);
         if (promoDismissBtn) promoDismissBtn.addEventListener('click', closePromoModal);
-        if (promoClaimBtn) promoClaimBtn.addEventListener('click', closePromoModal);
+        
+        if (promoDirectBuyBtn) {
+            promoDirectBuyBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                closePromoModal();
+                const contactSection = document.getElementById('footer-contact');
+                if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                    setTimeout(() => {
+                        const nameInput = document.getElementById('wa-name');
+                        if (nameInput) nameInput.focus();
+                    }, 800);
+                }
+            });
+        }
         
         if (promoBackdrop) {
             promoBackdrop.addEventListener('click', (e) => {
@@ -1443,49 +1431,39 @@
             });
         }
 
-        // Splash Screen Logic
         (function() {
             const splash = document.getElementById('splash-overlay');
             const splashLogo = document.getElementById('splash-logo');
-            if (!splash || !splashLogo) {
-                setTimeout(openPromoModal, 600);
-                return;
-            }
+            if (!splash || !splashLogo) { setTimeout(openPromoModal, 600); return; }
 
             const prevOverflow = document.body.style.overflow;
             document.body.style.overflow = 'hidden';
-
             const removeSplash = () => {
-                splash.style.opacity = '0';
-                splash.style.visibility = 'hidden';
+                splash.style.opacity = '0'; splash.style.visibility = 'hidden';
                 setTimeout(() => {
                     try { splash.remove(); } catch (e) {}
                     document.body.style.overflow = prevOverflow || '';
-                    setTimeout(openPromoModal, 400);
+                    setTimeout(openPromoModal, 400); 
                 }, 900);
             };
 
             if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                removeSplash();
-                return;
+                removeSplash(); return;
             }
-
             const maxTimeout = setTimeout(removeSplash, 2600);
             splashLogo.addEventListener('animationend', () => {
-                clearTimeout(maxTimeout);
-                setTimeout(removeSplash, 200);
+                clearTimeout(maxTimeout); setTimeout(removeSplash, 200);
             });
         })();
 
-        // Generic Product Slideshow Logic
         document.querySelectorAll('.product-item').forEach(card => {
             const slides = card.querySelectorAll('.frame-slide');
+            const variantSelectCard = card.querySelector('.card-variant-select');
+            
             if (slides.length <= 1) return;
 
-            let currentIndex = 0;
-            let autoplayTimer = null;
+            let currentIndex = 0; let autoplayTimer = null;
             const dots = card.querySelectorAll('.slideshow-dot');
-            const swatches = card.querySelectorAll('.swatch-btn');
             const cardTitle = card.querySelector('h3');
             const priceElement = card.querySelector('p[id$="-price"]');
             const prevBtn = card.querySelector('.slideshow-arrow.prev');
@@ -1499,38 +1477,37 @@
                 slides.forEach((slide, idx) => {
                     slide.classList.toggle('active-slide', idx === currentIndex);
                     if (idx === currentIndex) {
-                        if (cardTitle && slide.dataset.title) {
-                            cardTitle.textContent = slide.dataset.title;
-                        }
-                        if (priceElement && slide.dataset.price) {
-                            priceElement.textContent = `₹${slide.dataset.price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}/-`;
-                        }
+                        if (cardTitle && slide.dataset.title) cardTitle.textContent = slide.dataset.title;
+                        if (priceElement && slide.dataset.price) priceElement.textContent = `₹${slide.dataset.price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}/-`;
                     }
                 });
                 dots.forEach((dot, idx) => dot.classList.toggle('active-dot', idx === currentIndex));
-                swatches.forEach((swatch, idx) => swatch.classList.toggle('active-swatch', idx === currentIndex));
+                
+                // Keep dropdown synchronized with slideshow if possible
+                if (variantSelectCard && currentIndex < variantSelectCard.options.length) {
+                    variantSelectCard.selectedIndex = currentIndex;
+                }
             }
 
             if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); updateFrame(currentIndex - 1); restartAutoplay(); });
             if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); updateFrame(currentIndex + 1); restartAutoplay(); });
-
             dots.forEach((dot, idx) => dot.addEventListener('click', (e) => { e.stopPropagation(); updateFrame(idx); restartAutoplay(); }));
-            swatches.forEach((swatch, idx) => swatch.addEventListener('click', (e) => { e.stopPropagation(); updateFrame(idx); restartAutoplay(); }));
-
-            function startAutoplay() {
-                autoplayTimer = setInterval(() => updateFrame(currentIndex + 1), 3500);
+            
+            if (variantSelectCard) {
+                variantSelectCard.addEventListener('change', (e) => {
+                    e.stopPropagation();
+                    const idx = e.target.selectedIndex;
+                    if(idx < slides.length) { updateFrame(idx); restartAutoplay(); }
+                });
             }
-            function restartAutoplay() {
-                clearInterval(autoplayTimer);
-                startAutoplay();
-            }
 
+            function startAutoplay() { autoplayTimer = setInterval(() => updateFrame(currentIndex + 1), 3500); }
+            function restartAutoplay() { clearInterval(autoplayTimer); startAutoplay(); }
             startAutoplay();
             card.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
             card.addEventListener('mouseleave', () => startAutoplay());
         });
 
-        // Quick View Modal Logic
         const watchModalBackdrop = document.getElementById('watch-modal-backdrop');
         const watchModalWindow = document.querySelector('.watch-modal-window');
         const watchModalSlides = document.querySelector('.watch-modal-slides');
@@ -1538,40 +1515,28 @@
         const watchModalClose = document.querySelector('.watch-modal-close');
         const watchModalPrev = document.querySelector('.watch-modal-prev');
         const watchModalNext = document.querySelector('.watch-modal-next');
-
-        let watchModalImages = [];
-        let watchModalIndex = 0;
+        let watchModalImages = []; let watchModalIndex = 0;
 
         function setWatchModalSlide(index) {
             if (!watchModalImages.length) return;
             if (index < 0) index = watchModalImages.length - 1;
             if (index >= watchModalImages.length) index = 0;
             watchModalIndex = index;
-
-            const slides = watchModalSlides.querySelectorAll('.watch-modal-slide');
-            slides.forEach((slide, idx) => {
+            watchModalSlides.querySelectorAll('.watch-modal-slide').forEach((slide, idx) => {
                 slide.classList.toggle('active-modal-slide', idx === watchModalIndex);
             });
         }
 
         function buildWatchModal(images, title, widthPx) {
-            watchModalImages = images;
-            watchModalSlides.innerHTML = '';
-            watchModalTitle.textContent = title || 'Watch Preview';
-
+            watchModalImages = images; watchModalSlides.innerHTML = ''; watchModalTitle.textContent = title || 'Watch Preview';
             images.forEach((image, idx) => {
                 const img = document.createElement('img');
-                img.src = image.src;
-                img.alt = image.alt || `${title} image ${idx + 1}`;
+                img.src = image.src; img.alt = image.alt || `${title} image ${idx + 1}`;
                 img.className = 'watch-modal-slide';
                 if (idx === 0) img.classList.add('active-modal-slide');
                 watchModalSlides.appendChild(img);
             });
-
-            if (widthPx && watchModalWindow) {
-                watchModalWindow.style.width = `${Math.min(widthPx, window.innerWidth - 36)}px`;
-            }
-
+            if (widthPx && watchModalWindow) watchModalWindow.style.width = `${Math.min(widthPx, window.innerWidth - 36)}px`;
             setWatchModalSlide(0);
             watchModalBackdrop.classList.remove('hidden');
             watchModalBackdrop.setAttribute('aria-hidden', 'false');
@@ -1584,133 +1549,106 @@
             document.body.style.overflow = '';
         }
 
-        function getWatchImages(card) {
+        function openWatchModal(card) {
+            if (!card) return;
+            const title = card.querySelector('h3')?.textContent || 'Watch Preview';
             const imageNodes = [];
             if (card.querySelector('.frame-slide')) {
-                card.querySelectorAll('.frame-slide').forEach(img => {
-                    imageNodes.push({ src: img.src, alt: img.alt || img.dataset.title || 'Watch detail' });
-                });
+                card.querySelectorAll('.frame-slide').forEach(img => imageNodes.push({ src: img.src, alt: img.alt || img.dataset.title || 'Watch detail' }));
             } else {
                 const image = card.querySelector('.product-img');
                 if (image) imageNodes.push({ src: image.src, alt: image.alt || 'Watch image' });
             }
-            return imageNodes.length ? imageNodes : [{ src: card.querySelector('.product-img')?.src || '', alt: 'Watch preview' }];
+            const images = imageNodes.length ? imageNodes : [{ src: card.querySelector('.product-img')?.src || '', alt: 'Watch preview' }];
+            buildWatchModal(images, title, card.getBoundingClientRect().width);
         }
 
-        function openWatchModal(card) {
-            if (!card) return;
-            const title = card.querySelector('h3')?.textContent || 'Watch Preview';
-            const images = getWatchImages(card);
-            const rect = card.getBoundingClientRect();
-            buildWatchModal(images, title, rect.width);
-        }
-
-        // Bind all Quick View buttons 
         document.querySelectorAll('.quick-view-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                const card = btn.closest('.product-item');
-                openWatchModal(card);
-            });
+            btn.addEventListener('click', (e) => { e.stopPropagation(); e.preventDefault(); openWatchModal(btn.closest('.product-item')); });
         });
 
-        // Buy action button logic (Smooth scroll & auto-select)
+        // Advanced Buy Action with Dynamic Cascading form mapping
         document.querySelectorAll('.buy-action-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                e.preventDefault();
+                e.stopPropagation(); e.preventDefault();
                 
-                // Select category in dropdown
+                const card = btn.closest('.product-item');
                 const category = btn.dataset.category;
-                if (category && typeof categorySelect !== 'undefined' && categorySelect) {
-                    categorySelect.value = category;
-                    categorySelect.dispatchEvent(new Event('change'));
-                }
+                const subcategory = btn.dataset.subcategory || null;
                 
-                // Scroll to footer contact smoothly
-                const contactSection = document.getElementById('footer-contact');
-                if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
-                    // Focus name input after a short delay
+                const variantSelectCard = card.querySelector('.card-variant-select');
+                const quantityInputCard = card.querySelector('.card-quantity-input');
+                
+                const selectedVariant = variantSelectCard ? variantSelectCard.value : null;
+                const selectedQuantity = quantityInputCard ? quantityInputCard.value : "1";
+
+                if (category && typeof categorySelect !== 'undefined' && categorySelect) {
+                    categorySelect.value = category; 
+                    categorySelect.dispatchEvent(new Event('change'));
+                    
+                    // Allow the DOM to render the new sub-category/variant options via setTimeout
                     setTimeout(() => {
-                        const nameInput = document.getElementById('wa-name');
-                        if (nameInput) nameInput.focus();
-                    }, 800);
+                        if (subcategory && typeof subCategorySelect !== 'undefined' && subCategorySelect && !subCategoryContainer.classList.contains('hidden')) {
+                            subCategorySelect.value = subcategory;
+                            subCategorySelect.dispatchEvent(new Event('change'));
+                        }
+                        
+                        setTimeout(() => {
+                            if (selectedVariant && typeof variantSelect !== 'undefined' && variantSelect) {
+                                variantSelect.value = selectedVariant;
+                                variantSelect.dispatchEvent(new Event('change'));
+                            }
+                            
+                            const footerQty = document.getElementById('wa-quantity');
+                            if (footerQty) footerQty.value = selectedQuantity;
+
+                            const contactSection = document.getElementById('footer-contact');
+                            if (contactSection) {
+                                contactSection.scrollIntoView({ behavior: 'smooth' });
+                                setTimeout(() => {
+                                    const nameInput = document.getElementById('wa-name');
+                                    if (nameInput) nameInput.focus();
+                                }, 800);
+                            }
+                        }, 50);
+                    }, 50);
                 }
             });
         });
 
-        // Mobile touch logic for revealing Quick View buttons on image tap
         document.querySelectorAll('.product-img-wrap').forEach(wrap => {
             wrap.addEventListener('click', (e) => {
-                // Apply ONLY on devices without traditional hover functionality
                 if (window.matchMedia("(hover: none)").matches) {
-                    // Do not intercept if clicking internal buttons/arrows
-                    if (e.target.closest('.slideshow-arrow') || 
-                        e.target.closest('.slideshow-dot') || 
-                        e.target.closest('.quick-view-btn')) {
-                        return;
-                    }
-                    
+                    if (e.target.closest('.slideshow-arrow') || e.target.closest('.slideshow-dot') || e.target.closest('.quick-view-btn')) return;
                     const productItem = wrap.closest('.product-item');
-                    const isActive = productItem.classList.contains('touch-active');
-                    
-                    // Close/Deactivate any other previously tapped product items
                     document.querySelectorAll('.product-item.touch-active').forEach(item => {
-                        if (item !== productItem) {
-                            item.classList.remove('touch-active');
-                        }
+                        if (item !== productItem) item.classList.remove('touch-active');
                     });
-
-                    // Toggle visibility of the button/overlay for the tapped item
                     productItem.classList.toggle('touch-active');
                 }
             });
         });
 
-        // Clicking entirely outside product item will reset touch states on mobile
         document.addEventListener('click', (e) => {
-            if (window.matchMedia("(hover: none)").matches) {
-                if (!e.target.closest('.product-item')) {
-                    document.querySelectorAll('.product-item.touch-active').forEach(item => {
-                        item.classList.remove('touch-active');
-                    });
-                }
+            if (window.matchMedia("(hover: none)").matches && !e.target.closest('.product-item')) {
+                document.querySelectorAll('.product-item.touch-active').forEach(item => item.classList.remove('touch-active'));
             }
         });
 
         if (watchModalClose) watchModalClose.addEventListener('click', closeWatchModal);
         if (watchModalPrev) watchModalPrev.addEventListener('click', () => setWatchModalSlide(watchModalIndex - 1));
         if (watchModalNext) watchModalNext.addEventListener('click', () => setWatchModalSlide(watchModalIndex + 1));
-        if (watchModalBackdrop) {
-            watchModalBackdrop.addEventListener('click', event => {
-                if (event.target === watchModalBackdrop) closeWatchModal();
-            });
-        }
+        if (watchModalBackdrop) watchModalBackdrop.addEventListener('click', e => { if (e.target === watchModalBackdrop) closeWatchModal(); });
         
         document.addEventListener('keydown', event => {
             if (event.key === 'Escape') {
-                if (promoBackdrop && promoBackdrop.classList.contains('active')) {
-                    closePromoModal();
-                }
-                if (watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) {
-                    closeWatchModal();
-                }
+                if (promoBackdrop && promoBackdrop.classList.contains('active')) closePromoModal();
+                if (watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) closeWatchModal();
             }
-            if (event.key === 'ArrowRight' && watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) {
-                setWatchModalSlide(watchModalIndex + 1);
-            }
-            if (event.key === 'ArrowLeft' && watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) {
-                setWatchModalSlide(watchModalIndex - 1);
-            }
-            // Initialize Icons Safely
-if (typeof lucide !== 'undefined') {
-    lucide.createIcons();
-} else {
-    console.warn('Lucide icons failed to load.');
-}
+            if (event.key === 'ArrowRight' && watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) setWatchModalSlide(watchModalIndex + 1);
+            if (event.key === 'ArrowLeft' && watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) setWatchModalSlide(watchModalIndex - 1);
         });
+
     </script>
 </body>
 </html>
