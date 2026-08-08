@@ -1,0 +1,191 @@
+{
+  "products": [
+    {
+      "id": "forest-tiger-skeleton",
+      "name": "Forest Tiger Skeleton",
+      "category": "Forest Timepieces",
+      "price": 1500,
+      "badge": "Bestseller",
+      "images": [
+        "boys watches/Forest2.PNG",
+        "boys watches/Forest3.PNG"
+      ],
+      "variants": [
+        "Gold",
+        "Silver"
+      ]
+    },
+    {
+      "id": "luxury-zoga-edition",
+      "name": "Luxury Zoga Edition",
+      "category": "Zoga Special Edition",
+      "price": 550,
+      "badge": null,
+      "images": [
+        "boys watches/zogaedition.PNG"
+      ],
+      "variants": [
+        "Luxury Edition Standard"
+      ]
+    },
+    {
+      "id": "hublot-geneve-edition",
+      "name": "Hublot Geneve Edition",
+      "category": "Hublot Collection",
+      "price": 1100,
+      "badge": "Exclusive",
+      "images": [
+        "boys watches/hubolt11.PNG",
+        "boys watches/2hubolt11.PNG",
+        "boys watches/hubolt12.PNG",
+        "boys watches/2hubolt12.PNG"
+      ],
+      "variants": [
+        "Grey Dial With Brown Straps",
+        "White Dial With Black Straps",
+        "Interior Green With Silver Dial With Green Straps",
+        "Luxury Edition: Metal Dial With Metal Chain Interior Is Black"
+      ]
+    },
+    {
+      "id": "casio-masterpiece",
+      "name": "Casio Masterpiece",
+      "category": "Casio Series",
+      "price": 1000,
+      "badge": "Classic",
+      "images": [
+        "boys watches/casio-st.PNG",
+        "boys watches/casio-st2.PNG",
+        "boys watches/Casio-Chain.PNG",
+        "boys watches/casio-st3.PNG",
+        "boys watches/casioi-4.PNG"
+      ],
+      "variants": [
+        "Casio [AE-1200WHL-5AV] Leather Straps",
+        "Casio AE 1200 WHD Series Watch With Black Leather Strap",
+        "Casio Series Round Dial Black Leather Strap",
+        "Casio Series Round Dial Brown Straps",
+        "Casio Classic Edition With Metal Straps"
+      ]
+    },
+    {
+      "id": "rm-masterpiece-series",
+      "name": "RM Masterpiece Series",
+      "category": "RM Watch Collection",
+      "price": 1700,
+      "badge": "Limited",
+      "images": [
+        "boys watches/RM Dragon edition.jpeg",
+        "boys watches/RM 01.jpeg",
+        "boys watches/RM 02.jpeg",
+        "boys watches/RM 03.jpeg"
+      ],
+      "variants": [
+        "RM Dragon Edition",
+        "RM 30-01 Green Edition",
+        "RM 30-01 Orange Edition",
+        "RM 30-01 Yellow Edition"
+      ]
+    },
+    {
+      "id": "rolex-elegance",
+      "name": "Rolex Elegance",
+      "category": "Rolex Masterpieces",
+      "price": 1300,
+      "badge": "Premium",
+      "images": [
+        "boys watches/Rolex lux .jpeg",
+        "boys watches/Rolex lux01.jpeg",
+        "boys watches/Rolexclassic.jpeg",
+        "boys watches/Rolexclassic01.jpeg"
+      ],
+      "variants": [
+        "Rolex With Gold Chain With Black Interior Luxury Edition",
+        "Rolex With Gold Chain With Green Interior Luxury Edition",
+        "Rolex Full Gold Edition",
+        "Rolex With Gold Chain Interior Silver Edition",
+        "Rolex With Gold Chain Interior Light Gold Special Edition"
+      ]
+    },
+    {
+      "id": "seiko-diver-style",
+      "name": "SEIKO Diver Style",
+      "category": "SEIKO Series",
+      "price": 1100,
+      "badge": "New Arrival",
+      "images": [
+        "boys watches/SEIKO.PNG"
+      ],
+      "variants": [
+        "Style: Diver- Syle watch, Dial Color: brown, Strap: Black Silicone"
+      ]
+    },
+    {
+      "id": "denvosi-premium",
+      "name": "DENVOSI Premium",
+      "category": "DENVOSI Series",
+      "price": 1900,
+      "badge": "Premium",
+      "images": [
+        "boys watches/DENVOSI-B.PNG",
+        "boys watches/DENVOSI-W.PNG",
+        "boys watches/DENVOSI-BR.PNG"
+      ],
+      "variants": [
+        "DENVOSI Premium Black",
+        "DENVOSI Rose Gold",
+        "DENVOSI Silver"
+      ]
+    },
+    {
+      "id": "jaina-watch-sets",
+      "name": "Jaina Watch Sets",
+      "category": "Girls Watch",
+      "price": 500,
+      "badge": "Trending",
+      "images": [
+        "girls watches/1band.jpeg",
+        "girls watches/2band.jpeg",
+        "girls watches/3band.jpeg",
+        "girls watches/4band.jpeg"
+      ],
+      "variants": [
+        "Jaina Crystal Round Watch Set (1band.jpeg): A rose-gold-toned round quartz watch featuring a crystal-studded bezel, a patterned pink dial, and a matching stone-embellished cuff bracelet.",
+        "Jaina Roman Numeral Watch Set (2band.jpeg): An elegant rose-gold-toned watch with a faceted bezel, Roman numerals, a crystal ring dial, and a pink-accented crystal bangle.",
+        "Jaina Square Quartz Watch Set (3band.jpeg): A sleek rose-gold-toned square watch paired with geometric link bands and a matching crystal-bordered square stone bracelet.",
+        "Jaina Link-Chain Watch Set (4band.jpeg): A minimalist rose-gold-toned round watch with interlocking pink-and-gold chain links and a coordinating oval-stone cluster bangle."
+      ]
+    },
+    {
+      "id": "titan-collection",
+      "name": "Titan Collection",
+      "category": "Titan Premium Series",
+      "price": 500,
+      "badge": null,
+      "images": [
+        "girls watches/11girl.jpeg",
+        "girls watches/12girls.jpeg",
+        "girls watches/13girls.jpeg",
+        "girls watches/14girls.jpeg",
+        "girls watches/15girls.jpeg",
+        "girls watches/16girls.jpeg",
+        "girls watches/17girls.jpeg",
+        "girls watches/18girls.jpeg",
+        "girls watches/19girls.jpeg",
+        "girls watches/20girls.jpeg"
+      ],
+      "variants": [
+        "Titan Pure White (11girl.jpeg)",
+        "Titan Dual Tone Pink (12girls.jpeg)",
+        "Titan Silver Elegance (13girls.jpeg)",
+        "Guess Rose Gold (14girls.jpeg)",
+        "Titan Green Dial Drop Lug (15girls.jpeg)",
+        "Titan Champagne Gold (16girls.jpeg)",
+        "Titan Bronze & Black (17girls.jpeg)",
+        "Titan Gold White Dial Classic (18girls.jpeg)",
+        "Titan Gold White Dial Modern (19girls.jpeg)",
+        "Titan Gold Emerald Green (20girls.jpeg)"
+      ]
+    }
+  ]
+}
