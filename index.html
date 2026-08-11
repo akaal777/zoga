@@ -144,6 +144,25 @@
             background: rgba(230,0,0,0.85);
         }
 
+        /* Glass Mirror Text Effect */
+        .glass-mirror-text {
+            background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 45%, #ffffff 50%, rgba(255, 255, 255, 0.4) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            -webkit-box-reflect: below -0.2em linear-gradient(to bottom, transparent 55%, rgba(255, 255, 255, 0.25) 100%);
+            filter: drop-shadow(0 4px 20px rgba(255, 255, 255, 0.2));
+            display: inline-block;
+            padding-bottom: 0.1em;
+        }
+
+        .glass-mirror-text .text-zoga-red {
+            background: linear-gradient(180deg, #ff6666 0%, var(--zoga-red) 45%, #ff3333 50%, rgba(139, 0, 0, 0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         .brand-logo {
             font-family: 'Playfair Display', serif;
             color: var(--zoga-red);
@@ -963,7 +982,7 @@
 
         <div class="relative z-20 text-center px-4 mt-20 hero-info">
             <p class="text-sm md:text-base tracking-[0.3em] uppercase mb-4 text-gray-300 reveal">The New Standard of</p>
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-medium mb-8 text-white tracking-tight reveal drop-shadow-2xl section-heading" style="transition-delay: 200ms;">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-medium mb-12 tracking-tight reveal section-heading glass-mirror-text" style="transition-delay: 200ms;">
                 Timeless <span class="italic text-zoga-red">Elegance</span>
             </h1>
             <div class="reveal" style="transition-delay: 400ms;">
