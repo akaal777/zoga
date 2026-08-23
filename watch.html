@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#050505">
     <title>Zoga | The Watch Collection</title>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;0,900;1,400;1,600;1,800;1,900&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;0,900;1,400;1,600;1,800;1,900&family=Jost:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-
     <script>
         tailwind.config = {
             theme: {
@@ -41,12 +44,15 @@
             --zoga-black: #050505;
         }
 
-        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
 
         body {
             min-height: 100vh;
             background-color: #050505;
-            background-image: radial-gradient(circle at 20% 10%, rgba(230,0,0,0.12), transparent 18%), radial-gradient(circle at 85% 90%, rgba(255,255,255,0.05), transparent 18%), linear-gradient(135deg, #050505 0%, #090909 100%);
+            background-image: radial-gradient(circle at 20% 10%, rgba(230, 0, 0, 0.12), transparent 18%), radial-gradient(circle at 85% 90%, rgba(255, 255, 255, 0.05), transparent 18%), linear-gradient(135deg, #050505 0%, #090909 100%);
             color: #f5f5f5;
             overflow-x: hidden;
             text-rendering: optimizeLegibility;
@@ -58,200 +64,879 @@
             content: '';
             position: fixed;
             inset: 0;
-            background: radial-gradient(circle at 30% 22%, rgba(230,0,0,0.12), transparent 22%), radial-gradient(circle at 82% 75%, rgba(255,255,255,0.04), transparent 20%);
+            background: radial-gradient(circle at 30% 22%, rgba(230, 0, 0, 0.12), transparent 22%), radial-gradient(circle at 82% 75%, rgba(255, 255, 255, 0.04), transparent 20%);
             pointer-events: none;
             z-index: -1;
         }
 
         /* Buttons & Typography */
         .btn-accent {
-            display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem;
-            border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.08); color: #ffffff;
-            text-transform: uppercase; font-weight: 700; border-radius: 999px; box-shadow: 0 18px 45px rgba(0,0,0,0.24);
-            backdrop-filter: blur(12px); transition: all 0.3s ease; padding: 0.75rem 1.5rem; letter-spacing: 0.15em; font-size: 0.65rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            text-transform: uppercase;
+            font-weight: 700;
+            border-radius: 999px;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.24);
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+            padding: 0.75rem 1.5rem;
+            letter-spacing: 0.15em;
+            font-size: 0.65rem;
         }
-        @media (min-width: 768px) { .btn-accent { padding: 0.95rem 2rem; letter-spacing: 0.24em; font-size: 0.8rem; } }
-        .btn-accent:hover { color: #050505; background: var(--zoga-red); border-color: var(--zoga-red); transform: translateY(-2px); box-shadow: 0 22px 55px rgba(230,0,0,0.38); }
-        .btn-accent:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; hover:background: rgba(255,255,255,0.08); hover:color: #ffffff; hover:border-color: rgba(255,255,255,0.18); }
 
-        .section-heading { position: relative; }
+        @media (min-width: 768px) {
+            .btn-accent {
+                padding: 0.95rem 2rem;
+                letter-spacing: 0.24em;
+                font-size: 0.8rem;
+            }
+        }
+
+        .btn-accent:hover {
+            color: #050505;
+            background: var(--zoga-red);
+            border-color: var(--zoga-red);
+            transform: translateY(-2px);
+            box-shadow: 0 22px 55px rgba(230, 0, 0, 0.38);
+        }
+
+        .btn-accent:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        .section-heading {
+            position: relative;
+        }
+
         .section-heading::after {
-            content: ''; position: absolute; left: 0; bottom: -0.75rem; width: 3rem; height: 2px;
-            border-radius: 999px; background: rgba(230,0,0,0.85);
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.75rem;
+            width: 3rem;
+            height: 2px;
+            border-radius: 999px;
+            background: rgba(230, 0, 0, 0.85);
         }
-        @media (min-width: 768px) { .section-heading::after { bottom: -1rem; width: 4rem; } }
 
-        .brand-logo { font-family: 'Playfair Display', serif; color: var(--zoga-red); font-weight: 900; font-style: italic; letter-spacing: -0.05em; text-transform: lowercase; line-height: 1; transform: scaleY(1.1); text-shadow: 0 16px 40px rgba(230,0,0,0.12); }
-        .content-panel { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 40px 100px rgba(0,0,0,0.3); backdrop-filter: blur(18px); border-radius: 1.5rem; }
-        @media (min-width: 768px) { .content-panel { border-radius: 2rem; } }
+        @media (min-width: 768px) {
+            .section-heading::after {
+                bottom: -1rem;
+                width: 4rem;
+            }
+        }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        .brand-logo {
+            font-family: 'Playfair Display', serif;
+            color: var(--zoga-red);
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: -0.05em;
+            text-transform: lowercase;
+            line-height: 1;
+            transform: scaleY(1.1);
+            text-shadow: 0 16px 40px rgba(230, 0, 0, 0.12);
+        }
 
-        .hero-overlay { background: linear-gradient(to top, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.25) 50%, rgba(5,5,5,0.75) 100%); }
-        .hero-slideshow { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-        .slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0; animation: kenburns 30s infinite; transition: opacity 1s ease-in-out, transform 8s ease-in-out; }
-        .slide:nth-child(1) { animation-delay: 0s; } .slide:nth-child(2) { animation-delay: 6s; } .slide:nth-child(3) { animation-delay: 12s; } .slide:nth-child(4) { animation-delay: 18s; }
-        @keyframes kenburns { 0% { opacity: 0; transform: scale(1.05); } 5% { opacity: 0.92; transform: scale(1.08); } 20% { opacity: 0.92; transform: scale(1.12); } 25% { opacity: 0; transform: scale(1.15); } 100% { opacity: 0; transform: scale(1.15); } }
+        .content-panel {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(18px);
+            border-radius: 1.5rem;
+        }
 
-        #splash-overlay { transition: opacity 800ms ease, visibility 800ms ease; }
-        #splash-logo { will-change: transform, opacity; animation: splash-zoom 2200ms cubic-bezier(.2,.9,.2,1) forwards; }
-        @keyframes splash-zoom { 0% { transform: scale(1); opacity: 1; } 30% { transform: scale(1.05); opacity: 1; } 70% { transform: scale(3.6); opacity: 0.9; } 100% { transform: scale(8); opacity: 0; } }
+        @media (min-width: 768px) {
+            .content-panel {
+                border-radius: 2rem;
+            }
+        }
 
-        .promo-backdrop { position: fixed; inset: 0; z-index: 990; display: flex; align-items: center; justify-content: center; padding: 1rem; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); opacity: 0; visibility: hidden; transition: opacity 0.5s ease, visibility 0.5s ease; }
-        .promo-backdrop.active { opacity: 1; visibility: visible; }
-        .promo-card { position: relative; width: min(92vw, 580px); background: linear-gradient(145deg, rgba(18, 18, 18, 0.96) 0%, rgba(8, 8, 8, 0.98) 100%); border: 1px solid rgba(230, 0, 0, 0.35); border-radius: 1.75rem; padding: 2.5rem 1.5rem; box-shadow: 0 30px 90px rgba(0, 0, 0, 0.8), 0 0 50px rgba(230, 0, 0, 0.15); transform: scale(0.88) translateY(20px); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden; text-align: center; }
-        @media (min-width: 640px) { .promo-card { padding: 3rem 2.5rem; border-radius: 2rem; } }
-        .promo-backdrop.active .promo-card { transform: scale(1) translateY(0); }
-        .promo-close-btn { position: absolute; top: 1rem; right: 1rem; width: 2.5rem; height: 2.5rem; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #ffffff; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: all 0.3s ease; backdrop-filter: blur(4px); }
-        .promo-close-btn:hover { background: var(--zoga-red); border-color: var(--zoga-red); transform: rotate(90deg) scale(1.05); box-shadow: 0 0 20px rgba(230,0,0,0.5); }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-        input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-        input[type=number] { -moz-appearance: textfield; }
-        .card-variant-select { -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 0.5rem center; background-size: 0.8em; padding-right: 1.5rem; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
-        .card-variant-select option { background-color: #0a0a0a; color: #ffffff; padding: 8px; }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-        .product-item { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06); padding: 0.5rem; border-radius: 1rem; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease; display: flex; flex-direction: column; justify-content: space-between; }
-        @media (min-width: 768px) { .product-item { padding: 1.25rem; border-radius: 1.5rem; } }
-        .product-item:hover { transform: translateY(-8px); border-color: rgba(230, 0, 0, 0.35); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5); }
-        .product-img-wrap { position: relative; overflow: hidden; border-radius: 0.75rem; aspect-ratio: 4/5; background: #f0ebe4; cursor: pointer; }
-        @media (min-width: 768px) { .product-img-wrap { border-radius: 1rem; cursor: default; } }
-        .product-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-        .product-item:hover .product-img { transform: scale(1.08); }
+        .hero-overlay {
+            background: linear-gradient(to top, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.25) 50%, rgba(5, 5, 5, 0.75) 100%);
+        }
 
-        @media (hover: none) { .product-img-wrap:hover .slideshow-arrow { opacity: 0; } .product-item.touch-active .slideshow-arrow { opacity: 1; } }
-        
-        .tag-new { position: absolute; top: 0.5rem; left: 0.5rem; background: var(--zoga-red); color: #ffffff; font-size: 0.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.25rem 0.5rem; border-radius: 0.25rem; z-index: 20; box-shadow: 0 4px 18px rgba(230,0,0,0.4); backdrop-filter: blur(6px); }
-        @media (min-width: 768px) { .tag-new { top: 1rem; left: 1rem; font-size: 0.65rem; letter-spacing: 0.22em; padding: 0.4rem 0.85rem; border-radius: 0.35rem; } }
+        .hero-slideshow {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
 
-        @keyframes failsafe-hide { to { opacity: 0; visibility: hidden; z-index: -1; } }
-        #splash-overlay { animation: failsafe-hide 0.5s ease 3.5s forwards; }
+        .slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0;
+            animation: kenburns 30s infinite;
+            transition: opacity 1s ease-in-out, transform 8s ease-in-out;
+        }
 
-        .frame-slideshow-container { position: relative; width: 100%; height: 100%; }
-        .frame-slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.04); transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none; }
-        .frame-slide.active-slide { opacity: 1; transform: scale(1); pointer-events: auto; }
-        
-        .slideshow-controls { position: absolute; bottom: 0.5rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 0.3rem; z-index: 25; background: rgba(5, 5, 5, 0.6); padding: 0.3rem 0.5rem; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.15); backdrop-filter: blur(12px); }
-        @media (min-width: 768px) { .slideshow-controls { bottom: 1rem; gap: 0.6rem; padding: 0.4rem 0.8rem; } }
-        .slideshow-dot { width: 0.35rem; height: 0.35rem; border-radius: 999px; background: rgba(255, 255, 255, 0.35); transition: all 0.4s ease; cursor: pointer; border: none; padding: 0; }
-        .slideshow-dot.active-dot { background: var(--zoga-red); width: 1rem; }
-        @media (min-width: 768px) { .slideshow-dot { width: 0.5rem; height: 0.5rem; } .slideshow-dot.active-dot { width: 1.5rem; } }
-        
-        .slideshow-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 1.75rem; height: 1.75rem; border-radius: 999px; background: rgba(5, 5, 5, 0.5); border: 1px solid rgba(255, 255, 255, 0.2); color: #ffffff; display: flex; align-items: center; justify-content: center; z-index: 25; opacity: 0; transition: all 0.3s ease; backdrop-filter: blur(8px); cursor: pointer; }
-        @media (min-width: 768px) { .slideshow-arrow { width: 2.25rem; height: 2.25rem; } }
-        .product-img-wrap:hover .slideshow-arrow { opacity: 1; }
-        .slideshow-arrow:hover { background: var(--zoga-red); border-color: var(--zoga-red); transform: translateY(-50%) scale(1.1); }
-        .slideshow-arrow.prev { left: 0.5rem; } .slideshow-arrow.next { right: 0.5rem; }
+        .slide:nth-child(1) {
+            animation-delay: 0s;
+        }
 
-        .watch-modal-backdrop { position: fixed; inset: 0; z-index: 80; display: flex; align-items: center; justify-content: center; padding: 1.25rem; background: rgba(0, 0, 0, 0.82); }
-        .watch-modal-window { position: relative; width: min(90vw, 520px); max-width: 100%; border-radius: 1.75rem; overflow: hidden; background: rgba(5, 5, 5, 0.96); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6); }
-        .watch-modal-content { position: relative; width: 100%; background: #050505; }
-        .watch-modal-slide { width: 100%; display: none; object-fit: cover; aspect-ratio: 1 / 1; background: #050505; }
-        .watch-modal-slide.active-modal-slide { display: block; }
-        .watch-modal-footer { padding: 1rem 1.25rem 1.25rem; text-align: center; background: rgba(5,5,5,0.95); border-top: 1px solid rgba(255,255,255,0.08); }
-        .watch-modal-footer p { margin: 0; color: #d1d1d1; letter-spacing: 0.18em; text-transform: uppercase; font-size: 0.85rem; }
-        .watch-modal-close { position: absolute; top: 0.85rem; right: 0.85rem; width: 2.5rem; height: 2.5rem; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(0,0,0,0.62); color: #ffffff; cursor: pointer; z-index: 2; transition: all 0.25s ease; }
-        .watch-modal-close:hover { background: rgba(230,0,0,0.9); transform: scale(1.05); }
-        .watch-modal-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 3rem; height: 3rem; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(0,0,0,0.6); color: #ffffff; cursor: pointer; z-index: 2; transition: all 0.25s ease; }
-        .watch-modal-nav:hover { background: rgba(230,0,0,0.9); transform: translateY(-50%) scale(1.05); }
-        .watch-modal-prev { left: 0.85rem; } .watch-modal-next { right: 0.85rem; }
-        .watch-modal-backdrop.hidden { display: none; }
+        .slide:nth-child(2) {
+            animation-delay: 6s;
+        }
 
-        .mobile-menu-panel { position: fixed; top: 0; right: 0; width: min(84vw, 320px); height: 100vh; padding: 5.5rem 1.25rem 1.5rem; background: rgba(5, 5, 5, 0.72); backdrop-filter: blur(24px); border-left: 1px solid rgba(255,255,255,0.14); box-shadow: -12px 0 40px rgba(0, 0, 0, 0.35); transform: translateX(100%); transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1); z-index: 60; display: flex; flex-direction: column; gap: 1rem; }
-        .mobile-menu-panel.open { transform: translateX(0); }
-        .mobile-menu-panel .mobile-nav-link { opacity: 0; transform: translateX(18px); transition: all 0.25s ease; }
-        .mobile-menu-panel.open .mobile-nav-link { opacity: 1; transform: translateX(0); }
-        .mobile-menu-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.62); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; z-index: 55; }
-        .mobile-menu-overlay.open { opacity: 1; pointer-events: auto; }
-        .mobile-menu-toggle { width: 2.7rem; height: 2.7rem; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.28rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); transition: all 0.25s ease; padding: 0; }
-        .mobile-menu-toggle .hamburger-line { display: block; width: 1.1rem; height: 2px; border-radius: 999px; background: #fff; transition: all 0.28s ease; }
-        .mobile-menu-toggle.active .hamburger-line:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-        .mobile-menu-toggle.active .hamburger-line:nth-child(2) { opacity: 0; transform: translateX(-4px); }
-        .mobile-menu-toggle.active .hamburger-line:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+        .slide:nth-child(3) {
+            animation-delay: 12s;
+        }
 
-        select option { background-color: #111; color: white; padding: 10px; }
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-        
+        .slide:nth-child(4) {
+            animation-delay: 18s;
+        }
+
+        @keyframes kenburns {
+            0% {
+                opacity: 0;
+                transform: scale(1.05);
+            }
+
+            5% {
+                opacity: 0.92;
+                transform: scale(1.08);
+            }
+
+            20% {
+                opacity: 0.92;
+                transform: scale(1.12);
+            }
+
+            25% {
+                opacity: 0;
+                transform: scale(1.15);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1.15);
+            }
+        }
+
+        #splash-overlay {
+            transition: opacity 800ms ease, visibility 800ms ease;
+        }
+
+        #splash-logo {
+            will-change: transform, opacity;
+            animation: splash-zoom 2200ms cubic-bezier(.2, .9, .2, 1) forwards;
+        }
+
+        @keyframes splash-zoom {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            30% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+
+            70% {
+                transform: scale(3.6);
+                opacity: 0.9;
+            }
+
+            100% {
+                transform: scale(8);
+                opacity: 0;
+            }
+        }
+
+        .promo-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 990;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .promo-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .promo-card {
+            position: relative;
+            width: min(92vw, 580px);
+            background: linear-gradient(145deg, rgba(18, 18, 18, 0.96) 0%, rgba(8, 8, 8, 0.98) 100%);
+            border: 1px solid rgba(230, 0, 0, 0.35);
+            border-radius: 1.75rem;
+            padding: 2.5rem 1.5rem;
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.8), 0 0 50px rgba(230, 0, 0, 0.15);
+            transform: scale(0.88) translateY(20px);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        @media (min-width: 640px) {
+            .promo-card {
+                padding: 3rem 2.5rem;
+                border-radius: 2rem;
+            }
+        }
+
+        .promo-backdrop.active .promo-card {
+            transform: scale(1) translateY(0);
+        }
+
+        .promo-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .promo-close-btn:hover {
+            background: var(--zoga-red);
+            border-color: var(--zoga-red);
+            transform: rotate(90deg) scale(1.05);
+            box-shadow: 0 0 20px rgba(230, 0, 0, 0.5);
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .card-variant-select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            background-size: 0.8em;
+            padding-right: 1.5rem;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .card-variant-select option {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            padding: 8px;
+        }
+
+        .product-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 0.5rem;
+            border-radius: 1rem;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        @media (min-width: 768px) {
+            .product-item {
+                padding: 1.25rem;
+                border-radius: 1.5rem;
+            }
+        }
+
+        .product-item:hover {
+            transform: translateY(-8px);
+            border-color: rgba(230, 0, 0, 0.35);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .product-img-wrap {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            aspect-ratio: 4/5;
+            background: #f0ebe4;
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            .product-img-wrap {
+                border-radius: 1rem;
+                cursor: default;
+            }
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .product-item:hover .product-img {
+            transform: scale(1.08);
+        }
+
+        @media (hover: none) {
+            .product-img-wrap:hover .slideshow-arrow {
+                opacity: 0;
+            }
+
+            .product-item.touch-active .slideshow-arrow {
+                opacity: 1;
+            }
+        }
+
+        .tag-new {
+            position: absolute;
+            top: 0.5rem;
+            left: 0.5rem;
+            background: var(--zoga-red);
+            color: #ffffff;
+            font-size: 0.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            z-index: 20;
+            box-shadow: 0 4px 18px rgba(230, 0, 0, 0.4);
+            backdrop-filter: blur(6px);
+        }
+
+        @media (min-width: 768px) {
+            .tag-new {
+                top: 1rem;
+                left: 1rem;
+                font-size: 0.65rem;
+                letter-spacing: 0.22em;
+                padding: 0.4rem 0.85rem;
+                border-radius: 0.35rem;
+            }
+        }
+
+        @keyframes failsafe-hide {
+            to {
+                opacity: 0;
+                visibility: hidden;
+                z-index: -1;
+            }
+        }
+
+        #splash-overlay {
+            animation: failsafe-hide 0.5s ease 3.5s forwards;
+        }
+
+        .frame-slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .frame-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(1.04);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        .frame-slide.active-slide {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
+        .slideshow-controls {
+            position: absolute;
+            bottom: 0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            z-index: 25;
+            background: rgba(5, 5, 5, 0.6);
+            padding: 0.3rem 0.5rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+        }
+
+        @media (min-width: 768px) {
+            .slideshow-controls {
+                bottom: 1rem;
+                gap: 0.6rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+
+        .slideshow-dot {
+            width: 0.35rem;
+            height: 0.35rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.35);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: none;
+            padding: 0;
+        }
+
+        .slideshow-dot.active-dot {
+            background: var(--zoga-red);
+            width: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .slideshow-dot {
+                width: 0.5rem;
+                height: 0.5rem;
+            }
+
+            .slideshow-dot.active-dot {
+                width: 1.5rem;
+            }
+        }
+
+        .slideshow-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1.75rem;
+            height: 1.75rem;
+            border-radius: 999px;
+            background: rgba(5, 5, 5, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 25;
+            opacity: 0;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            .slideshow-arrow {
+                width: 2.25rem;
+                height: 2.25rem;
+            }
+        }
+
+        .product-img-wrap:hover .slideshow-arrow {
+            opacity: 1;
+        }
+
+        .slideshow-arrow:hover {
+            background: var(--zoga-red);
+            border-color: var(--zoga-red);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slideshow-arrow.prev {
+            left: 0.5rem;
+        }
+
+        .slideshow-arrow.next {
+            right: 0.5rem;
+        }
+
+        .watch-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 80;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            background: rgba(0, 0, 0, 0.82);
+        }
+
+        .watch-modal-window {
+            position: relative;
+            width: min(90vw, 520px);
+            max-width: 100%;
+            border-radius: 1.75rem;
+            overflow: hidden;
+            background: rgba(5, 5, 5, 0.96);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
+        }
+
+        .watch-modal-content {
+            position: relative;
+            width: 100%;
+            background: #050505;
+        }
+
+        .watch-modal-slide {
+            width: 100%;
+            display: none;
+            object-fit: cover;
+            aspect-ratio: 1 / 1;
+            background: #050505;
+        }
+
+        .watch-modal-slide.active-modal-slide {
+            display: block;
+        }
+
+        .watch-modal-footer {
+            padding: 1rem 1.25rem 1.25rem;
+            text-align: center;
+            background: rgba(5, 5, 5, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .watch-modal-footer p {
+            margin: 0;
+            color: #d1d1d1;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .watch-modal-close {
+            position: absolute;
+            top: 0.85rem;
+            right: 0.85rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(0, 0, 0, 0.62);
+            color: #ffffff;
+            cursor: pointer;
+            z-index: 2;
+            transition: all 0.25s ease;
+        }
+
+        .watch-modal-close:hover {
+            background: rgba(230, 0, 0, 0.9);
+            transform: scale(1.05);
+        }
+
+        .watch-modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3rem;
+            height: 3rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+            cursor: pointer;
+            z-index: 2;
+            transition: all 0.25s ease;
+        }
+
+        .watch-modal-nav:hover {
+            background: rgba(230, 0, 0, 0.9);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .watch-modal-prev {
+            left: 0.85rem;
+        }
+
+        .watch-modal-next {
+            right: 0.85rem;
+        }
+
+        .watch-modal-backdrop.hidden {
+            display: none;
+        }
+
+        .mobile-menu-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: min(84vw, 320px);
+            height: 100vh;
+            padding: 5.5rem 1.25rem 1.5rem;
+            background: rgba(5, 5, 5, 0.72);
+            backdrop-filter: blur(24px);
+            border-left: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: -12px 0 40px rgba(0, 0, 0, 0.35);
+            transform: translateX(100%);
+            transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
+            z-index: 60;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .mobile-menu-panel.open {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-panel .mobile-nav-link {
+            opacity: 0;
+            transform: translateX(18px);
+            transition: all 0.25s ease;
+        }
+
+        .mobile-menu-panel.open .mobile-nav-link {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.62);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 55;
+        }
+
+        .mobile-menu-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-menu-toggle {
+            width: 2.7rem;
+            height: 2.7rem;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.28rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            transition: all 0.25s ease;
+            padding: 0;
+        }
+
+        .mobile-menu-toggle .hamburger-line {
+            display: block;
+            width: 1.1rem;
+            height: 2px;
+            border-radius: 999px;
+            background: #fff;
+            transition: all 0.28s ease;
+        }
+
+        .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-4px);
+        }
+
+        .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        select option {
+            background-color: #111;
+            color: white;
+            padding: 10px;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
         /* Auth loading spinner */
-        .loader { border: 2px solid rgba(255,255,255,0.1); border-left-color: #ffffff; border-radius: 50%; width: 1.2rem; height: 1.2rem; animation: spin 1s linear infinite; display: none; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .loader {
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #ffffff;
+            border-radius: 50%;
+            width: 1.2rem;
+            height: 1.2rem;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
+
 <body class="antialiased">
 
-    <div id="splash-overlay" aria-hidden="true" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#050505;z-index:9999;">
-        <div id="splash-logo" class="brand-logo" style="color:#e60000;font-size:4rem;letter-spacing:-0.05em;transform-origin:center;">zoga</div>
+    <div id="splash-overlay" aria-hidden="true"
+        style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#050505;z-index:9999;">
+        <div id="splash-logo" class="brand-logo"
+            style="color:#e60000;font-size:4rem;letter-spacing:-0.05em;transform-origin:center;">zoga</div>
     </div>
 
     <!-- Promo Modal -->
     <div id="promo-modal-backdrop" class="promo-backdrop" aria-hidden="true">
-        <div class="promo-card flex flex-col items-center justify-center relative z-10" role="dialog" aria-modal="true" aria-labelledby="promo-modal-title">
-            <button id="promo-modal-close" class="promo-close-btn" aria-label="Close promotion message"><i data-lucide="x" class="w-5 h-5"></i></button>
-            <div class="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-zoga-red/10 border border-zoga-red/30 text-zoga-red text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold mb-6">
+        <div class="promo-card flex flex-col items-center justify-center relative z-10" role="dialog" aria-modal="true"
+            aria-labelledby="promo-modal-title">
+            <button id="promo-modal-close" class="promo-close-btn" aria-label="Close promotion message"><i
+                    data-lucide="x" class="w-5 h-5"></i></button>
+            <div
+                class="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-zoga-red/10 border border-zoga-red/30 text-zoga-red text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold mb-6">
                 <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Limited Time Offer
             </div>
-            <h2 id="promo-modal-title" class="text-3xl sm:text-4xl md:text-5xl font-serif text-white mb-4 tracking-tight leading-tight">
+            <h2 id="promo-modal-title"
+                class="text-3xl sm:text-4xl md:text-5xl font-serif text-white mb-4 tracking-tight leading-tight">
                 Luxury <span class="italic text-zoga-red drop-shadow-[0_0_15px_rgba(230,0,0,0.3)]">Eyewear</span> Free
             </h2>
             <p class="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-8 font-light max-w-sm mx-auto">
-                Buy <span class="text-white font-medium underline decoration-zoga-red underline-offset-4">ANY 2 watches</span> up to <span class="text-white font-medium">₹1,000</span> and receive a premium eyewear piece completely complimentary.
+                Buy <span class="text-white font-medium underline decoration-zoga-red underline-offset-4">ANY 2
+                    watches</span> up to <span class="text-white font-medium">₹1,000</span> and receive a premium
+                eyewear piece completely complimentary.
             </p>
             <div class="flex flex-col w-full max-w-xs mx-auto gap-3">
-                <button id="promo-direct-buy-btn" class="btn-accent w-full py-3.5 sm:py-4 text-[10px] sm:text-xs tracking-[0.2em] flex items-center justify-center gap-2 group">
-                    <span>Inquire Now</span><i data-lucide="arrow-down" class="w-4 h-4 transform group-hover:translate-y-1 transition-transform"></i>
+                <button id="promo-direct-buy-btn"
+                    class="btn-accent w-full py-3.5 sm:py-4 text-[10px] sm:text-xs tracking-[0.2em] flex items-center justify-center gap-2 group">
+                    <span>Inquire Now</span><i data-lucide="arrow-down"
+                        class="w-4 h-4 transform group-hover:translate-y-1 transition-transform"></i>
                 </button>
-                <button id="promo-dismiss-btn" class="text-[10px] sm:text-xs uppercase tracking-widest text-gray-500 hover:text-white transition-colors py-3 px-4">Continue Browsing</button>
+                <button id="promo-dismiss-btn"
+                    class="text-[10px] sm:text-xs uppercase tracking-widest text-gray-500 hover:text-white transition-colors py-3 px-4">Continue
+                    Browsing</button>
             </div>
         </div>
     </div>
 
     <!-- Authentication Modal -->
     <div id="auth-modal-backdrop" class="promo-backdrop" aria-hidden="true">
-        <div class="promo-card flex flex-col items-center justify-center relative z-10 w-full max-w-md py-10" role="dialog" aria-modal="true">
-            <button id="auth-modal-close" class="promo-close-btn" aria-label="Close auth menu"><i data-lucide="x" class="w-5 h-5"></i></button>
-            
-            <h2 id="auth-modal-title" class="text-3xl sm:text-4xl font-serif text-white mb-2 tracking-tight">Welcome Back</h2>
-            <p id="auth-modal-subtitle" class="text-gray-400 text-sm mb-8 tracking-wide">Sign in to your Zoga account</p>
-            
+        <div class="promo-card flex flex-col items-center justify-center relative z-10 w-full max-w-md py-10"
+            role="dialog" aria-modal="true">
+            <button id="auth-modal-close" class="promo-close-btn" aria-label="Close auth menu"><i data-lucide="x"
+                    class="w-5 h-5"></i></button>
+
+            <h2 id="auth-modal-title" class="text-3xl sm:text-4xl font-serif text-white mb-2 tracking-tight">Welcome
+                Back</h2>
+            <p id="auth-modal-subtitle" class="text-gray-400 text-sm mb-8 tracking-wide">Sign in to your Zoga account
+            </p>
+
             <form id="auth-form" class="w-full space-y-5 px-2">
                 <div class="border-b border-gray-600 focus-within:border-zoga-red transition-colors relative">
                     <i data-lucide="mail" class="absolute left-1 top-2.5 w-4 h-4 text-gray-500"></i>
-                    <input id="auth-email" type="email" placeholder="Email Address" class="bg-transparent border-none outline-none text-sm py-2 pl-8 w-full text-white placeholder-gray-500" required>
+                    <input id="auth-email" type="email" placeholder="Email Address"
+                        class="bg-transparent border-none outline-none text-sm py-2 pl-8 w-full text-white placeholder-gray-500"
+                        required>
                 </div>
                 <div class="border-b border-gray-600 focus-within:border-zoga-red transition-colors relative">
                     <i data-lucide="lock" class="absolute left-1 top-2.5 w-4 h-4 text-gray-500"></i>
-                    <input id="auth-password" type="password" placeholder="Password" class="bg-transparent border-none outline-none text-sm py-2 pl-8 w-full text-white placeholder-gray-500" required>
+                    <input id="auth-password" type="password" placeholder="Password"
+                        class="bg-transparent border-none outline-none text-sm py-2 pl-8 w-full text-white placeholder-gray-500"
+                        required>
                 </div>
-                
-                <div id="auth-error-msg" class="text-zoga-red text-xs text-left bg-zoga-red/10 border border-zoga-red/30 p-2 rounded hidden mt-2"></div>
-                
+
+                <div id="auth-error-msg"
+                    class="text-zoga-red text-xs text-left bg-zoga-red/10 border border-zoga-red/30 p-2 rounded hidden mt-2">
+                </div>
+
                 <button type="submit" id="auth-submit-btn" class="btn-accent w-full py-4 mt-6">
                     <span id="auth-btn-text">Sign In</span>
                     <div id="auth-loader" class="loader"></div>
                 </button>
             </form>
-            
+
             <p class="text-gray-400 text-xs mt-8 tracking-widest uppercase">
-                <span id="auth-toggle-prompt">New to Zoga?</span> 
-                <button type="button" id="auth-toggle-btn" class="text-white hover:text-zoga-red underline ml-1 font-medium transition-colors">Create Account</button>
+                <span id="auth-toggle-prompt">New to Zoga?</span>
+                <button type="button" id="auth-toggle-btn"
+                    class="text-white hover:text-zoga-red underline ml-1 font-medium transition-colors">Create
+                    Account</button>
             </p>
         </div>
     </div>
 
     <div id="mobile-menu-overlay" class="mobile-menu-overlay" aria-hidden="true"></div>
     <div id="mobile-menu-panel" class="mobile-menu-panel" aria-label="Mobile navigation">
-        <button id="mobile-menu-close" class="self-end text-white hover:text-zoga-red transition-colors" aria-label="Close menu"><i data-lucide="x" class="w-6 h-6"></i></button>
-        <a href="index.html" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Home</a>
-        <a href="#all-watches" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Watches</a>
-        <a href="#girls-watches" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Girls Watches</a>
-        <a href="#footer-contact" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Contact</a>
+        <button id="mobile-menu-close" class="self-end text-white hover:text-zoga-red transition-colors"
+            aria-label="Close menu"><i data-lucide="x" class="w-6 h-6"></i></button>
+        <a href="index.html"
+            class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Home</a>
+        <a href="#all-watches"
+            class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Watches</a>
+        <a href="#girls-watches"
+            class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Girls
+            Watches</a>
+        <a href="#footer-contact"
+            class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Contact</a>
         <div class="mt-auto border-t border-white/10 pt-6">
-             <!-- Mobile Auth Button (Changes state based on login) -->
-             <button id="mobile-auth-btn" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-gray-400 hover:text-zoga-red transition-colors w-full text-left flex items-center gap-3">
-                <i id="mobile-auth-icon" data-lucide="log-in" class="w-5 h-5"></i> 
+            <!-- Mobile Auth Button (Changes state based on login) -->
+            <button id="mobile-auth-btn"
+                class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-gray-400 hover:text-zoga-red transition-colors w-full text-left flex items-center gap-3">
+                <i id="mobile-auth-icon" data-lucide="log-in" class="w-5 h-5"></i>
                 <span id="mobile-auth-text">Log In</span>
-             </button>
+            </button>
         </div>
     </div>
 
@@ -262,19 +947,25 @@
                 <a href="#all-watches" class="text-zoga-red transition-colors duration-300">Watches</a>
                 <a href="#girls-watches" class="hover:text-zoga-red transition-colors duration-300">Girls Watches</a>
             </div>
-            <button id="mobile-menu-toggle" class="mobile-menu-toggle md:hidden" aria-label="Open menu" aria-expanded="false">
-                <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
+            <button id="mobile-menu-toggle" class="mobile-menu-toggle md:hidden" aria-label="Open menu"
+                aria-expanded="false">
+                <span class="hamburger-line"></span><span class="hamburger-line"></span><span
+                    class="hamburger-line"></span>
             </button>
             <div class="absolute left-1/2 transform -translate-x-1/2">
                 <a href="index.html" class="brand-logo text-4xl md:text-5xl drop-shadow-lg">zoga</a>
             </div>
             <div class="flex space-x-5 items-center">
-                <button class="hover:text-zoga-red transition-colors duration-300 hidden sm:block"><i data-lucide="search" class="w-5 h-5"></i></button>
-                
+                <button class="hover:text-zoga-red transition-colors duration-300 hidden sm:block"><i
+                        data-lucide="search" class="w-5 h-5"></i></button>
+
                 <!-- Desktop Auth Button (Changes icon/tooltip based on state) -->
-                <button id="nav-auth-btn" class="hover:text-zoga-red transition-colors duration-300 hidden sm:block relative group">
+                <button id="nav-auth-btn"
+                    class="hover:text-zoga-red transition-colors duration-300 hidden sm:block relative group">
                     <i id="nav-auth-icon" data-lucide="user" class="w-5 h-5 transition-all"></i>
-                    <span id="nav-auth-tooltip" class="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-gray-900 border border-gray-700 text-white text-[10px] tracking-widest uppercase py-1.5 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl">Login / Register</span>
+                    <span id="nav-auth-tooltip"
+                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-gray-900 border border-gray-700 text-white text-[10px] tracking-widest uppercase py-1.5 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl">Login
+                        / Register</span>
                 </button>
             </div>
         </div>
@@ -282,43 +973,55 @@
 
     <header class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
         <div class="hero-slideshow">
-            <img src="second person/DSC_4863.JPG.jpeg" class="slide" alt="Lifestyle Watch Shoot 1" onerror="this.src='https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=1200&q=80'">
-            <img src="second person/DSC_4956.JPG" class="slide" alt="Lifestyle Watch Shoot 2" onerror="this.src='https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1200&q=80'">
-            <img src="second person/DSC_4933.JPG.jpeg" class="slide" alt="Macro Watch Details Shoot" onerror="this.src='https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?auto=format&fit=crop&w=1200&q=80'">
-            <img src="first person/DSC_4897.JPG" class="slide" alt="Elegant Wrist Watch Shoot" onerror="this.src='https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=1200&q=80'">
-            <img src="first person/DSC_4815.JPG" class="slide" alt="Elegant Wrist Watch Shoot" onerror="this.src='https://images.unsplash.com/photo-1587836374828-cb4387df3eb7?auto=format&fit=crop&w=1200&q=80'">
+            <img src="second person/DSC_4863.JPG.jpeg" class="slide" alt="Lifestyle Watch Shoot 1"
+                onerror="this.src='https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=1200&q=80'">
+            <img src="second person/DSC_4956.JPG" class="slide" alt="Lifestyle Watch Shoot 2"
+                onerror="this.src='https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1200&q=80'">
+            <img src="second person/DSC_4933.JPG.jpeg" class="slide" alt="Macro Watch Details Shoot"
+                onerror="this.src='https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?auto=format&fit=crop&w=1200&q=80'">
+            <img src="first person/DSC_4897.JPG" class="slide" alt="Elegant Wrist Watch Shoot"
+                onerror="this.src='https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=1200&q=80'">
+            <img src="first person/DSC_4815.JPG" class="slide" alt="Elegant Wrist Watch Shoot"
+                onerror="this.src='https://images.unsplash.com/photo-1587836374828-cb4387df3eb7?auto=format&fit=crop&w=1200&q=80'">
         </div>
         <div class="absolute inset-0 hero-overlay z-10 pointer-events-none"></div>
         <div class="relative z-20 text-center px-4 mb-48 md:mb-0 md:mt-20 hero-info">
             <p class="text-sm md:text-base tracking-[0.3em] uppercase mb-4 text-gray-300 reveal">The Masterpieces</p>
-            <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-medium mb-8 text-white tracking-tight reveal drop-shadow-2xl section-heading" style="transition-delay: 200ms;">
+            <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-medium mb-8 text-white tracking-tight reveal drop-shadow-2xl section-heading"
+                style="transition-delay: 200ms;">
                 Horological <span class="italic text-zoga-red">Excellence</span>
             </h1>
-            <div class="reveal" style="transition-delay: 400ms;"><a href="#all-watches" class="btn-accent">View Entire Collection</a></div>
+            <div class="reveal" style="transition-delay: 400ms;"><a href="#all-watches" class="btn-accent">View Entire
+                    Collection</a></div>
         </div>
         <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
-            <a href="#all-watches" class="text-white/50 hover:text-white transition-colors"><i data-lucide="chevron-down" class="w-6 h-6"></i></a>
+            <a href="#all-watches" class="text-white/50 hover:text-white transition-colors"><i
+                    data-lucide="chevron-down" class="w-6 h-6"></i></a>
         </div>
     </header>
 
     <main>
-        <section id="all-watches" class="py-16 md:py-24 px-3 sm:px-6 md:px-12 max-w-[1400px] mx-auto content-panel mt-12 mb-16 md:mb-24">
+        <section id="all-watches"
+            class="py-16 md:py-24 px-3 sm:px-6 md:px-12 max-w-[1400px] mx-auto content-panel mt-12 mb-16 md:mb-24">
             <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 px-2 md:px-0 reveal">
                 <div>
-                    <p class="text-zoga-red tracking-widest uppercase text-xs sm:text-sm mb-2 font-medium">Curated Selection</p>
+                    <p class="text-zoga-red tracking-widest uppercase text-xs sm:text-sm mb-2 font-medium">Curated
+                        Selection</p>
                     <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif italic section-heading">All Watches</h2>
                 </div>
             </div>
-            
+
             <div id="all-watches-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 md:gap-8">
                 <!-- Products automatically injected here by JS -->
             </div>
         </section>
 
-        <section id="girls-watches" class="py-16 md:py-24 px-3 sm:px-6 md:px-12 max-w-[1400px] mx-auto content-panel mb-16 md:mb-24">
+        <section id="girls-watches"
+            class="py-16 md:py-24 px-3 sm:px-6 md:px-12 max-w-[1400px] mx-auto content-panel mb-16 md:mb-24">
             <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 px-2 md:px-0 reveal">
                 <div>
-                    <p class="text-zoga-red tracking-widest uppercase text-xs sm:text-sm mb-2 font-medium">Elegant & Graceful</p>
+                    <p class="text-zoga-red tracking-widest uppercase text-xs sm:text-sm mb-2 font-medium">Elegant &
+                        Graceful</p>
                     <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif italic section-heading">Girls Watches</h2>
                 </div>
             </div>
@@ -326,21 +1029,28 @@
             <div id="girls-watches-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 md:gap-8">
                 <!-- Products automatically injected here by JS -->
             </div>
-            
+
             <div class="text-center mt-12 md:mt-16 reveal">
-                <button class="btn-secondary text-gray-300 hover:text-white transition-colors underline tracking-widest uppercase text-xs md:text-sm">Explore Girls Collection</button>
+                <button
+                    class="btn-secondary text-gray-300 hover:text-white transition-colors underline tracking-widest uppercase text-xs md:text-sm">Explore
+                    Girls Collection</button>
             </div>
         </section>
 
         <!-- Preview Modal -->
         <div id="watch-modal-backdrop" class="watch-modal-backdrop hidden" aria-hidden="true">
             <div class="watch-modal-window" role="dialog" aria-modal="true" aria-labelledby="watch-modal-title">
-                <button type="button" class="watch-modal-close" aria-label="Close preview"><i data-lucide="x" class="w-5 h-5"></i></button>
+                <button type="button" class="watch-modal-close" aria-label="Close preview"><i data-lucide="x"
+                        class="w-5 h-5"></i></button>
                 <div class="watch-modal-content">
                     <div class="watch-modal-slides"></div>
-                    <button type="button" class="watch-modal-nav watch-modal-prev" aria-label="Previous image"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
-                    <button type="button" class="watch-modal-nav watch-modal-next" aria-label="Next image"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
-                    <div class="watch-modal-footer"><p id="watch-modal-title">Watch Preview</p></div>
+                    <button type="button" class="watch-modal-nav watch-modal-prev" aria-label="Previous image"><i
+                            data-lucide="chevron-left" class="w-5 h-5"></i></button>
+                    <button type="button" class="watch-modal-nav watch-modal-next" aria-label="Next image"><i
+                            data-lucide="chevron-right" class="w-5 h-5"></i></button>
+                    <div class="watch-modal-footer">
+                        <p id="watch-modal-title">Watch Preview</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -351,66 +1061,94 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 md:mb-20">
                 <div class="space-y-4 md:space-y-6">
                     <a href="index.html" class="brand-logo text-3xl md:text-4xl block mb-4 md:mb-6">zoga</a>
-                    <p class="text-gray-400 text-xs md:text-sm leading-relaxed max-w-xs">Defining luxury through meticulous craftsmanship and visionary design. The ultimate destination for premium watches.</p>
+                    <p class="text-gray-400 text-xs md:text-sm leading-relaxed max-w-xs">Defining luxury through
+                        meticulous craftsmanship and visionary design. The ultimate destination for premium watches.</p>
                 </div>
                 <div>
-                    <h4 class="text-xs md:text-sm font-medium uppercase tracking-widest mb-4 md:mb-6 text-white">Collections</h4>
+                    <h4 class="text-xs md:text-sm font-medium uppercase tracking-widest mb-4 md:mb-6 text-white">
+                        Collections</h4>
                     <ul class="space-y-3 md:space-y-4 text-gray-400 text-xs md:text-sm">
                         <li><a href="#all-watches" class="hover:text-zoga-red transition-colors">Men's Watches</a></li>
-                        <li><a href="#girls-watches" class="hover:text-zoga-red transition-colors">Girls Watches</a></li>
+                        <li><a href="#girls-watches" class="hover:text-zoga-red transition-colors">Girls Watches</a>
+                        </li>
                         <li><a href="#" class="hover:text-zoga-red transition-colors">Limited Editions</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-xs md:text-sm font-medium uppercase tracking-widest mb-4 md:mb-6 text-white">Client Care</h4>
+                    <h4 class="text-xs md:text-sm font-medium uppercase tracking-widest mb-4 md:mb-6 text-white">Client
+                        Care</h4>
                     <ul class="space-y-3 md:space-y-4 text-gray-400 text-xs md:text-sm">
-                        <li><a href="https://www.instagram.com/zogafashions?igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="hover:text-zoga-red transition-colors" aria-label="Instagram Profile"><i data-lucide="instagram" class="w-3.5 h-3.5 md:w-4 md:h-4 inline mr-2"></i>@zogafashions</a></li>
-                        <li><a href="mailto:Fashionzoga@gmail.com" class="hover:text-zoga-red transition-colors"><i data-lucide="mail" class="w-3.5 h-3.5 md:w-4 md:h-4 inline mr-2"></i>Fashionzoga@gmail.com</a></li>
-                        <li><a href="tel:+919876378181" class="hover:text-zoga-red transition-colors"><i data-lucide="phone" class="w-3.5 h-3.5 md:w-4 md:h-4 inline mr-2"></i>9876378181</a></li>
+                        <li><a href="https://www.instagram.com/zogafashions?igsh=ZDNlZDc0MzIxNw==" target="_blank"
+                                rel="noopener noreferrer" class="hover:text-zoga-red transition-colors"
+                                aria-label="Instagram Profile"><i data-lucide="instagram"
+                                    class="w-3.5 h-3.5 md:w-4 md:h-4 inline mr-2"></i>@zogafashions</a></li>
+                        <li><a href="mailto:Fashionzoga@gmail.com" class="hover:text-zoga-red transition-colors"><i
+                                    data-lucide="mail"
+                                    class="w-3.5 h-3.5 md:w-4 md:h-4 inline mr-2"></i>Fashionzoga@gmail.com</a></li>
+                        <li><a href="tel:+919876378181" class="hover:text-zoga-red transition-colors"><i
+                                    data-lucide="phone" class="w-3.5 h-3.5 md:w-4 md:h-4 inline mr-2"></i>9876378181</a>
+                        </li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-xs md:text-sm font-medium uppercase tracking-widest mb-4 md:mb-6 text-white">Direct Inquiry For Buying</h4>
-                    <p class="text-gray-400 text-xs md:text-sm mb-4">Select your preferred timepiece for a direct consultation via WhatsApp.</p>
-                    
+                    <h4 class="text-xs md:text-sm font-medium uppercase tracking-widest mb-4 md:mb-6 text-white">Direct
+                        Inquiry For Buying</h4>
+                    <p class="text-gray-400 text-xs md:text-sm mb-4">Select your preferred timepiece for a direct
+                        consultation via WhatsApp.</p>
+
                     <form id="whatsapp-form" class="space-y-4">
                         <div class="border-b border-gray-600 focus-within:border-zoga-red transition-colors group">
-                            <input id="wa-name" type="text" placeholder="Your Name" class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500" required>
+                            <input id="wa-name" type="text" placeholder="Your Name"
+                                class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500"
+                                required>
                         </div>
                         <div class="border-b border-gray-600 focus-within:border-zoga-red transition-colors group">
-                            <input id="wa-phone" type="tel" placeholder="Phone Number" class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500" required>
+                            <input id="wa-phone" type="tel" placeholder="Phone Number"
+                                class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500"
+                                required>
                         </div>
                         <div class="border-b border-gray-600 focus-within:border-zoga-red transition-colors group">
-                            <textarea id="wa-address" rows="2" placeholder="Delivery Address" class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500 resize-none" required></textarea>
+                            <textarea id="wa-address" rows="2" placeholder="Delivery Address"
+                                class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500 resize-none"
+                                required></textarea>
                         </div>
                         <div class="border-b border-gray-600 focus-within:border-zoga-red transition-colors group">
-                            <input id="wa-quantity" type="number" min="1" step="1" placeholder="Quantity (Numbers Only)" class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500 appearance-none" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value === '0') this.value = '1';">
+                            <input id="wa-quantity" type="number" min="1" step="1" placeholder="Quantity (Numbers Only)"
+                                class="bg-transparent border-none outline-none text-xs md:text-sm py-2 w-full text-white placeholder-gray-500 appearance-none"
+                                required
+                                oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value === '0') this.value = '1';">
                         </div>
-                        
+
                         <div class="mt-4 space-y-3">
                             <div class="relative">
-                                <select id="wa-category-select" class="w-full bg-[#111] border border-gray-700 text-white text-xs md:text-sm rounded p-3 outline-none focus:border-zoga-red transition-all cursor-pointer" required>
+                                <select id="wa-category-select"
+                                    class="w-full bg-[#111] border border-gray-700 text-white text-xs md:text-sm rounded p-3 outline-none focus:border-zoga-red transition-all cursor-pointer"
+                                    required>
                                     <option value="" disabled selected>Select Watch Category</option>
                                 </select>
                             </div>
                             <div class="relative">
-                                <select id="wa-variant-select" class="w-full bg-[#111] border border-gray-700 text-white text-xs md:text-sm rounded p-3 outline-none focus:border-zoga-red transition-all cursor-pointer disabled:opacity-50" disabled required>
+                                <select id="wa-variant-select"
+                                    class="w-full bg-[#111] border border-gray-700 text-white text-xs md:text-sm rounded p-3 outline-none focus:border-zoga-red transition-all cursor-pointer disabled:opacity-50"
+                                    disabled required>
                                     <option value="" disabled selected>Select Color / Model Variant</option>
                                 </select>
                             </div>
                             <input type="hidden" id="wa-selected-product">
                         </div>
 
-                        <button type="submit" class="w-full mt-4 btn-accent bg-[#25D366]/10 border-[#25D366]/30 hover:bg-[#25D366] hover:border-[#25D366] hover:text-white text-[#25D366] flex items-center justify-center gap-2 py-3">
-                            <i data-lucide="message-circle" class="w-4 h-4 md:w-5 md:h-5"></i> 
+                        <button type="submit"
+                            class="w-full mt-4 btn-accent bg-[#25D366]/10 border-[#25D366]/30 hover:bg-[#25D366] hover:border-[#25D366] hover:text-white text-[#25D366] flex items-center justify-center gap-2 py-3">
+                            <i data-lucide="message-circle" class="w-4 h-4 md:w-5 md:h-5"></i>
                             <span class="tracking-widest">Send on WhatsApp</span>
                         </button>
                     </form>
                 </div>
             </div>
-            
-            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] md:text-xs text-gray-500 uppercase tracking-widest">
+
+            <div
+                class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] md:text-xs text-gray-500 uppercase tracking-widest">
                 <p>&copy; 2026 Zoga. All rights reserved.</p>
                 <div class="flex space-x-6">
                     <a href="#" class="hover:text-white transition-colors">Privacy</a>
@@ -420,51 +1158,61 @@
         </div>
     </footer>
 
+
+    <script src="auth_operations.js" type="module"></script>
+
     <!-- Core UI Scripts -->
-    <script>
+    <script type="module">
+        import { getProducts } from "./db_operations.js";
+
         lucide.createIcons();
-        window.productCatalog = {}; // Global catalog built from JSON
+        window.productCatalog = {}; // Global catalog built from Firestore or JSON
+
+        async function loadProductsFromJson() {
+            const reqUrl = new URL('products.json', window.location.href);
+            const response = await fetch(reqUrl);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return (await response.json()).products || [];
+        }
 
         async function loadProducts() {
-            let data = { products: [] };
-            
+            let products = [];
+
             try {
-                // Fetch strictly from products.json
-                const reqUrl = new URL('products.json', window.location.href);
-                const response = await fetch(reqUrl);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                data = await response.json();
+                products = await getProducts();
             } catch (error) {
-                console.error('Failed to load products from products.json:', error.message);
-                const allGrid = document.getElementById('all-watches-grid');
-                if (allGrid) {
-                    allGrid.innerHTML = `<p class="col-span-full text-center text-gray-400 py-10">Unable to load the watch collection. Please try again later.</p>`;
+                console.warn('Firestore product read failed. Trying products.json fallback:', error.message);
+                try {
+                    products = await loadProductsFromJson();
+                } catch (fallbackError) {
+                    console.error('Failed to load products:', fallbackError.message);
+                    const allGrid = document.getElementById('all-watches-grid');
+                    if (allGrid) {
+                        allGrid.innerHTML = `<p class="col-span-full text-center text-gray-400 py-10">Unable to load the watch collection. Please try again later.</p>`;
+                    }
+                    return;
                 }
-                return; // Stop execution if we can't fetch the data
             }
 
             const allGrid = document.getElementById('all-watches-grid');
             const girlsGrid = document.getElementById('girls-watches-grid');
             const waCategorySelect = document.getElementById('wa-category-select');
-            
-            if(allGrid) allGrid.innerHTML = '';
-            if(girlsGrid) girlsGrid.innerHTML = '';
-            if(waCategorySelect) waCategorySelect.innerHTML = '<option value="" disabled selected>Select Watch Category</option>';
 
-            data.products.forEach((product, index) => {
+            if (allGrid) allGrid.innerHTML = '';
+            if (girlsGrid) girlsGrid.innerHTML = '';
+            if (waCategorySelect) waCategorySelect.innerHTML =
+                '<option value="" disabled selected>Select Watch Category</option>';
+
+            products.forEach((product, index) => {
                 window.productCatalog[product.category] = product.variants;
                 const isGirlsWatch = product.category === 'Girls Watch' || product.category === 'Titan Premium Series';
                 const targetGrid = isGirlsWatch ? girlsGrid : allGrid;
-                
+
                 const delay = (index % 4) * 100;
-                if(targetGrid) targetGrid.insertAdjacentHTML('beforeend', createProductCardHTML(product, delay));
+                if (targetGrid) targetGrid.insertAdjacentHTML('beforeend', createProductCardHTML(product, delay));
             });
 
-            if(waCategorySelect){
+            if (waCategorySelect) {
                 Object.keys(window.productCatalog).forEach(cat => waCategorySelect.innerHTML += `<option value="${cat}">${cat}</option>`);
             }
             initInteractions();
@@ -474,15 +1222,16 @@
             const hasMultipleImages = product.images.length > 1;
             const badgeHtml = product.badge ? `<div class="tag-new">${product.badge}</div>` : '';
             let slidesHtml = ''; let dotsHtml = '';
-            
+
             product.images.forEach((img, idx) => {
                 const isActive = idx === 0 ? 'active-slide' : '';
+                console.log("img url", img)
                 slidesHtml += `<img src="${img}" alt="${product.name}" class="frame-slide ${isActive}" data-title="${product.name}" onerror="this.src='https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=600&q=80'">`;
                 if (hasMultipleImages) dotsHtml += `<button class="slideshow-dot ${idx === 0 ? 'active-dot' : ''}" aria-label="Slide ${idx + 1}"></button>`;
             });
 
             let slideshowControls = hasMultipleImages ? `<button class="slideshow-arrow prev" aria-label="Previous Slide"><i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i></button><button class="slideshow-arrow next" aria-label="Next Slide"><i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i></button><div class="slideshow-controls">${dotsHtml}</div>` : '';
-            
+
             let variantsHtml = '';
             product.variants.forEach(variant => {
                 const displayString = variant.length > 40 ? variant.substring(0, 37) + '...' : variant;
@@ -529,7 +1278,7 @@
         const selectedProductInput = document.getElementById('wa-selected-product');
         const whatsappForm = document.getElementById('whatsapp-form');
 
-        if(categorySelect) {
+        if (categorySelect) {
             categorySelect.addEventListener('change', (e) => {
                 const selectedCategory = e.target.value;
                 variantSelect.innerHTML = '<option value="" disabled selected>Select Color / Model Variant</option>';
@@ -538,7 +1287,7 @@
                 if (window.productCatalog && window.productCatalog[selectedCategory]) {
                     window.productCatalog[selectedCategory].forEach(variant => {
                         const option = document.createElement('option');
-                        option.value = variant; 
+                        option.value = variant;
                         option.textContent = variant.length > 50 ? variant.substring(0, 47) + '...' : variant;
                         variantSelect.appendChild(option);
                     });
@@ -548,23 +1297,23 @@
             });
         }
 
-        if(variantSelect) variantSelect.addEventListener('change', (e) => selectedProductInput.value = `${categorySelect.value} - ${e.target.value}`);
+        if (variantSelect) variantSelect.addEventListener('change', (e) => selectedProductInput.value = `${categorySelect.value} - ${e.target.value}`);
 
         if (whatsappForm) {
-            whatsappForm.addEventListener('submit', function(e) {
+            whatsappForm.addEventListener('submit', function (e) {
                 e.preventDefault();
                 const name = document.getElementById('wa-name').value.trim();
                 const phone = document.getElementById('wa-phone').value.trim();
                 const address = document.getElementById('wa-address').value.trim();
                 const quantity = document.getElementById('wa-quantity').value.trim();
                 const product = selectedProductInput.value;
-                
+
                 if (!product) return alert('Please select both a watch category and a specific variant option.');
-                
-                const targetNumber = '919878173681'; 
+
+                const targetNumber = '919878173681';
                 const msg = `*New Zoga Direct Order Inquiry* 🛍️\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Address:* ${address}\n*Quantity:* ${quantity}\n*Selected Timepiece:* ${product}\n\nHi! I am interested in this item. Please share availability, additional details, and actual pictures.`;
                 window.open(`https://wa.me/${targetNumber}?text=${encodeURIComponent(msg)}`, '_blank');
-                
+
                 whatsappForm.reset();
                 variantSelect.innerHTML = '<option value="" disabled selected>Select Color / Model Variant</option>';
                 variantSelect.disabled = true;
@@ -617,7 +1366,7 @@
                         categorySelect.value = category; categorySelect.dispatchEvent(new Event('change'));
                         setTimeout(() => {
                             if (variant && variantSelect) { variantSelect.value = variant; variantSelect.dispatchEvent(new Event('change')); }
-                            if(document.getElementById('wa-quantity')) document.getElementById('wa-quantity').value = qty;
+                            if (document.getElementById('wa-quantity')) document.getElementById('wa-quantity').value = qty;
                             document.getElementById('footer-contact')?.scrollIntoView({ behavior: 'smooth' });
                             setTimeout(() => document.getElementById('wa-name')?.focus(), 800);
                         }, 50);
@@ -656,8 +1405,8 @@
         });
 
         const promoBackdrop = document.getElementById('promo-modal-backdrop');
-        function openPromoModal() { if(promoBackdrop) { promoBackdrop.classList.add('active'); promoBackdrop.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; } }
-        function closePromoModal() { if(promoBackdrop) { promoBackdrop.classList.remove('active'); promoBackdrop.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; } }
+        function openPromoModal() { if (promoBackdrop) { promoBackdrop.classList.add('active'); promoBackdrop.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; } }
+        function closePromoModal() { if (promoBackdrop) { promoBackdrop.classList.remove('active'); promoBackdrop.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; } }
         document.getElementById('promo-modal-close')?.addEventListener('click', closePromoModal);
         document.getElementById('promo-dismiss-btn')?.addEventListener('click', closePromoModal);
         document.getElementById('promo-direct-buy-btn')?.addEventListener('click', (e) => { e.preventDefault(); closePromoModal(); document.getElementById('footer-contact')?.scrollIntoView({ behavior: 'smooth' }); });
@@ -684,7 +1433,7 @@
             setWatchModalSlide(0); watchModalBackdrop.classList.remove('hidden'); document.body.style.overflow = 'hidden';
         }
         function closeWatchModal() { watchModalBackdrop.classList.add('hidden'); document.body.style.overflow = ''; }
-        
+
         document.querySelector('.watch-modal-close')?.addEventListener('click', closeWatchModal);
         document.querySelector('.watch-modal-prev')?.addEventListener('click', () => setWatchModalSlide(watchModalIndex - 1));
         document.querySelector('.watch-modal-next')?.addEventListener('click', () => setWatchModalSlide(watchModalIndex + 1));
@@ -697,11 +1446,11 @@
         });
 
         // Splash handling
-        (function() {
+        (function () {
             const splash = document.getElementById('splash-overlay'); const splashLogo = document.getElementById('splash-logo');
             if (!splash || !splashLogo) { setTimeout(openPromoModal, 600); return; }
             const prevOverflow = document.body.style.overflow; document.body.style.overflow = 'hidden';
-            const removeSplash = () => { splash.style.opacity = '0'; splash.style.visibility = 'hidden'; setTimeout(() => { try { splash.remove(); } catch(e){} document.body.style.overflow = prevOverflow || ''; setTimeout(openPromoModal, 400); }, 900); };
+            const removeSplash = () => { splash.style.opacity = '0'; splash.style.visibility = 'hidden'; setTimeout(() => { try { splash.remove(); } catch (e) { } document.body.style.overflow = prevOverflow || ''; setTimeout(openPromoModal, 400); }, 900); };
             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { removeSplash(); return; }
             const maxTimeout = setTimeout(removeSplash, 2600);
             splashLogo.addEventListener('animationend', () => { clearTimeout(maxTimeout); setTimeout(removeSplash, 200); });
@@ -709,202 +1458,26 @@
 
         // Auth Modal UI controls
         const authBackdrop = document.getElementById('auth-modal-backdrop');
-        function openAuthModal() { 
-            if(authBackdrop) {
+        function openAuthModal() {
+            if (authBackdrop) {
                 closePromoModal(); // Close promo if open
                 if (document.getElementById('mobile-menu-panel').classList.contains('open')) toggleMobileMenu();
-                authBackdrop.classList.add('active'); authBackdrop.setAttribute('aria-hidden', 'false'); 
-                document.body.style.overflow = 'hidden'; 
+                authBackdrop.classList.add('active'); authBackdrop.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
                 document.getElementById('auth-email').focus();
             }
         }
-        function closeAuthModal() { 
-            if(authBackdrop) { 
-                authBackdrop.classList.remove('active'); authBackdrop.setAttribute('aria-hidden', 'true'); 
-                document.body.style.overflow = ''; 
+        function closeAuthModal() {
+            if (authBackdrop) {
+                authBackdrop.classList.remove('active'); authBackdrop.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
                 document.getElementById('auth-form').reset();
                 document.getElementById('auth-error-msg').classList.add('hidden');
-            } 
+            }
         }
         document.getElementById('auth-modal-close')?.addEventListener('click', closeAuthModal);
     </script>
 
-    <!-- Firebase Authentication Logic (ES Module) -->
-    <script type="module">
-        // 1. Import Firebase Core and Auth Modules via CDN
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { 
-            getAuth, 
-            createUserWithEmailAndPassword, 
-            signInWithEmailAndPassword, 
-            signOut, 
-            onAuthStateChanged 
-        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-        // =====================================================================
-        // STEP 1: PASTE YOUR FIREBASE CONFIGURATION HERE
-        // Find this in your Firebase Console -> Project Settings -> General
-        // =====================================================================
-        const firebaseConfig = {
-            apiKey: "AIzaSyDF8hssJgUZw3BLOYnxGPugoreOOLp8EFY",
-            authDomain: "zoga-watches.firebaseapp.com",
-            projectId: "zoga-watches",
-            storageBucket: "zoga-watches.firebasestorage.app",
-            messagingSenderId: "992143199414",
-            appId: "1:992143199414:web:4a5376bb55b112b2d8aa17"
-        };
-        
-        // Initialize Firebase
-        let app, auth;
-        try {
-            app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-        } catch(e) {
-            console.error("Firebase not configured correctly yet.", e);
-        }
-
-        // UI State Variables
-        let isLoginMode = true; 
-        
-        // DOM Elements
-        const authForm = document.getElementById('auth-form');
-        const emailInput = document.getElementById('auth-email');
-        const passwordInput = document.getElementById('auth-password');
-        const errorMsg = document.getElementById('auth-error-msg');
-        const toggleBtn = document.getElementById('auth-toggle-btn');
-        const togglePrompt = document.getElementById('auth-toggle-prompt');
-        const modalTitle = document.getElementById('auth-modal-title');
-        const modalSubtitle = document.getElementById('auth-modal-subtitle');
-        const submitBtnText = document.getElementById('auth-btn-text');
-        const submitBtn = document.getElementById('auth-submit-btn');
-        const authLoader = document.getElementById('auth-loader');
-        
-        // Navbar triggers
-        const navAuthBtn = document.getElementById('nav-auth-btn');
-        const navAuthIcon = document.getElementById('nav-auth-icon');
-        const navAuthTooltip = document.getElementById('nav-auth-tooltip');
-        
-        // Mobile menu triggers
-        const mobileAuthBtn = document.getElementById('mobile-auth-btn');
-        const mobileAuthIcon = document.getElementById('mobile-auth-icon');
-        const mobileAuthText = document.getElementById('mobile-auth-text');
-
-        // Setup the Toggle between Login and Sign Up
-        toggleBtn?.addEventListener('click', () => {
-            isLoginMode = !isLoginMode;
-            errorMsg.classList.add('hidden');
-            authForm.reset();
-            
-            if (isLoginMode) {
-                modalTitle.textContent = "Welcome Back";
-                modalSubtitle.textContent = "Sign in to your Zoga account";
-                submitBtnText.textContent = "Sign In";
-                togglePrompt.textContent = "New to Zoga?";
-                toggleBtn.textContent = "Create Account";
-            } else {
-                modalTitle.textContent = "Join Zoga";
-                modalSubtitle.textContent = "Create an account to track your orders";
-                submitBtnText.textContent = "Sign Up";
-                togglePrompt.textContent = "Already have an account?";
-                toggleBtn.textContent = "Sign In";
-            }
-        });
-
-        // Handle Form Submission (Login / Register)
-        authForm?.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if(!auth) return showError("Firebase not configured. Check the script at the bottom of the HTML.");
-            
-            const email = emailInput.value.trim();
-            const password = passwordInput.value.trim();
-            
-            setLoading(true);
-            errorMsg.classList.add('hidden');
-
-            try {
-                if (isLoginMode) {
-                    await signInWithEmailAndPassword(auth, email, password);
-                } else {
-                    await createUserWithEmailAndPassword(auth, email, password);
-                }
-                // Close modal on success (the Auth State observer handles UI changes)
-                document.getElementById('auth-modal-close').click(); 
-            } catch (error) {
-                showError(getFriendlyErrorMessage(error.code));
-            } finally {
-                setLoading(false);
-            }
-        });
-
-        // Trigger the auth logic from the Navbar/Menu buttons
-        const handleAuthAction = async () => {
-            if(!auth) { alert("Firebase not configured."); return; }
-            
-            if (auth.currentUser) {
-                // User is logged in, so clicking the button signs them out
-                try {
-                    await signOut(auth);
-                } catch (error) {
-                    console.error("Error signing out:", error);
-                }
-            } else {
-                // User is logged out, open the modal
-                window.openAuthModal();
-            }
-        };
-
-        navAuthBtn?.addEventListener('click', handleAuthAction);
-        mobileAuthBtn?.addEventListener('click', handleAuthAction);
-
-        // Observer: Listen for User Login/Logout status changes globally
-        if (auth) {
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    // Logged In State
-                    if(navAuthIcon) navAuthIcon.setAttribute('data-lucide', 'log-out');
-                    if(navAuthTooltip) navAuthTooltip.textContent = "Log Out";
-                    
-                    if(mobileAuthIcon) mobileAuthIcon.setAttribute('data-lucide', 'log-out');
-                    if(mobileAuthText) mobileAuthText.textContent = "Log Out";
-                } else {
-                    // Logged Out State
-                    if(navAuthIcon) navAuthIcon.setAttribute('data-lucide', 'user');
-                    if(navAuthTooltip) navAuthTooltip.textContent = "Login / Register";
-                    
-                    if(mobileAuthIcon) mobileAuthIcon.setAttribute('data-lucide', 'log-in');
-                    if(mobileAuthText) mobileAuthText.textContent = "Log In";
-                }
-                // Refresh Lucide icons after manipulating the DOM
-                lucide.createIcons();
-            });
-        }
-
-        // Helper functions
-        function setLoading(isLoading) {
-            submitBtn.disabled = isLoading;
-            if(isLoading) {
-                submitBtnText.style.display = 'none';
-                authLoader.style.display = 'block';
-            } else {
-                submitBtnText.style.display = 'block';
-                authLoader.style.display = 'none';
-            }
-        }
-
-        function showError(msg) {
-            errorMsg.textContent = msg;
-            errorMsg.classList.remove('hidden');
-        }
-
-        function getFriendlyErrorMessage(errorCode) {
-            switch (errorCode) {
-                case 'auth/invalid-credential': return "Invalid email or password.";
-                case 'auth/email-already-in-use': return "An account with this email already exists.";
-                case 'auth/weak-password': return "Password should be at least 6 characters.";
-                case 'auth/network-request-failed': return "Network error. Please check your connection.";
-                default: return "An error occurred. Please try again.";
-            }
-        }
-    </script>
 </body>
+
 </html>

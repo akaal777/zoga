@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#050505">
     <title>Zoga | Luxury Watches & Eyewear</title>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" type="image/svg+xml" href="icon.svg">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;0,900;1,400;1,600;1,800;1,900&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;0,900;1,400;1,600;1,800;1,900&family=Jost:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <script>
@@ -54,7 +58,7 @@
         body {
             min-height: 100vh;
             background-color: #050505;
-            background-image: radial-gradient(circle at 20% 10%, rgba(230,0,0,0.12), transparent 18%), radial-gradient(circle at 85% 90%, rgba(255,255,255,0.05), transparent 18%), linear-gradient(135deg, #050505 0%, #090909 100%);
+            background-image: radial-gradient(circle at 20% 10%, rgba(230, 0, 0, 0.12), transparent 18%), radial-gradient(circle at 85% 90%, rgba(255, 255, 255, 0.05), transparent 18%), linear-gradient(135deg, #050505 0%, #090909 100%);
             color: #f5f5f5;
             overflow-x: hidden;
             text-rendering: optimizeLegibility;
@@ -73,7 +77,7 @@
             content: '';
             position: fixed;
             inset: 0;
-            background: radial-gradient(circle at 30% 22%, rgba(230,0,0,0.12), transparent 22%), radial-gradient(circle at 82% 75%, rgba(255,255,255,0.04), transparent 20%);
+            background: radial-gradient(circle at 30% 22%, rgba(230, 0, 0, 0.12), transparent 22%), radial-gradient(circle at 82% 75%, rgba(255, 255, 255, 0.04), transparent 20%);
             pointer-events: none;
             z-index: -1;
         }
@@ -83,8 +87,8 @@
             align-items: center;
             justify-content: center;
             gap: 0.75rem;
-            border: 1px solid rgba(255,255,255,0.18);
-            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.08);
             color: #ffffff;
             padding: 0.95rem 2rem;
             text-transform: uppercase;
@@ -92,16 +96,17 @@
             font-size: 0.8rem;
             font-weight: 700;
             border-radius: 999px;
-            box-shadow: 0 18px 45px rgba(0,0,0,0.24);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.24);
             backdrop-filter: blur(12px);
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
+
         .btn-accent:hover {
             color: #050505;
             background: var(--zoga-red);
             border-color: var(--zoga-red);
             transform: translateY(-2px);
-            box-shadow: 0 22px 55px rgba(230,0,0,0.38);
+            box-shadow: 0 22px 55px rgba(230, 0, 0, 0.38);
         }
 
         .btn-secondary {
@@ -109,7 +114,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.75rem;
-            border: 1px solid rgba(255,255,255,0.14);
+            border: 1px solid rgba(255, 255, 255, 0.14);
             background: transparent;
             color: #e5e5e5;
             padding: 0.95rem 2rem;
@@ -120,16 +125,18 @@
             border-radius: 999px;
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
+
         .btn-secondary:hover {
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.08);
             color: #ffffff;
             transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
         }
 
         .section-heading {
             position: relative;
         }
+
         .section-heading::after {
             content: '';
             position: absolute;
@@ -138,7 +145,7 @@
             width: 4rem;
             height: 2px;
             border-radius: 999px;
-            background: rgba(230,0,0,0.85);
+            background: rgba(230, 0, 0, 0.85);
         }
 
         .brand-logo {
@@ -150,17 +157,17 @@
             text-transform: lowercase;
             line-height: 1;
             transform: scaleY(1.1);
-            text-shadow: 0 16px 40px rgba(230,0,0,0.12);
+            text-shadow: 0 16px 40px rgba(230, 0, 0, 0.12);
         }
 
         .hero-info {
-            text-shadow: 0 20px 80px rgba(0,0,0,0.45);
+            text-shadow: 0 20px 80px rgba(0, 0, 0, 0.45);
         }
 
         .content-panel {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(18px);
             border-radius: 2rem;
         }
@@ -168,10 +175,12 @@
         .img-zoom-container {
             overflow: hidden;
         }
+
         .img-zoom {
             transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.6s ease;
             will-change: transform;
         }
+
         .group:hover .img-zoom {
             transform: scale(1.05);
         }
@@ -189,8 +198,8 @@
             overflow: hidden;
             border-radius: 1.25rem;
             background: #000;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 18px 50px rgba(0,0,0,0.25);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
             min-height: 220px;
             height: min(60vh, 360px);
             isolation: isolate;
@@ -221,7 +230,7 @@
             align-items: center;
             gap: 0.75rem;
             padding: 0.85rem 0.9rem;
-            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.85) 100%);
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.85) 100%);
             opacity: 1;
             transform: translateY(0);
             transition: opacity 0.25s ease, transform 0.25s ease;
@@ -234,7 +243,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, rgba(5,5,5,0.95), rgba(30,10,10,0.88));
+            background: linear-gradient(135deg, rgba(5, 5, 5, 0.95), rgba(30, 10, 10, 0.88));
             color: #fff;
             font-size: 0.95rem;
             letter-spacing: 0.2em;
@@ -256,7 +265,7 @@
 
         .video-controls button {
             border: 0;
-            background: rgba(255,255,255,0.14);
+            background: rgba(255, 255, 255, 0.14);
             color: #fff;
             width: 2.25rem;
             height: 2.25rem;
@@ -271,7 +280,7 @@
         }
 
         .video-controls button:hover {
-            background: rgba(230,0,0,0.82);
+            background: rgba(230, 0, 0, 0.82);
             transform: scale(1.04);
         }
 
@@ -279,7 +288,7 @@
             flex: 1;
             height: 0.35rem;
             border-radius: 999px;
-            background: rgba(255,255,255,0.24);
+            background: rgba(255, 255, 255, 0.24);
             overflow: hidden;
             position: relative;
         }
@@ -297,7 +306,7 @@
             position: absolute;
             inset: auto 0 0 0;
             padding: 1rem 1rem 1.1rem;
-            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.74) 100%);
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.74) 100%);
             pointer-events: none;
             z-index: 1;
         }
@@ -331,6 +340,7 @@
             transform: translateY(30px);
             transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
@@ -338,8 +348,9 @@
 
         /* Hero Overlay & Slideshow Animations */
         .hero-overlay {
-            background: linear-gradient(to top, rgba(5,5,5,0.85) 0%, rgba(5,5,5,0.25) 50%, rgba(5,5,5,0.65) 100%);
+            background: linear-gradient(to top, rgba(5, 5, 5, 0.85) 0%, rgba(5, 5, 5, 0.25) 50%, rgba(5, 5, 5, 0.65) 100%);
         }
+
         .hero-slideshow {
             position: absolute;
             inset: 0;
@@ -347,6 +358,7 @@
             height: 100%;
             z-index: 0;
         }
+
         .slide {
             position: absolute;
             inset: 0;
@@ -359,32 +371,95 @@
             transition: opacity 1s ease-in-out, transform 8s ease-in-out;
             filter: none;
         }
-        .slide:nth-child(1) { animation-delay: 0s; }
-        .slide:nth-child(2) { animation-delay: 6s; }
-        .slide:nth-child(3) { animation-delay: 12s; }
-        .slide:nth-child(4) { animation-delay: 18s; }
-        .slide:nth-child(5) { animation-delay: 24s; }
+
+        .slide:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .slide:nth-child(2) {
+            animation-delay: 6s;
+        }
+
+        .slide:nth-child(3) {
+            animation-delay: 12s;
+        }
+
+        .slide:nth-child(4) {
+            animation-delay: 18s;
+        }
+
+        .slide:nth-child(5) {
+            animation-delay: 24s;
+        }
 
         @keyframes kenburns {
-            0% { opacity: 0; transform: scale(1.05); }
-            5% { opacity: 0.92; transform: scale(1.08); }
-            20% { opacity: 0.92; transform: scale(1.12); }
-            25% { opacity: 0; transform: scale(1.15); }
-            100% { opacity: 0; transform: scale(1.15); }
+            0% {
+                opacity: 0;
+                transform: scale(1.05);
+            }
+
+            5% {
+                opacity: 0.92;
+                transform: scale(1.08);
+            }
+
+            20% {
+                opacity: 0.92;
+                transform: scale(1.12);
+            }
+
+            25% {
+                opacity: 0;
+                transform: scale(1.15);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1.15);
+            }
         }
 
         /* Splash Intro Overlay */
-        #splash-overlay { transition: opacity 800ms ease, visibility 800ms ease; }
-        #splash-logo { will-change: transform, opacity; animation: splash-zoom 2200ms cubic-bezier(.2,.9,.2,1) forwards; }
-        @keyframes splash-zoom {
-            0% { transform: scale(1); opacity: 1; }
-            30% { transform: scale(1.05); opacity: 1; }
-            70% { transform: scale(3.6); opacity: 0.9; }
-            100% { transform: scale(8); opacity: 0; }
+        #splash-overlay {
+            transition: opacity 800ms ease, visibility 800ms ease;
         }
+
+        #splash-logo {
+            will-change: transform, opacity;
+            animation: splash-zoom 2200ms cubic-bezier(.2, .9, .2, 1) forwards;
+        }
+
+        @keyframes splash-zoom {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            30% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+
+            70% {
+                transform: scale(3.6);
+                opacity: 0.9;
+            }
+
+            100% {
+                transform: scale(8);
+                opacity: 0;
+            }
+        }
+
         @media (prefers-reduced-motion: reduce) {
-            #splash-logo { animation: none; transform: scale(1); }
-            #splash-overlay { display: none; }
+            #splash-logo {
+                animation: none;
+                transform: scale(1);
+            }
+
+            #splash-overlay {
+                display: none;
+            }
         }
 
         /* Minimalist High-End Product Card Styling */
@@ -395,16 +470,19 @@
             padding: 1.25rem;
             transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
         }
+
         .product-item:hover {
             transform: translateY(-8px);
             border-color: rgba(230, 0, 0, 0.35);
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
         }
+
         .product-img-wrap {
             position: relative;
             overflow: hidden;
             border-radius: 1rem;
-            aspect-ratio: 3/4; /* Adjusted for better grid presentation */
+            aspect-ratio: 3/4;
+            /* Adjusted for better grid presentation */
             background: #f0ebe4;
         }
 
@@ -414,9 +492,11 @@
             object-fit: cover;
             transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
+
         .product-item:hover .product-img {
             transform: scale(1.08);
         }
+
         .product-overlay {
             position: absolute;
             inset: 0;
@@ -428,17 +508,20 @@
             transition: opacity 0.4s ease;
             z-index: 15;
         }
+
         .product-item:hover .product-overlay {
             opacity: 1;
         }
+
         .quick-view-btn {
             transform: translateY(15px);
             transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
         .product-item:hover .quick-view-btn {
             transform: translateY(0);
         }
-        
+
         .tag-new {
             position: absolute;
             top: 1rem;
@@ -452,7 +535,7 @@
             padding: 0.4rem 0.85rem;
             border-radius: 0.35rem;
             z-index: 20;
-            box-shadow: 0 4px 18px rgba(230,0,0,0.4);
+            box-shadow: 0 4px 18px rgba(230, 0, 0, 0.4);
             backdrop-filter: blur(6px);
         }
 
@@ -462,7 +545,7 @@
             width: 100%;
             height: 100%;
         }
-        
+
         .frame-slide {
             position: absolute;
             inset: 0;
@@ -545,8 +628,13 @@
             transform: translateY(-50%) scale(1.1);
         }
 
-        .slideshow-arrow.prev { left: 0.75rem; }
-        .slideshow-arrow.next { right: 0.75rem; }
+        .slideshow-arrow.prev {
+            left: 0.75rem;
+        }
+
+        .slideshow-arrow.next {
+            right: 0.75rem;
+        }
 
         /* Color Swatch Selectors */
         .color-swatch-bar {
@@ -575,13 +663,14 @@
 
         /* Footer Elements */
         .footer-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 1.75rem;
             padding: 2.25rem;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.22);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.22);
             min-width: 0;
         }
+
         .footer-heading {
             display: inline-block;
             margin-bottom: 1rem;
@@ -591,6 +680,7 @@
             font-size: 0.8rem;
             font-weight: 700;
         }
+
         .footer-link {
             color: #c7c7c7;
             transition: color 0.25s ease, transform 0.25s ease;
@@ -599,25 +689,29 @@
             gap: 0.5rem;
             word-break: break-word;
         }
+
         .footer-link:hover {
             color: var(--zoga-red);
             transform: translateX(3px);
         }
+
         .footer-note {
             color: #9e9e9e;
             word-break: break-word;
         }
+
         .footer-input {
             width: 100%;
             min-width: 0;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             color: #ffffff;
             padding: 0.95rem 1.25rem;
             border-radius: 999px;
             outline: none;
             transition: border-color 0.25s ease, background 0.25s ease;
         }
+
         .footer-submit {
             border: none;
             background: var(--zoga-red);
@@ -631,17 +725,20 @@
             width: 100%;
             box-shadow: 0 10px 25px rgba(230, 0, 0, 0.3);
         }
+
         .footer-submit:hover {
             transform: translateY(-2px);
             filter: brightness(1.1);
             box-shadow: 0 14px 30px rgba(230, 0, 0, 0.45);
         }
+
         .footer-social {
             display: flex;
             flex-wrap: wrap;
             gap: 0.75rem;
             margin-top: 1.5rem;
         }
+
         .footer-icon {
             width: 2.75rem;
             height: 2.75rem;
@@ -649,16 +746,17 @@
             align-items: center;
             justify-content: center;
             border-radius: 999px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
             color: #c7c7c7;
             transition: transform 0.25s ease, color 0.25s ease, background 0.25s ease, border-color 0.25s ease;
             cursor: pointer;
         }
+
         .footer-icon:hover {
             color: #ffffff;
             border-color: var(--zoga-red);
-            background: rgba(230,0,0,0.22);
+            background: rgba(230, 0, 0, 0.22);
             transform: translateY(-3px);
         }
 
@@ -667,6 +765,7 @@
             align-items: center;
             gap: 0.5rem;
         }
+
         .mailto-link,
         .contact-link {
             position: relative;
@@ -677,15 +776,18 @@
             border-radius: 0.35rem;
             transition: transform 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
         }
+
         .mailto-link:hover,
         .contact-link:hover {
             transform: translateY(-2px);
             box-shadow: 0 0 22px rgba(230, 0, 0, 0.22);
         }
+
         .mailto-link:hover i,
         .contact-link:hover i {
             transform: translateX(2px);
         }
+
         .mailto-link::after,
         .contact-link::after {
             content: '';
@@ -697,6 +799,7 @@
             transition: opacity 0.25s ease, transform 0.25s ease;
             transform: scale(0.95);
         }
+
         .mailto-link:hover::after,
         .contact-link:hover::after {
             opacity: 1;
@@ -714,6 +817,7 @@
             padding: 1.25rem;
             background: rgba(0, 0, 0, 0.82);
         }
+
         .watch-modal-window {
             position: relative;
             width: min(90vw, 520px);
@@ -724,27 +828,32 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
         }
+
         .watch-modal-content {
             position: relative;
             width: 100%;
             background: #050505;
         }
+
         .watch-modal-slide {
             width: 100%;
             display: none;
             object-fit: cover;
             aspect-ratio: 1 / 1;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             background: #050505;
         }
+
         .watch-modal-slide.active-modal-slide {
             display: block;
         }
+
         .watch-modal-footer {
             padding: 1rem 1.25rem 1.25rem;
             text-align: center;
-            background: rgba(5,5,5,0.95);
+            background: rgba(5, 5, 5, 0.95);
         }
+
         .watch-modal-footer p {
             margin: 0;
             color: #d1d1d1;
@@ -752,6 +861,7 @@
             text-transform: uppercase;
             font-size: 0.85rem;
         }
+
         .watch-modal-close {
             position: absolute;
             top: 0.85rem;
@@ -762,17 +872,19 @@
             align-items: center;
             justify-content: center;
             border-radius: 999px;
-            border: 1px solid rgba(255,255,255,0.18);
-            background: rgba(0,0,0,0.62);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(0, 0, 0, 0.62);
             color: #ffffff;
             cursor: pointer;
             z-index: 2;
             transition: background 0.25s ease, transform 0.25s ease;
         }
+
         .watch-modal-close:hover {
-            background: rgba(230,0,0,0.9);
+            background: rgba(230, 0, 0, 0.9);
             transform: scale(1.05);
         }
+
         .watch-modal-nav {
             position: absolute;
             top: 50%;
@@ -783,20 +895,30 @@
             align-items: center;
             justify-content: center;
             border-radius: 999px;
-            border: 1px solid rgba(255,255,255,0.18);
-            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(0, 0, 0, 0.6);
             color: #ffffff;
             cursor: pointer;
             z-index: 2;
             transition: background 0.25s ease, transform 0.25s ease;
         }
+
         .watch-modal-nav:hover {
-            background: rgba(230,0,0,0.9);
+            background: rgba(230, 0, 0, 0.9);
             transform: translateY(-50%) scale(1.05);
         }
-        .watch-modal-prev { left: 0.85rem; }
-        .watch-modal-next { right: 0.85rem; }
-        .watch-modal-backdrop.hidden { display: none; }
+
+        .watch-modal-prev {
+            left: 0.85rem;
+        }
+
+        .watch-modal-next {
+            right: 0.85rem;
+        }
+
+        .watch-modal-backdrop.hidden {
+            display: none;
+        }
 
         .mobile-menu-panel {
             position: fixed;
@@ -808,7 +930,7 @@
             background: rgba(5, 5, 5, 0.72);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border-left: 1px solid rgba(255,255,255,0.14);
+            border-left: 1px solid rgba(255, 255, 255, 0.14);
             box-shadow: -12px 0 40px rgba(0, 0, 0, 0.35);
             transform: translateX(100%);
             transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -833,10 +955,21 @@
             transform: translateX(0);
         }
 
-        .mobile-menu-panel.open .mobile-nav-link:nth-child(2) { transition-delay: 60ms; }
-        .mobile-menu-panel.open .mobile-nav-link:nth-child(3) { transition-delay: 100ms; }
-        .mobile-menu-panel.open .mobile-nav-link:nth-child(4) { transition-delay: 140ms; }
-        .mobile-menu-panel.open .mobile-nav-link:nth-child(5) { transition-delay: 180ms; }
+        .mobile-menu-panel.open .mobile-nav-link:nth-child(2) {
+            transition-delay: 60ms;
+        }
+
+        .mobile-menu-panel.open .mobile-nav-link:nth-child(3) {
+            transition-delay: 100ms;
+        }
+
+        .mobile-menu-panel.open .mobile-nav-link:nth-child(4) {
+            transition-delay: 140ms;
+        }
+
+        .mobile-menu-panel.open .mobile-nav-link:nth-child(5) {
+            transition-delay: 180ms;
+        }
 
         .mobile-menu-overlay {
             position: fixed;
@@ -862,8 +995,8 @@
             justify-content: center;
             gap: 0.28rem;
             border-radius: 999px;
-            border: 1px solid rgba(255,255,255,0.16);
-            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
@@ -872,8 +1005,8 @@
 
         .mobile-menu-toggle:hover {
             transform: translateY(-1px);
-            background: rgba(230,0,0,0.14);
-            border-color: rgba(230,0,0,0.32);
+            background: rgba(230, 0, 0, 0.14);
+            border-color: rgba(230, 0, 0, 0.32);
         }
 
         .mobile-menu-toggle .hamburger-line {
@@ -886,8 +1019,8 @@
         }
 
         .mobile-menu-toggle.active {
-            background: rgba(230,0,0,0.16);
-            border-color: rgba(230,0,0,0.36);
+            background: rgba(230, 0, 0, 0.16);
+            border-color: rgba(230, 0, 0, 0.36);
         }
 
         .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
@@ -904,19 +1037,41 @@
         }
 
         @media (max-width: 640px) {
-            .watch-modal-window { width: min(100vw, 95vw); border-radius: 1.25rem; }
-            .watch-modal-slide { aspect-ratio: 1.1 / 1; }
-            .watch-modal-close { top: 0.65rem; right: 0.65rem; width: 2.25rem; height: 2.25rem; }
-            .watch-modal-nav { width: 2.5rem; height: 2.5rem; }
-            .watch-modal-footer { padding: 0.85rem 1rem 1rem; }
+            .watch-modal-window {
+                width: min(100vw, 95vw);
+                border-radius: 1.25rem;
+            }
+
+            .watch-modal-slide {
+                aspect-ratio: 1.1 / 1;
+            }
+
+            .watch-modal-close {
+                top: 0.65rem;
+                right: 0.65rem;
+                width: 2.25rem;
+                height: 2.25rem;
+            }
+
+            .watch-modal-nav {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+
+            .watch-modal-footer {
+                padding: 0.85rem 1rem 1rem;
+            }
         }
     </style>
 </head>
+
 <body class="antialiased">
 
     <!-- Splash Overlay -->
-    <div id="splash-overlay" aria-hidden="true" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#050505;z-index:9999;">
-        <div id="splash-logo" class="brand-logo" style="color:#e60000;font-size:4rem;letter-spacing:-0.05em;transform-origin:center;">
+    <div id="splash-overlay" aria-hidden="true"
+        style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#050505;z-index:9999;">
+        <div id="splash-logo" class="brand-logo"
+            style="color:#e60000;font-size:4rem;letter-spacing:-0.05em;transform-origin:center;">
             zoga
         </div>
     </div>
@@ -924,26 +1079,32 @@
     <div id="mobile-menu-overlay" class="mobile-menu-overlay" aria-hidden="true"></div>
 
     <div id="mobile-menu-panel" class="mobile-menu-panel" aria-label="Mobile navigation">
-        <button id="mobile-menu-close" class="self-end text-white hover:text-zoga-red transition-colors" aria-label="Close menu">
+        <button id="mobile-menu-close" class="self-end text-white hover:text-zoga-red transition-colors"
+            aria-label="Close menu">
             <i data-lucide="x" class="w-6 h-6"></i>
         </button>
-        <a href="#watches-collection" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Watches</a>
-        <a href="#eyewear-collection" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Eyewear</a>
-        <a href="#heritage" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Heritage</a>
-        <a href="#footer-contact" class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Contact</a>
+        <a href="#watches-collection"
+            class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Watches</a>
+        <a href="#eyewear-collection"
+            class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Eyewear</a>
+        <a href="#heritage"
+            class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Heritage</a>
+        <a href="#footer-contact"
+            class="mobile-nav-link text-lg font-medium tracking-widest uppercase text-white hover:text-zoga-red transition-colors">Contact</a>
     </div>
 
     <!-- Navbar -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 bg-transparent py-4">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-            
+
             <div class="hidden md:flex space-x-8 items-center text-sm font-medium tracking-widest uppercase">
                 <a href="#watches-collection" class="hover:text-zoga-red transition-colors duration-300">Watches</a>
                 <a href="#eyewear-collection" class="hover:text-zoga-red transition-colors duration-300">Eyewear</a>
                 <a href="#heritage" class="hover:text-zoga-red transition-colors duration-300">Heritage</a>
             </div>
 
-            <button id="mobile-menu-toggle" class="mobile-menu-toggle md:hidden" aria-label="Open menu" aria-expanded="false">
+            <button id="mobile-menu-toggle" class="mobile-menu-toggle md:hidden" aria-label="Open menu"
+                aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -967,17 +1128,23 @@
     <!-- Header Hero Section -->
     <header class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
         <div class="hero-slideshow">
-            <img src="https://lh3.googleusercontent.com/d/19P7jmwgdB6mNRMRgZO5z-cjn0sHcuQmi" class="slide" alt="Slide 1">
-            <img src="https://lh3.googleusercontent.com/d/1u5BdQpYuaDpstUkto_ejwkvkb1gdlvH9" class="slide" alt="Slide 2">
-            <img src="https://lh3.googleusercontent.com/d/18SgN_UhedWTuFHR4vJWgnUlRewLjiIQ1" class="slide" alt="Slide 3">
-            <img src="https://lh3.googleusercontent.com/d/1wNk25XTzxlBWpcTb0gu9fQpzNs3S9wAU" class="slide" alt="Slide 4">
-            <img src="https://lh3.googleusercontent.com/d/1Kwy0FAHeC-DgESNmPMnK003szKmKmTze" class="slide" alt="Slide 5">
+            <img src="https://lh3.googleusercontent.com/d/19P7jmwgdB6mNRMRgZO5z-cjn0sHcuQmi" class="slide"
+                alt="Slide 1">
+            <img src="https://lh3.googleusercontent.com/d/1u5BdQpYuaDpstUkto_ejwkvkb1gdlvH9" class="slide"
+                alt="Slide 2">
+            <img src="https://lh3.googleusercontent.com/d/18SgN_UhedWTuFHR4vJWgnUlRewLjiIQ1" class="slide"
+                alt="Slide 3">
+            <img src="https://lh3.googleusercontent.com/d/1wNk25XTzxlBWpcTb0gu9fQpzNs3S9wAU" class="slide"
+                alt="Slide 4">
+            <img src="https://lh3.googleusercontent.com/d/1Kwy0FAHeC-DgESNmPMnK003szKmKmTze" class="slide"
+                alt="Slide 5">
         </div>
         <div class="absolute inset-0 hero-overlay z-10 pointer-events-none"></div>
 
         <div class="relative z-20 text-center px-4 mt-20 hero-info">
             <p class="text-sm md:text-base tracking-[0.3em] uppercase mb-4 text-gray-300 reveal">The New Standard of</p>
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-medium mb-8 text-white tracking-tight reveal drop-shadow-2xl section-heading" style="transition-delay: 200ms;">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-medium mb-8 text-white tracking-tight reveal drop-shadow-2xl section-heading"
+                style="transition-delay: 200ms;">
                 Timeless <span class="italic text-zoga-red">Elegance</span>
             </h1>
             <div class="reveal" style="transition-delay: 400ms;">
@@ -986,7 +1153,7 @@
                 </a>
             </div>
         </div>
-        
+
         <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
             <a href="#watches-collection" class="text-white/50 hover:text-white transition-colors">
                 <i data-lucide="chevron-down" class="w-6 h-6"></i>
@@ -1000,7 +1167,9 @@
                 <div class="video-card reveal">
                     <div class="video-shell">
                         <div class="video-fallback" data-fallback="eyewear">Loading video…</div>
-                        <video id="video-eyewear" autoplay muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1200&q=80" controlsList="nodownload noplaybackrate">
+                        <video id="video-eyewear" autoplay muted loop playsinline preload="metadata"
+                            poster="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1200&q=80"
+                            controlsList="nodownload noplaybackrate">
                             <source src="eyewear.mp4" type="video/mp4">
                         </video>
                         <div class="video-controls" data-controls="eyewear">
@@ -1022,8 +1191,12 @@
                 <div class="video-card reveal" style="transition-delay: 150ms;">
                     <div class="video-shell">
                         <div class="video-fallback" data-fallback="watch">Loading video…</div>
-                        <video id="video-watch" autoplay muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=1200&q=80" controlsList="nodownload noplaybackrate">
-                            <source src="https://v1.pinimg.com/videos/mc/720p/1d/bb/06/1dbb06f8a3350960384c203ed0e31e83.mp4?" type="video/mp4">
+                        <video id="video-watch" autoplay muted loop playsinline preload="metadata"
+                            poster="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=1200&q=80"
+                            controlsList="nodownload noplaybackrate">
+                            <source
+                                src="https://v1.pinimg.com/videos/mc/720p/1d/bb/06/1dbb06f8a3350960384c203ed0e31e83.mp4?"
+                                type="video/mp4">
                         </video>
                         <div class="video-controls" data-controls="watch">
                             <button type="button" aria-label="Play/Pause" data-action="play">
@@ -1058,43 +1231,58 @@
 
             <!-- Watches Grid - UPDATED to grid-cols-2 -->
             <div class="grid grid-cols-2 gap-4 md:gap-8">
-                
+
                 <div class="product-item p-3 md:p-5 reveal group" id="trio-watch-card" style="transition-delay: 100ms;">
                     <div class="product-img-wrap rounded-lg">
                         <div class="tag-new hidden sm:block">New Stock</div>
 
-                        <button class="slideshow-arrow prev opacity-0 sm:opacity-100" onclick="changeTrioSlide(-1)" aria-label="Previous Slide">
+                        <button class="slideshow-arrow prev opacity-0 sm:opacity-100" onclick="changeTrioSlide(-1)"
+                            aria-label="Previous Slide">
                             <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i>
                         </button>
-                        <button class="slideshow-arrow next opacity-0 sm:opacity-100" onclick="changeTrioSlide(1)" aria-label="Next Slide">
+                        <button class="slideshow-arrow next opacity-0 sm:opacity-100" onclick="changeTrioSlide(1)"
+                            aria-label="Next Slide">
                             <i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i>
                         </button>
 
                         <div class="frame-slideshow-container">
-                            <img src="product photos/IMG_6940.PNG" alt="Denvosi Obsidian Diamond Chrono" class="frame-slide active-slide" data-title="Obsidian Diamond Chrono" data-color="Obsidian Black">
-                            <img src="product photos/IMG_6941.PNG" alt="Denvosi Pearl Diamond Chrono" class="frame-slide" data-title="Pearl Diamond Chrono" data-color="Pearl White">
-                            <img src="product photos/IMG_6942.PNG" alt="Denvosi Auburn Diamond Chrono" class="frame-slide" data-title="Auburn Diamond Chrono" data-color="Auburn Brown">
+                            <img src="product photos/IMG_6940.PNG" alt="Denvosi Obsidian Diamond Chrono"
+                                class="frame-slide active-slide" data-title="Obsidian Diamond Chrono"
+                                data-color="Obsidian Black">
+                            <img src="product photos/IMG_6941.PNG" alt="Denvosi Pearl Diamond Chrono"
+                                class="frame-slide" data-title="Pearl Diamond Chrono" data-color="Pearl White">
+                            <img src="product photos/IMG_6942.PNG" alt="Denvosi Auburn Diamond Chrono"
+                                class="frame-slide" data-title="Auburn Diamond Chrono" data-color="Auburn Brown">
                         </div>
 
                         <div class="slideshow-controls scale-75 md:scale-100 bottom-2">
-                            <button class="slideshow-dot active-dot" onclick="setTrioSlide(0)" aria-label="Slide 1"></button>
+                            <button class="slideshow-dot active-dot" onclick="setTrioSlide(0)"
+                                aria-label="Slide 1"></button>
                             <button class="slideshow-dot" onclick="setTrioSlide(1)" aria-label="Slide 2"></button>
                             <button class="slideshow-dot" onclick="setTrioSlide(2)" aria-label="Slide 3"></button>
                         </div>
 
                         <div class="product-overlay">
-                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick View</button>
+                            <button
+                                class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick
+                                View</button>
                         </div>
                     </div>
 
                     <div class="mt-4 text-center">
-                        <h3 id="trio-card-title" class="text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors truncate px-1">DENVOSI Tonneau Watch</h3>
-                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest truncate">DENVOSI</p>
-                        
+                        <h3 id="trio-card-title"
+                            class="text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors truncate px-1">
+                            DENVOSI Tonneau Watch</h3>
+                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest truncate">
+                            DENVOSI</p>
+
                         <div class="color-swatch-bar mt-2 mb-2 scale-75 md:scale-100">
-                            <button class="swatch-btn active-swatch bg-black" onclick="setTrioSlide(0)" title="Obsidian Black"></button>
-                            <button class="swatch-btn bg-stone-100" onclick="setTrioSlide(1)" title="Pearl White"></button>
-                            <button class="swatch-btn bg-amber-900" onclick="setTrioSlide(2)" title="Auburn Brown"></button>
+                            <button class="swatch-btn active-swatch bg-black" onclick="setTrioSlide(0)"
+                                title="Obsidian Black"></button>
+                            <button class="swatch-btn bg-stone-100" onclick="setTrioSlide(1)"
+                                title="Pearl White"></button>
+                            <button class="swatch-btn bg-amber-900" onclick="setTrioSlide(2)"
+                                title="Auburn Brown"></button>
                         </div>
 
                         <p class="text-zoga-red text-sm md:text-base font-medium mt-1">₹1,900/-</p>
@@ -1106,11 +1294,15 @@
                         <div class="tag-new hidden sm:block">New Stock</div>
                         <img src="product photos/IMG_6986.PNG" alt="Seiko Rose Gold Diver" class="product-img">
                         <div class="product-overlay">
-                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick View</button>
+                            <button
+                                class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick
+                                View</button>
                         </div>
                     </div>
                     <div class="mt-4 text-center">
-                        <h3 class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">SEIKO Diver-style</h3>
+                        <h3
+                            class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">
+                            SEIKO Diver-style</h3>
                         <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest">SEIKO</p>
                         <p class="text-zoga-red text-sm md:text-base font-medium mt-2">₹1,100/-</p>
                     </div>
@@ -1120,18 +1312,22 @@
                     <div class="product-img-wrap rounded-lg">
                         <img src="product photos/IMG_6987.PNG" alt="Casio Classic Silver" class="product-img">
                         <div class="product-overlay">
-                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick View</button>
+                            <button
+                                class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick
+                                View</button>
                         </div>
                     </div>
                     <div class="mt-4 text-center">
-                        <h3 class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">Casio Classic</h3>
+                        <h3
+                            class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">
+                            Casio Classic</h3>
                         <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest">Casio</p>
                         <p class="text-zoga-red text-sm md:text-base font-medium mt-2">₹500/-</p>
                     </div>
                 </div>
-                
-                 <!-- Placeholder to keep the grid even if needed -->
-                 <div class="product-item p-3 md:p-5 reveal opacity-50 border-dashed" style="transition-delay: 400ms;">
+
+                <!-- Placeholder to keep the grid even if needed -->
+                <div class="product-item p-3 md:p-5 reveal opacity-50 border-dashed" style="transition-delay: 400ms;">
                     <div class="product-img-wrap rounded-lg flex items-center justify-center bg-gray-900">
                         <span class="text-gray-500 text-sm">More coming soon</span>
                     </div>
@@ -1141,7 +1337,7 @@
                 </div>
 
             </div>
-            
+
             <div class="mt-10 text-center md:hidden">
                 <a href="watch.html" class="btn-secondary w-full">
                     View All Watches
@@ -1164,18 +1360,23 @@
 
             <!-- Eyewear Grid - UPDATED to grid-cols-2 -->
             <div class="grid grid-cols-2 gap-4 md:gap-8">
-                
+
                 <div class="product-item p-3 md:p-5 reveal" style="transition-delay: 100ms;">
                     <div class="product-img-wrap rounded-lg">
                         <div class="tag-new hidden sm:block">New Stock</div>
                         <img src="product photos/IMG_6934.PNG" alt="Classic Gold Aviator" class="product-img">
                         <div class="product-overlay">
-                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick View</button>
+                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">
+                                QuickView
+                            </button>
                         </div>
                     </div>
                     <div class="mt-4 text-center">
-                        <h3 class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">Classic Gold Aviator</h3>
-                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest truncate">Polarized</p>
+                        <h3
+                            class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">
+                            Classic Gold Aviator</h3>
+                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest truncate">
+                            Polarized</p>
                         <p class="text-zoga-red text-sm md:text-base font-medium mt-2">$320</p>
                     </div>
                 </div>
@@ -1184,12 +1385,17 @@
                     <div class="product-img-wrap rounded-lg">
                         <img src="product photos/IMG_6935.PNG" alt="Clear Frame Shades" class="product-img">
                         <div class="product-overlay">
-                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick View</button>
+                            <button
+                                class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick
+                                View</button>
                         </div>
                     </div>
                     <div class="mt-4 text-center flex flex-col items-center">
-                        <h3 class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1 w-full">Clear Shades</h3>
-                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest">Clear Frame</p>
+                        <h3
+                            class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1 w-full">
+                            Clear Shades</h3>
+                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest">Clear Frame
+                        </p>
                         <p class="text-zoga-red text-sm md:text-base font-medium mt-2">₹500</p>
                     </div>
                 </div>
@@ -1198,12 +1404,17 @@
                     <div class="product-img-wrap rounded-lg">
                         <img src="product photos/IMG_6936.PNG" alt="Silver Chrome Aviator" class="product-img">
                         <div class="product-overlay">
-                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick View</button>
+                            <button
+                                class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick
+                                View</button>
                         </div>
                     </div>
                     <div class="mt-4 text-center">
-                        <h3 class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">Silver Chrome</h3>
-                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest truncate">UV Protection</p>
+                        <h3
+                            class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">
+                            Silver Chrome</h3>
+                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest truncate">UV
+                            Protection</p>
                         <p class="text-zoga-red text-sm md:text-base font-medium mt-2">$310</p>
                     </div>
                 </div>
@@ -1213,18 +1424,23 @@
                         <div class="tag-new hidden sm:block">New Stock</div>
                         <img src="product photos/IMG_6937.PNG" alt="Onyx Gold Hex" class="product-img">
                         <div class="product-overlay">
-                            <button class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick View</button>
+                            <button
+                                class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick
+                                View</button>
                         </div>
                     </div>
                     <div class="mt-4 text-center">
-                        <h3 class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">Onyx Gold Hex</h3>
-                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest truncate">Statement Series</p>
+                        <h3
+                            class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">
+                            Onyx Gold Hex</h3>
+                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest truncate">
+                            Statement Series</p>
                         <p class="text-zoga-red text-sm md:text-base font-medium mt-2">$340</p>
                     </div>
                 </div>
 
             </div>
-            
+
             <div class="mt-10 text-center md:hidden">
                 <a href="eyewear.html" class="btn-secondary w-full">
                     View All Eyewear
@@ -1237,31 +1453,43 @@
             <div class="max-w-[1400px] mx-auto px-6 md:px-12">
                 <div class="flex flex-col lg:flex-row items-center gap-16">
                     <div class="lg:w-1/2 reveal w-full">
-                        <div id="heritage-slideshow" class="relative w-full aspect-[4/3] min-h-[320px] rounded-xl overflow-hidden shadow-2xl bg-black/15 group">
+                        <div id="heritage-slideshow"
+                            class="relative w-full aspect-[4/3] min-h-[320px] rounded-xl overflow-hidden shadow-2xl bg-black/15 group">
                             <!-- Slides -->
-                            <img src="https://lh3.googleusercontent.com/d/1wNk25XTzxlBWpcTb0gu9fQpzNs3S9wAU" alt="Heritage Craft 1" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-100 active-slide frame-slide">
-                            <img src="https://lh3.googleusercontent.com/d/18SgN_UhedWTuFHR4vJWgnUlRewLjiIQ1" alt="Heritage Craft 2" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0 frame-slide">
-                            
+                            <img src="https://lh3.googleusercontent.com/d/1wNk25XTzxlBWpcTb0gu9fQpzNs3S9wAU"
+                                alt="Heritage Craft 1"
+                                class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-100 active-slide frame-slide">
+                            <img src="https://lh3.googleusercontent.com/d/18SgN_UhedWTuFHR4vJWgnUlRewLjiIQ1"
+                                alt="Heritage Craft 2"
+                                class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0 frame-slide">
+
                             <!-- Controls -->
                             <div class="slideshow-controls">
-                                <button class="slideshow-dot active-dot" onclick="setHeritageSlide(0)" aria-label="Slide 1"></button>
-                                <button class="slideshow-dot" onclick="setHeritageSlide(1)" aria-label="Slide 2"></button>
+                                <button class="slideshow-dot active-dot" onclick="setHeritageSlide(0)"
+                                    aria-label="Slide 1"></button>
+                                <button class="slideshow-dot" onclick="setHeritageSlide(1)"
+                                    aria-label="Slide 2"></button>
                             </div>
                         </div>
                     </div>
                     <div class="lg:w-1/2 space-y-8 reveal" style="transition-delay: 200ms;">
                         <p class="text-zoga-red tracking-widest uppercase text-sm font-bold">Our Heritage</p>
-                        <h2 class="text-4xl md:text-6xl font-serif leading-tight section-heading">Mastery in <br><span class="italic text-gray-400">Every Detail.</span></h2>
+                        <h2 class="text-4xl md:text-6xl font-serif leading-tight section-heading">Mastery in <br><span
+                                class="italic text-gray-400">Every Detail.</span></h2>
                         <p class="text-gray-400 leading-relaxed text-lg max-w-lg">
-                            At Zoga, we believe that true luxury lies in the unseen. Drawing inspiration from the world's most prestigious horology and avant-garde fashion houses, each piece is a testament to uncompromising quality and visionary design. 
+                            At Zoga, we believe that true luxury lies in the unseen. Drawing inspiration from the
+                            world's most prestigious horology and avant-garde fashion houses, each piece is a testament
+                            to uncompromising quality and visionary design.
                         </p>
                         <p class="text-gray-400 leading-relaxed text-lg max-w-lg">
                             We don't just measure time or frame the world; we define the moment.
                         </p>
                         <div class="pt-4">
-                            <a href="#" class="inline-flex items-center gap-3 text-sm uppercase tracking-widest border-b border-white pb-1 hover:text-zoga-red hover:border-zoga-red transition-colors group">
+                            <a href="#"
+                                class="inline-flex items-center gap-3 text-sm uppercase tracking-widest border-b border-white pb-1 hover:text-zoga-red hover:border-zoga-red transition-colors group">
                                 Discover Our Story
-                                <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-2 transition-transform"></i>
+                                <i data-lucide="arrow-right"
+                                    class="w-4 h-4 transform group-hover:translate-x-2 transition-transform"></i>
                             </a>
                         </div>
                     </div>
@@ -1271,11 +1499,15 @@
 
         <!-- Editorial Section -->
         <section class="w-full h-[60vh] relative flex items-center justify-center img-zoom-container">
-            <img src="https://lh3.googleusercontent.com/d/1u5BdQpYuaDpstUkto_ejwkvkb1gdlvH9" alt="Editorial" class="absolute inset-0 w-full h-full object-cover object-top opacity-70 img-zoom">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/80 pointer-events-none"></div>
+            <img src="https://lh3.googleusercontent.com/d/1u5BdQpYuaDpstUkto_ejwkvkb1gdlvH9" alt="Editorial"
+                class="absolute inset-0 w-full h-full object-cover object-top opacity-70 img-zoom">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/80 pointer-events-none">
+            </div>
             <div class="relative z-10 text-center text-white px-4 reveal">
-                <h2 class="text-3xl md:text-5xl lg:text-6xl font-serif italic mb-8 drop-shadow-lg">"Elegance is an attitude."</h2>
-                <a href="#" class="inline-block bg-white text-black px-10 py-4 text-sm uppercase tracking-widest font-bold hover:bg-zoga-red hover:text-white transition-colors shadow-xl">
+                <h2 class="text-3xl md:text-5xl lg:text-6xl font-serif italic mb-8 drop-shadow-lg">"Elegance is an
+                    attitude."</h2>
+                <a href="#"
+                    class="inline-block bg-white text-black px-10 py-4 text-sm uppercase tracking-widest font-bold hover:bg-zoga-red hover:text-white transition-colors shadow-xl">
                     Shop The Look
                 </a>
             </div>
@@ -1306,11 +1538,12 @@
     <footer id="footer-contact" class="bg-black pt-24 pb-12 border-t border-white/10">
         <div class="max-w-[1400px] mx-auto px-6 md:px-12">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
-                
+
                 <div class="space-y-6">
                     <a href="#" class="brand-logo text-4xl block mb-6">zoga</a>
                     <p class="text-gray-400 text-sm leading-relaxed max-w-xs">
-                        Defining luxury through meticulous craftsmanship and visionary design. The ultimate destination for premium watches and eyewear.
+                        Defining luxury through meticulous craftsmanship and visionary design. The ultimate destination
+                        for premium watches and eyewear.
                     </p>
                 </div>
 
@@ -1328,11 +1561,26 @@
                 <div>
                     <h4 class="text-sm font-medium uppercase tracking-widest mb-6 text-white">Client Care</h4>
                     <ul class="space-y-4 text-gray-400 text-sm">
-                        <li><a href="https://www.instagram.com/zogafashions?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="contact-with-icon hover:text-zoga-red transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Contact us on Instagram"><i data-lucide="instagram" class="w-4 h-4"></i><span>Contact Us</span></a></li>
-                        <li><a href="mailto:Fashionzoga@gmail.com" class="contact-with-icon mailto-link hover:text-zoga-red transition-colors" aria-label="Email Fashionzoga"><i data-lucide="mail" class="w-4 h-4"></i><span>Fashionzoga@gmail.com</span></a></li>
-                        <li><a href="tel:+919876378181" class="contact-with-icon contact-link hover:text-zoga-red transition-colors" aria-label="Call Fashionzoga"><i data-lucide="phone" class="w-4 h-4"></i><span>9876378181</span></a></li>
-                        <li><a href="tel:+917973063172" class="contact-with-icon contact-link hover:text-zoga-red transition-colors" aria-label="Call Fashionzoga"><i data-lucide="phone" class="w-4 h-4"></i><span>7973063172</span></a></li>
-                        <li><a href="tel:+919878173681" class="contact-with-icon contact-link hover:text-zoga-red transition-colors" aria-label="Call Fashionzoga"><i data-lucide="phone" class="w-4 h-4"></i><span>98781 73681</span></a></li>
+                        <li><a href="https://www.instagram.com/zogafashions?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                                class="contact-with-icon hover:text-zoga-red transition-colors" target="_blank"
+                                rel="noopener noreferrer" aria-label="Contact us on Instagram"><i
+                                    data-lucide="instagram" class="w-4 h-4"></i><span>Contact Us</span></a></li>
+                        <li><a href="mailto:Fashionzoga@gmail.com"
+                                class="contact-with-icon mailto-link hover:text-zoga-red transition-colors"
+                                aria-label="Email Fashionzoga"><i data-lucide="mail"
+                                    class="w-4 h-4"></i><span>Fashionzoga@gmail.com</span></a></li>
+                        <li><a href="tel:+919876378181"
+                                class="contact-with-icon contact-link hover:text-zoga-red transition-colors"
+                                aria-label="Call Fashionzoga"><i data-lucide="phone"
+                                    class="w-4 h-4"></i><span>9876378181</span></a></li>
+                        <li><a href="tel:+917973063172"
+                                class="contact-with-icon contact-link hover:text-zoga-red transition-colors"
+                                aria-label="Call Fashionzoga"><i data-lucide="phone"
+                                    class="w-4 h-4"></i><span>7973063172</span></a></li>
+                        <li><a href="tel:+919878173681"
+                                class="contact-with-icon contact-link hover:text-zoga-red transition-colors"
+                                aria-label="Call Fashionzoga"><i data-lucide="phone" class="w-4 h-4"></i><span>98781
+                                    73681</span></a></li>
                         <li><a href="#" class="hover:text-zoga-red transition-colors">Shipping & Returns</a></li>
                         <li><a href="#" class="hover:text-zoga-red transition-colors">Care Instructions</a></li>
                         <li><a href="#" class="hover:text-zoga-red transition-colors">Warranty</a></li>
@@ -1342,23 +1590,33 @@
 
                 <div>
                     <h4 class="text-sm font-medium uppercase tracking-widest mb-6 text-white">The Zoga Society</h4>
-                    <p class="text-gray-400 text-sm mb-4">Subscribe to receive updates, access to exclusive deals, and more.</p>
+                    <p class="text-gray-400 text-sm mb-4">Subscribe to receive updates, access to exclusive deals, and
+                        more.</p>
                     <form id="newsletter-form" class="space-y-3">
                         <div class="flex border-b border-gray-600 focus-within:border-zoga-red transition-colors group">
-                            <input id="newsletter-email" type="email" placeholder="Enter your email" class="bg-transparent border-none outline-none text-sm py-2 w-full text-white placeholder-gray-500" required>
-                            <button id="newsletter-submit" type="submit" class="text-gray-500 group-focus-within:text-zoga-red hover:text-white transition-colors" aria-label="Send email">
+                            <input id="newsletter-email" type="email" placeholder="Enter your email"
+                                class="bg-transparent border-none outline-none text-sm py-2 w-full text-white placeholder-gray-500"
+                                required>
+                            <button id="newsletter-submit" type="submit"
+                                class="text-gray-500 group-focus-within:text-zoga-red hover:text-white transition-colors"
+                                aria-label="Send email">
                                 <i data-lucide="arrow-right" class="w-5 h-5"></i>
                             </button>
                         </div>
-                        <textarea id="newsletter-message" rows="3" placeholder="Write your message..." class="w-full bg-transparent border border-white/10 rounded-xl px-3 py-2 text-sm text-white placeholder-gray-500 outline-none focus:border-zoga-red transition-colors"></textarea>
+                        <textarea id="newsletter-message" rows="3" placeholder="Write your message..."
+                            class="w-full bg-transparent border border-white/10 rounded-xl px-3 py-2 text-sm text-white placeholder-gray-500 outline-none focus:border-zoga-red transition-colors"></textarea>
                     </form>
                 </div>
             </div>
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-gray-500 text-xs tracking-widest uppercase">© 2024 Zoga. All Rights Reserved.</p>
                 <div class="flex space-x-6">
-                    <a href="#" class="text-gray-500 hover:text-white transition-colors text-xs uppercase tracking-widest">Privacy Policy</a>
-                    <a href="#" class="text-gray-500 hover:text-white transition-colors text-xs uppercase tracking-widest">Terms of Service</a>
+                    <a href="#"
+                        class="text-gray-500 hover:text-white transition-colors text-xs uppercase tracking-widest">Privacy
+                        Policy</a>
+                    <a href="#"
+                        class="text-gray-500 hover:text-white transition-colors text-xs uppercase tracking-widest">Terms
+                        of Service</a>
                 </div>
             </div>
         </div>
@@ -1369,7 +1627,7 @@
         function setHeritageSlide(index) {
             const slides = document.querySelectorAll('#heritage-slideshow .frame-slide');
             const dots = document.querySelectorAll('#heritage-slideshow .slideshow-dot');
-            
+
             slides.forEach((s, i) => {
                 s.style.opacity = (i === index) ? '1' : '0';
                 s.classList.toggle('active-slide', i === index);
@@ -1417,7 +1675,7 @@
             video.addEventListener('pause', showControls);
 
             video.load();
-            video.play().catch(() => {});
+            video.play().catch(() => { });
         });
 
         document.querySelectorAll('.video-controls button').forEach((btn) => {
@@ -1496,7 +1754,7 @@
 
         const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
         revealElements.forEach(el => revealObserver.observe(el));
-        
+
         setTimeout(() => {
             revealElements.forEach(el => {
                 const rect = el.getBoundingClientRect();
@@ -1527,7 +1785,7 @@
             });
         }
 
-        (function() {
+        (function () {
             const splash = document.getElementById('splash-overlay');
             const splashLogo = document.getElementById('splash-logo');
             if (!splash || !splashLogo) return;
@@ -1539,7 +1797,7 @@
                 splash.style.opacity = '0';
                 splash.style.visibility = 'hidden';
                 setTimeout(() => {
-                    try { splash.remove(); } catch (e) {}
+                    try { splash.remove(); } catch (e) { }
                     document.body.style.overflow = prevOverflow || '';
                 }, 900);
             };
@@ -1701,6 +1959,7 @@
         watchModalBackdrop.addEventListener('click', event => {
             if (event.target === watchModalBackdrop) closeWatchModal();
         });
+
         document.addEventListener('keydown', event => {
             if (event.key === 'Escape' && watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) {
                 closeWatchModal();
@@ -1723,4 +1982,5 @@
         });
     </script>
 </body>
+
 </html>
