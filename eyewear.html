@@ -77,7 +77,6 @@
             box-shadow: 0 18px 45px rgba(0,0,0,0.24);
             backdrop-filter: blur(12px);
             transition: all 0.3s ease;
-            
             padding: 0.75rem 1.5rem;
             letter-spacing: 0.15em;
             font-size: 0.65rem;
@@ -131,8 +130,18 @@
             100% { opacity: 0; transform: scale(1.15); }
         }
 
-        #splash-overlay { transition: opacity 800ms ease, visibility 800ms ease; }
-        #splash-logo { will-change: transform, opacity; animation: splash-zoom 2200ms cubic-bezier(.2,.9,.2,1) forwards; }
+        /* ---- ADDED: SPLASH SCREEN FAILSAFE ---- */
+        @keyframes failsafe-hide {
+            to { opacity: 0; visibility: hidden; z-index: -1; }
+        }
+        #splash-overlay { 
+            transition: opacity 800ms ease, visibility 800ms ease; 
+            animation: failsafe-hide 0.5s ease 3.5s forwards; 
+        }
+        #splash-logo { 
+            will-change: transform, opacity; 
+            animation: splash-zoom 2200ms cubic-bezier(.2,.9,.2,1) forwards; 
+        }
         @keyframes splash-zoom {
             0% { transform: scale(1); opacity: 1; } 30% { transform: scale(1.05); opacity: 1; }
             70% { transform: scale(3.6); opacity: 0.9; } 100% { transform: scale(8); opacity: 0; }
@@ -180,7 +189,6 @@
         .product-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .product-item:hover .product-img { transform: scale(1.08); }
 
-        /* Custom Number Input Reset */
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
         input[type=number] { -moz-appearance: textfield; }
@@ -414,7 +422,6 @@
     </header>
 
     <main>
-        <!-- SECTION 2: ALL EYEWEAR PRODUCTS (Dynamic) -->
         <section id="all-eyewear" class="py-16 md:py-24 px-3 sm:px-6 md:px-12 max-w-[1400px] mx-auto content-panel mt-12 mb-16 md:mb-24">
             <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 px-2 md:px-0 reveal">
                 <div>
@@ -437,7 +444,6 @@
             </div>
         </section>
 
-        <!-- SECTION 3: WOMEN'S EYEWEAR (Dynamic) -->
         <section id="womens-eyewear" class="py-16 md:py-24 px-3 sm:px-6 md:px-12 max-w-[1400px] mx-auto content-panel mb-16 md:mb-24">
             <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 px-2 md:px-0 reveal">
                 <div>
@@ -535,15 +541,12 @@
                         </div>
                         
                         <div class="mt-4 space-y-3">
-                            <!-- Category Dropdown -->
                             <div class="relative">
                                 <select id="wa-category-select" class="w-full bg-[#111] border border-gray-700 text-white text-xs md:text-sm rounded p-3 outline-none focus:border-zoga-red transition-all cursor-pointer" required>
                                     <option value="" disabled selected>Loading Eyewear Categories...</option>
-                                    <!-- Options will be injected dynamically -->
                                 </select>
                             </div>
 
-                            <!-- Variant Dropdown -->
                             <div class="relative">
                                 <select id="wa-variant-select" class="w-full bg-[#111] border border-gray-700 text-white text-xs md:text-sm rounded p-3 outline-none focus:border-zoga-red transition-all cursor-pointer disabled:opacity-50" disabled required>
                                     <option value="" disabled selected>Select Color / Frame Variant</option>
@@ -572,54 +575,112 @@
         </div>
     </footer>
 
-    <!-- Notice type="module" allows us to use ES imports directly from the CDN -->
-    <script type="module">
-        import { 
-            collection, 
-            getDocs, 
-            query, 
-            where,
-            addDoc,
-            doc,
-            updateDoc,
-            deleteDoc 
-        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // =========================================================================
-        // FIREBASE CONFIGURATION (Placeholder)
-        // Note: To connect to your real DB, import initializeApp and getFirestore,
-        // then configure them with your project keys.
-        // =========================================================================
-        const db = null; // Set to null temporarily to trigger the beautiful fallback data
-
-        /**
-         * Retrieves all eyewear products from the database and sorts them.
-         */
-        async function getEyewearProducts() {
-            try {
-                if (!db) throw new Error("Firebase DB not initialized in preview. Utilizing UI fallback data.");
-                
-                const eyewearCollectionRef = collection(db, "eyewear");
-                const snapshot = await getDocs(eyewearCollectionRef);
-                
-                const products = snapshot.docs.map(productDoc => {
-                    return { id: productDoc.id, ...productDoc.data() };
-                });
-                
-                return products.sort((first, second) => (first.sortOrder || 0) - (second.sortOrder || 0));
-            } catch (error) {
-                console.warn(error.message);
-                return []; // Return empty array so the website smoothly falls back to default products
-            }
-        }
-
-        // Initialize early Lucide Icons (for static HTML)
+    <!-- ========================================== -->
+    <!-- SCRIPT 1: BASIC UI (SPLASH, MENUS)         -->
+    <!-- Runs even if Database Module fails to load -->
+    <!-- ========================================== -->
+    <script>
+        // Initialize early Lucide Icons
         lucide.createIcons();
 
-        /* =========================================================================
-           DATABASE INTEGRATION & DYNAMIC RENDERING
-           ========================================================================= */
+        // 1. Splash Screen & Promo Modal Logic (Safe from DB errors)
+        const splash = document.getElementById('splash-overlay');
+        const splashLogo = document.getElementById('splash-logo');
+        const promoBackdrop = document.getElementById('promo-modal-backdrop');
+
+        function openPromoModal() {
+            if (!promoBackdrop) return;
+            promoBackdrop.classList.add('active');
+            promoBackdrop.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePromoModal() {
+            if (!promoBackdrop) return;
+            promoBackdrop.classList.remove('active');
+            promoBackdrop.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('promo-modal-close')?.addEventListener('click', closePromoModal);
+        document.getElementById('promo-dismiss-btn')?.addEventListener('click', closePromoModal);
+        document.getElementById('promo-claim-btn')?.addEventListener('click', closePromoModal);
         
+        if (splash && splashLogo) {
+            const prevOverflow = document.body.style.overflow;
+            document.body.style.overflow = 'hidden';
+
+            const removeSplash = () => {
+                splash.style.opacity = '0';
+                splash.style.visibility = 'hidden';
+                setTimeout(() => {
+                    try { splash.remove(); } catch (e) {}
+                    document.body.style.overflow = prevOverflow || '';
+                    setTimeout(openPromoModal, 400);
+                }, 900);
+            };
+
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                removeSplash();
+            } else {
+                const maxTimeout = setTimeout(removeSplash, 2600);
+                splashLogo.addEventListener('animationend', () => {
+                    clearTimeout(maxTimeout);
+                    setTimeout(removeSplash, 200);
+                });
+            }
+        } else {
+            setTimeout(openPromoModal, 600);
+        }
+
+        // 2. Mobile Menu Logic
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+        const toggleMobileMenu = () => {
+            if (!mobileMenuPanel || !mobileMenuOverlay || !mobileMenuToggle) return;
+            const isOpen = mobileMenuPanel.classList.toggle('open');
+            mobileMenuOverlay.classList.toggle('open', isOpen);
+            mobileMenuToggle.classList.toggle('active', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        };
+
+        document.getElementById('mobile-menu-toggle')?.addEventListener('click', toggleMobileMenu);
+        document.getElementById('mobile-menu-close')?.addEventListener('click', toggleMobileMenu);
+        document.getElementById('mobile-menu-overlay')?.addEventListener('click', toggleMobileMenu);
+        document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+            link.addEventListener('click', () => {
+                mobileMenuPanel?.classList.remove('open');
+                mobileMenuOverlay?.classList.remove('open');
+                mobileMenuToggle?.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // 3. Navbar Scroll Logic
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black/95', 'backdrop-blur-sm', 'shadow-lg', 'py-2');
+                navbar.classList.remove('bg-transparent', 'py-4');
+            } else {
+                navbar.classList.remove('bg-black/95', 'backdrop-blur-sm', 'shadow-lg', 'py-2');
+                navbar.classList.add('bg-transparent', 'py-4');
+            }
+        });
+    </script>
+
+
+    <!-- ========================================== -->
+    <!-- SCRIPT 2: DATABASE & PRODUCT LOGIC         -->
+    <!-- Requires Local Server to prevent CORS err  -->
+    <!-- ========================================== -->
+    <script type="module">
+        import { getEyewearProducts } from "./db_operationsEYE.js";
+        
+        // This array ensures the website NEVER looks broken, even if your Firestore DB is offline.
         const defaultFallbackProducts = [
             {
                 id: 'fallback-1', category: 'All Eyewear', tag: 'Bestseller', series: 'CARTIER AVIATOR SERIES', defaultTitle: 'Cartier Titanium Gold Aviator', defaultPrice: '1200',
@@ -638,34 +699,10 @@
                 ]
             },
             {
-                id: 'fallback-3', category: 'All Eyewear', tag: 'Exclusive', series: 'TOM FORD OPTICALS', defaultTitle: 'Tom Ford Rose Gold Hexagon', defaultPrice: '1100',
-                variants: [
-                    { title: 'Tom Ford Rose Gold Hexagon', price: '1100', color: '#b76e79', image: 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=800&q=80' },
-                    { title: 'Tom Ford Brushed Gold Hexagon', price: '1100', color: '#d4af37', image: 'https://images.unsplash.com/photo-1582142839970-2b93224fe87e?auto=format&fit=crop&w=800&q=80' },
-                    { title: 'Tom Ford Gunmetal Hexagon', price: '1100', color: 'bg-gray-600', image: 'https://images.unsplash.com/photo-1516714435131-44d6b64dc6a2?auto=format&fit=crop&w=800&q=80' }
-                ]
-            },
-            {
-                id: 'fallback-4', category: 'All Eyewear', tag: 'Classic', series: 'RAY-BAN WAYFARER CLASSIC', defaultTitle: 'Ray-Ban Matte Black Wayfarer', defaultPrice: '850',
-                variants: [
-                    { title: 'Ray-Ban Matte Black Wayfarer', price: '850', color: 'bg-gray-900', image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80' },
-                    { title: 'Ray-Ban Vintage Tortoise Wayfarer', price: '850', color: '#5C4033', image: 'https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=800&q=80' }
-                ]
-            },
-            {
-                id: 'fallback-5', category: 'Women', tag: 'Chic', series: 'CAT-EYE GLAMOUR', defaultTitle: 'Cat-Eye Pearl White Edition', defaultPrice: '650',
+                id: 'fallback-3', category: 'Women', tag: 'Chic', series: 'CAT-EYE GLAMOUR', defaultTitle: 'Cat-Eye Pearl White Edition', defaultPrice: '650',
                 variants: [
                     { title: 'Cat-Eye Pearl White Edition', price: '650', color: 'bg-gray-100', image: 'https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=800&q=80' },
-                    { title: 'Cat-Eye Rose Quartz Edition', price: '650', color: '#b76e79', image: 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=800&q=80' },
-                    { title: 'Cat-Eye Champagne Gold Edition', price: '650', color: '#d4af37', image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80' }
-                ]
-            },
-            {
-                id: 'fallback-6', category: 'Women', tag: 'Oversized', series: 'VINTAGE BUTTERFLY', defaultTitle: 'Butterfly Blush Pink Frame', defaultPrice: '800',
-                variants: [
-                    { title: 'Butterfly Blush Pink Frame', price: '800', color: 'bg-pink-300', image: 'https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=800&q=80' },
-                    { title: 'Butterfly Tortoise Gold Frame', price: '800', color: '#8B4513', image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80' },
-                    { title: 'Butterfly Midnight Jet Frame', price: '800', color: 'bg-black', image: 'https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=800&q=80' }
+                    { title: 'Cat-Eye Rose Quartz Edition', price: '650', color: '#b76e79', image: 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=800&q=80' }
                 ]
             }
         ];
@@ -674,11 +711,17 @@
 
         async function fetchAndRenderProducts() {
             try {
-                const fetchedData = await getEyewearProducts();
+                let fetchedData = [];
+                try {
+                    fetchedData = await getEyewearProducts();
+                } catch (dbErr) {
+                    console.warn("Could not fetch from Firebase, using fallback data.");
+                }
+
                 loadedProducts = (fetchedData && fetchedData.length > 0) ? fetchedData : defaultFallbackProducts;
 
-                const allEyewear = loadedProducts.filter(p => p.category !== 'Women' || p.category === 'All Eyewear');
-                const womensEyewear = loadedProducts.filter(p => p.category === 'Women' || p.category === 'Womens Eyewear');
+                const allEyewear = loadedProducts.filter(p => p.category !== 'Women' && p.category !== "Women's Eyewear");
+                const womensEyewear = loadedProducts.filter(p => p.category === 'Women' || p.category === "Women's Eyewear");
 
                 document.getElementById('all-eyewear-count').textContent = `Showing ${allEyewear.length} Designer Frames`;
                 document.getElementById('womens-eyewear-count').textContent = `Showing ${womensEyewear.length} High-Fashion Frames`;
@@ -688,7 +731,6 @@
 
                 populateWhatsAppForm(loadedProducts);
 
-                // Post-Render Initializations
                 lucide.createIcons();
                 initializeProductSlideshows();
                 initializeQuickViewModals();
@@ -702,17 +744,31 @@
         function renderGrid(containerId, productsArray) {
             const container = document.getElementById(containerId);
             if (!container) return;
-
             container.innerHTML = ''; 
 
             productsArray.forEach((product, idx) => {
                 const delay = (idx % 4) * 100 + 100;
                 
+                const name = product.name || product.defaultTitle || 'Zoga Frame';
+                const price = product.price || product.defaultPrice || '0';
+                const badge = product.badge || product.tag || '';
+                const category = product.category || 'Eyewear';
+                const series = product.series || category;
+
                 let slidesHTML = '';
                 let dotsHTML = '';
                 let swatchesHTML = '';
 
-                if (product.variants && product.variants.length > 0) {
+                if (product.images && product.images.length > 0) {
+                    product.images.forEach((imgSrc, vIdx) => {
+                        const activeSlide = vIdx === 0 ? 'active-slide' : '';
+                        const activeDot = vIdx === 0 ? 'active-dot' : '';
+                        
+                        slidesHTML += `<img src="${imgSrc}" alt="${name}" class="frame-slide ${activeSlide}" data-title="${name}" data-price="${price}" onerror="this.src='https://via.placeholder.com/800'">`;
+                        dotsHTML += `<button class="slideshow-dot ${activeDot}" aria-label="Slide ${vIdx + 1}"></button>`;
+                    });
+                } 
+                else if (product.variants && product.variants.length > 0) {
                     product.variants.forEach((variant, vIdx) => {
                         const activeSlide = vIdx === 0 ? 'active-slide' : '';
                         const activeDot = vIdx === 0 ? 'active-dot' : '';
@@ -721,14 +777,13 @@
                         slidesHTML += `<img src="${variant.image}" alt="${variant.title}" class="frame-slide ${activeSlide}" data-title="${variant.title}" data-price="${variant.price}">`;
                         dotsHTML += `<button class="slideshow-dot ${activeDot}" aria-label="Slide ${vIdx + 1}"></button>`;
                         
-                        const isHex = variant.color.startsWith('#') || variant.color.startsWith('rgb');
+                        const isHex = variant.color && (variant.color.startsWith('#') || variant.color.startsWith('rgb'));
                         const styleStr = isHex ? `style="background: ${variant.color};"` : '';
-                        const classStr = !isHex ? variant.color : '';
-
+                        const classStr = !isHex && variant.color ? variant.color : '';
                         swatchesHTML += `<button class="swatch-btn ${activeSwatch} ${classStr}" ${styleStr} title="${variant.title} color"></button>`;
                     });
                 } else {
-                    slidesHTML = `<img src="${product.image || 'https://via.placeholder.com/800'}" alt="${product.defaultTitle}" class="frame-slide active-slide" data-title="${product.defaultTitle}" data-price="${product.defaultPrice}">`;
+                    slidesHTML = `<img src="${product.image || 'https://via.placeholder.com/800'}" alt="${name}" class="frame-slide active-slide" data-title="${name}" data-price="${price}">`;
                     dotsHTML = `<button class="slideshow-dot active-dot" aria-label="Slide 1"></button>`;
                     swatchesHTML = `<button class="swatch-btn active-swatch bg-gray-600" title="Default Color"></button>`;
                 }
@@ -736,7 +791,7 @@
                 const htmlTemplate = `
                     <div class="product-item reveal group" style="transition-delay: ${delay}ms;">
                         <div class="product-img-wrap">
-                            ${product.tag ? `<div class="tag-new">${product.tag}</div>` : ''}
+                            ${badge ? `<div class="tag-new">${badge}</div>` : ''}
 
                             <button class="slideshow-arrow prev" aria-label="Previous Slide">
                                 <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i>
@@ -755,8 +810,8 @@
                         </div>
 
                         <div class="mt-4 md:mt-5 text-center flex-grow flex flex-col justify-end">
-                            <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">${product.defaultTitle || 'Zoga Frame'}</h3>
-                            <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">${product.series || product.category}</p>
+                            <h3 class="text-[12px] sm:text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors line-clamp-1">${name}</h3>
+                            <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2 uppercase tracking-widest line-clamp-1">${series}</p>
                             
                             <div class="color-swatch-bar mt-2 md:mt-3">
                                 ${swatchesHTML}
@@ -767,10 +822,10 @@
                                     <input type="number" min="1" value="1" class="card-quantity-input w-full h-full bg-black/40 border border-white/10 text-white text-[10px] text-center rounded-full outline-none focus:border-zoga-red transition-colors" placeholder="Qty">
                                 </div>
                                 <button class="quick-view-btn flex-1 max-w-[80px] h-7 sm:h-8 text-[9px] md:text-[10px] lg:text-[11px] font-medium tracking-widest uppercase border border-white/20 hover:border-white rounded-full transition-colors bg-transparent hover:bg-white/10 text-white whitespace-nowrap">View</button>
-                                <button class="buy-action-btn flex-1 max-w-[100px] h-7 sm:h-8 text-[9px] md:text-[10px] lg:text-[11px] font-bold tracking-widest uppercase bg-zoga-red text-white border border-zoga-red hover:bg-white hover:border-white hover:text-black rounded-full transition-all shadow-[0_4px_10px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_15px_rgba(255,255,255,0.4)] whitespace-nowrap" data-category="${product.series || product.category}">Buy</button>
+                                <button class="buy-action-btn flex-1 max-w-[100px] h-7 sm:h-8 text-[9px] md:text-[10px] lg:text-[11px] font-bold tracking-widest uppercase bg-zoga-red text-white border border-zoga-red hover:bg-white hover:border-white hover:text-black rounded-full transition-all shadow-[0_4px_10px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_15px_rgba(255,255,255,0.4)] whitespace-nowrap" data-category="${category}">Buy</button>
                             </div>
 
-                            <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-3 md:mt-4">₹${product.defaultPrice || '0'}/-</p>
+                            <p class="text-zoga-red text-xs sm:text-sm md:text-base font-medium mt-3 md:mt-4">₹${price}/-</p>
                         </div>
                     </div>
                 `;
@@ -783,7 +838,9 @@
             const dynamicCatalog = {};
             
             productsList.forEach(product => {
-                const categoryGroup = product.series || product.category || 'Other Frames';
+                const categoryGroup = product.category || 'Other Frames';
+                const name = product.name || product.defaultTitle;
+
                 if (!dynamicCatalog[categoryGroup]) {
                     dynamicCatalog[categoryGroup] = [];
                 }
@@ -795,7 +852,9 @@
                         }
                     });
                 } else {
-                     dynamicCatalog[categoryGroup].push(product.defaultTitle || 'Frame');
+                    if (!dynamicCatalog[categoryGroup].includes(name)) {
+                        dynamicCatalog[categoryGroup].push(name);
+                    }
                 }
             });
 
@@ -871,54 +930,6 @@
             }
         }
 
-        /* =========================================================================
-           USER INTERFACE & ANIMATION SCRIPTS
-           ========================================================================= */
-
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const mobileMenuClose = document.getElementById('mobile-menu-close');
-        const mobileMenuPanel = document.getElementById('mobile-menu-panel');
-        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-
-        const toggleMobileMenu = () => {
-            if (!mobileMenuPanel || !mobileMenuOverlay || !mobileMenuToggle) return;
-            const isOpen = mobileMenuPanel.classList.toggle('open');
-            mobileMenuOverlay.classList.toggle('open', isOpen);
-            mobileMenuToggle.classList.toggle('active', isOpen);
-            mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
-            document.body.style.overflow = isOpen ? 'hidden' : '';
-        };
-
-        if (mobileMenuToggle) mobileMenuToggle.addEventListener('click', toggleMobileMenu);
-        if (mobileMenuClose) mobileMenuClose.addEventListener('click', toggleMobileMenu);
-        if (mobileMenuOverlay) mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
-        
-        mobileNavLinks.forEach((link) => {
-            link.addEventListener('click', () => {
-                if (mobileMenuPanel) mobileMenuPanel.classList.remove('open');
-                if (mobileMenuOverlay) mobileMenuOverlay.classList.remove('open');
-                if (mobileMenuToggle) {
-                    mobileMenuToggle.classList.remove('active');
-                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
-                }
-                document.body.style.overflow = '';
-            });
-        });
-
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-black/95', 'backdrop-blur-sm', 'shadow-lg');
-                navbar.classList.remove('bg-transparent', 'py-4');
-                navbar.classList.add('py-2');
-            } else {
-                navbar.classList.remove('bg-black/95', 'backdrop-blur-sm', 'shadow-lg');
-                navbar.classList.add('bg-transparent', 'py-4');
-                navbar.classList.remove('py-2');
-            }
-        });
-
         const revealCallback = (entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); };
         const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
         const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
@@ -932,68 +943,9 @@
                 });
             }, 100);
         }
-        observeReveals();
-
-        const promoBackdrop = document.getElementById('promo-modal-backdrop');
-        const promoCloseBtn = document.getElementById('promo-modal-close');
-        const promoDismissBtn = document.getElementById('promo-dismiss-btn');
-        const promoClaimBtn = document.getElementById('promo-claim-btn');
-
-        function openPromoModal() {
-            if (!promoBackdrop) return;
-            promoBackdrop.classList.add('active');
-            promoBackdrop.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closePromoModal() {
-            if (!promoBackdrop) return;
-            promoBackdrop.classList.remove('active');
-            promoBackdrop.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
-        }
-
-        if (promoCloseBtn) promoCloseBtn.addEventListener('click', closePromoModal);
-        if (promoDismissBtn) promoDismissBtn.addEventListener('click', closePromoModal);
-        if (promoClaimBtn) promoClaimBtn.addEventListener('click', closePromoModal);
-        if (promoBackdrop) {
-            promoBackdrop.addEventListener('click', (e) => {
-                if (e.target === promoBackdrop) closePromoModal();
-            });
-        }
-
-        const splash = document.getElementById('splash-overlay');
-        const splashLogo = document.getElementById('splash-logo');
-        if (!splash || !splashLogo) {
-            setTimeout(openPromoModal, 600);
-        } else {
-            const prevOverflow = document.body.style.overflow;
-            document.body.style.overflow = 'hidden';
-
-            const removeSplash = () => {
-                splash.style.opacity = '0';
-                splash.style.visibility = 'hidden';
-                setTimeout(() => {
-                    try { splash.remove(); } catch (e) {}
-                    document.body.style.overflow = prevOverflow || '';
-                    setTimeout(openPromoModal, 400);
-                }, 900);
-            };
-
-            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                removeSplash();
-            } else {
-                const maxTimeout = setTimeout(removeSplash, 2600);
-                splashLogo.addEventListener('animationend', () => {
-                    clearTimeout(maxTimeout);
-                    setTimeout(removeSplash, 200);
-                });
-            }
-        }
-
+        
         function initializeProductSlideshows() {
             observeReveals(); 
-
             document.querySelectorAll('.product-item').forEach(card => {
                 const slides = card.querySelectorAll('.frame-slide');
                 if (slides.length <= 1) return;
@@ -1004,8 +956,6 @@
                 const swatches = card.querySelectorAll('.swatch-btn');
                 const cardTitle = card.querySelector('h3');
                 const priceElement = card.querySelector('p.text-zoga-red');
-                const prevBtn = card.querySelector('.slideshow-arrow.prev');
-                const nextBtn = card.querySelector('.slideshow-arrow.next');
 
                 function updateFrame(index) {
                     if (index >= slides.length) currentIndex = 0;
@@ -1027,30 +977,23 @@
                     swatches.forEach((swatch, idx) => swatch.classList.toggle('active-swatch', idx === currentIndex));
                 }
 
-                if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); updateFrame(currentIndex - 1); restartAutoplay(); });
-                if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); updateFrame(currentIndex + 1); restartAutoplay(); });
-
+                card.querySelector('.slideshow-arrow.prev')?.addEventListener('click', (e) => { e.stopPropagation(); updateFrame(currentIndex - 1); restartAutoplay(); });
+                card.querySelector('.slideshow-arrow.next')?.addEventListener('click', (e) => { e.stopPropagation(); updateFrame(currentIndex + 1); restartAutoplay(); });
                 dots.forEach((dot, idx) => dot.addEventListener('click', (e) => { e.stopPropagation(); updateFrame(idx); restartAutoplay(); }));
                 swatches.forEach((swatch, idx) => swatch.addEventListener('click', (e) => { e.stopPropagation(); updateFrame(idx); restartAutoplay(); }));
 
                 function startAutoplay() { autoplayTimer = setInterval(() => updateFrame(currentIndex + 1), 3500); }
                 function restartAutoplay() { clearInterval(autoplayTimer); startAutoplay(); }
-
                 startAutoplay();
                 card.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
                 card.addEventListener('mouseleave', () => startAutoplay());
             });
         }
 
-        // Quick View Functionality
         const watchModalBackdrop = document.getElementById('watch-modal-backdrop');
         const watchModalWindow = document.querySelector('.watch-modal-window');
         const watchModalSlides = document.querySelector('.watch-modal-slides');
         const watchModalTitle = document.getElementById('watch-modal-title');
-        const watchModalClose = document.querySelector('.watch-modal-close');
-        const watchModalPrev = document.querySelector('.watch-modal-prev');
-        const watchModalNext = document.querySelector('.watch-modal-next');
-
         let watchModalImages = [];
         let watchModalIndex = 0;
 
@@ -1060,71 +1003,44 @@
             if (index >= watchModalImages.length) index = 0;
             watchModalIndex = index;
 
-            const slides = watchModalSlides.querySelectorAll('.watch-modal-slide');
-            slides.forEach((slide, idx) => {
+            watchModalSlides.querySelectorAll('.watch-modal-slide').forEach((slide, idx) => {
                 slide.classList.toggle('active-modal-slide', idx === watchModalIndex);
             });
-        }
-
-        function buildWatchModal(images, title, widthPx) {
-            watchModalImages = images;
-            watchModalSlides.innerHTML = '';
-            watchModalTitle.textContent = title || 'Eyewear Preview';
-
-            images.forEach((image, idx) => {
-                const img = document.createElement('img');
-                img.src = image.src;
-                img.alt = image.alt || `${title} image ${idx + 1}`;
-                img.className = 'watch-modal-slide';
-                if (idx === 0) img.classList.add('active-modal-slide');
-                watchModalSlides.appendChild(img);
-            });
-
-            if (widthPx && watchModalWindow) {
-                watchModalWindow.style.width = `${Math.min(widthPx, window.innerWidth - 36)}px`;
-            }
-
-            setWatchModalSlide(0);
-            watchModalBackdrop.classList.remove('hidden');
-            watchModalBackdrop.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeWatchModal() {
-            watchModalBackdrop.classList.add('hidden');
-            watchModalBackdrop.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
-        }
-
-        function getWatchImages(card) {
-            const imageNodes = [];
-            if (card.querySelector('.frame-slide')) {
-                card.querySelectorAll('.frame-slide').forEach(img => {
-                    imageNodes.push({ src: img.src, alt: img.alt || img.dataset.title || 'Eyewear detail' });
-                });
-            } else {
-                const image = card.querySelector('.product-img');
-                if (image) imageNodes.push({ src: image.src, alt: image.alt || 'Eyewear image' });
-            }
-            return imageNodes.length ? imageNodes : [{ src: card.querySelector('.product-img')?.src || '', alt: 'Eyewear preview' }];
         }
 
         function openWatchModal(card) {
             if (!card) return;
             const title = card.querySelector('h3')?.textContent || 'Eyewear Preview';
-            const images = getWatchImages(card);
-            const rect = card.getBoundingClientRect();
-            buildWatchModal(images, title, rect.width);
+            const images = card.querySelector('.frame-slide') ? Array.from(card.querySelectorAll('.frame-slide')).map(img => ({ src: img.src, alt: img.alt || img.dataset.title })) : [{ src: card.querySelector('.product-img')?.src || '', alt: 'Preview' }];
+            
+            watchModalImages = images;
+            watchModalSlides.innerHTML = '';
+            watchModalTitle.textContent = title;
+
+            images.forEach((image, idx) => {
+                const img = document.createElement('img');
+                img.src = image.src;
+                img.alt = image.alt;
+                img.className = 'watch-modal-slide';
+                if (idx === 0) img.classList.add('active-modal-slide');
+                watchModalSlides.appendChild(img);
+            });
+
+            if (watchModalWindow) watchModalWindow.style.width = `${Math.min(card.getBoundingClientRect().width, window.innerWidth - 36)}px`;
+
+            setWatchModalSlide(0);
+            watchModalBackdrop.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeWatchModal() {
+            watchModalBackdrop.classList.add('hidden');
+            document.body.style.overflow = '';
         }
 
         function initializeQuickViewModals() {
             document.querySelectorAll('.quick-view-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    const card = btn.closest('.product-item');
-                    openWatchModal(card);
-                });
+                btn.addEventListener('click', (e) => { e.stopPropagation(); e.preventDefault(); openWatchModal(btn.closest('.product-item')); });
             });
         }
 
@@ -1138,13 +1054,10 @@
                     const categoryGroup = btn.dataset.category;
                     const activeSlide = card.querySelector('.frame-slide.active-slide');
                     const variantTitle = activeSlide ? activeSlide.dataset.title : (card.querySelector('h3')?.textContent || '');
-                    
-                    const qtyInput = card.querySelector('.card-quantity-input');
-                    const qty = qtyInput ? qtyInput.value : "1";
+                    const qty = card.querySelector('.card-quantity-input')?.value || "1";
                     
                     const categorySelect = document.getElementById('wa-category-select');
                     const variantSelect = document.getElementById('wa-variant-select');
-                    const quantityInput = document.getElementById('wa-quantity');
                     
                     if (categoryGroup && categorySelect) {
                         categorySelect.value = categoryGroup; 
@@ -1155,47 +1068,29 @@
                                 variantSelect.value = variantTitle; 
                                 variantSelect.dispatchEvent(new Event('change')); 
                             }
-                            if (quantityInput) {
-                                quantityInput.value = qty;
-                            }
+                            if (document.getElementById('wa-quantity')) document.getElementById('wa-quantity').value = qty;
                             
-                            const contactSection = document.getElementById('footer-contact');
-                            if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
-                            
-                            setTimeout(() => {
-                                document.getElementById('wa-name')?.focus();
-                            }, 800);
+                            document.getElementById('footer-contact')?.scrollIntoView({ behavior: 'smooth' });
+                            setTimeout(() => document.getElementById('wa-name')?.focus(), 800);
                         }, 50);
                     }
                 });
             });
         }
 
-        if (watchModalClose) watchModalClose.addEventListener('click', closeWatchModal);
-        if (watchModalPrev) watchModalPrev.addEventListener('click', () => setWatchModalSlide(watchModalIndex - 1));
-        if (watchModalNext) watchModalNext.addEventListener('click', () => setWatchModalSlide(watchModalIndex + 1));
-        if (watchModalBackdrop) {
-            watchModalBackdrop.addEventListener('click', event => {
-                if (event.target === watchModalBackdrop) closeWatchModal();
-            });
-        }
+        document.querySelector('.watch-modal-close')?.addEventListener('click', closeWatchModal);
+        document.querySelector('.watch-modal-prev')?.addEventListener('click', () => setWatchModalSlide(watchModalIndex - 1));
+        document.querySelector('.watch-modal-next')?.addEventListener('click', () => setWatchModalSlide(watchModalIndex + 1));
+        watchModalBackdrop?.addEventListener('click', e => { if (e.target === watchModalBackdrop) closeWatchModal(); });
         
         document.addEventListener('keydown', event => {
-            if (event.key === 'Escape') {
-                if (promoBackdrop && promoBackdrop.classList.contains('active')) closePromoModal();
-                if (watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) closeWatchModal();
-            }
-            if (event.key === 'ArrowRight' && watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) {
-                setWatchModalSlide(watchModalIndex + 1);
-            }
-            if (event.key === 'ArrowLeft' && watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) {
-                setWatchModalSlide(watchModalIndex - 1);
-            }
+            if (event.key === 'Escape' && watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) closeWatchModal();
+            if (event.key === 'ArrowRight' && watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) setWatchModalSlide(watchModalIndex + 1);
+            if (event.key === 'ArrowLeft' && watchModalBackdrop && !watchModalBackdrop.classList.contains('hidden')) setWatchModalSlide(watchModalIndex - 1);
         });
 
-        // Initialize Fetch and Render
+        // Fire rendering immediately
         window.addEventListener('DOMContentLoaded', fetchAndRenderProducts);
-
     </script>
 </body>
 </html>
