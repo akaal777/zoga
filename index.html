@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#050505">
     <title>Zoga | Luxury Watches & Eyewear</title>
     
-    <!-- Deferred third-party scripts to avoid render blocking (Optimization #4) -->
+    <!-- Deferred third-party scripts to avoid render blocking -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest" defer></script>
 
@@ -39,9 +39,7 @@
         }
     </script>
     
-
     <style>
-        /* Base Styling... */
         :root {
             color-scheme: dark;
             --zoga-red: #e60000;
@@ -78,7 +76,6 @@
             z-index: -1;
         }
 
-        /* Button Styling... */
         .btn-accent {
             display: inline-flex;
             align-items: center;
@@ -95,7 +92,6 @@
             border-radius: 999px;
             box-shadow: 0 18px 45px rgba(0, 0, 0, 0.24);
             backdrop-filter: blur(12px);
-            /* Optimization #1: Only animating colors, transforms, and shadows */
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
@@ -131,7 +127,6 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
         }
 
-        /* Layout Elements... */
         .section-heading { position: relative; }
         .section-heading::after {
             content: '';
@@ -187,7 +182,6 @@
         .img-zoom-container { overflow: hidden; }
         .img-zoom {
             transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.6s ease;
-            /* Optimization #1: Preparing GPU for heavy scroll/hover animations */
             will-change: transform;
         }
 
@@ -195,25 +189,37 @@
             transform: scale(1.05);
         }
 
-        /* Video Player Styling... */
         .video-showcase {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 1rem;
+            gap: 2.5rem;
             align-items: stretch;
             width: 100%;
         }
 
+        /* Classic Frame Styling for Video Container */
         .video-card {
             position: relative;
-            overflow: hidden;
-            border-radius: 1.25rem;
-            background: #000;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
-            min-height: 220px;
+            background: #111; /* Dark matte color */
+            padding: 1.25rem; /* Matte thickness */
+            border: 2px solid #2a2a2a; /* Outer frame border */
+            border-radius: 6px; /* Classic sharp/slight round corners */
+            box-shadow: 
+                inset 0 0 25px rgba(0,0,0,0.9), /* Inner matte depth */
+                0 0 0 1px rgba(255,255,255,0.05), /* Thin highlight */
+                0 25px 60px rgba(0, 0, 0, 0.5); /* Deep drop shadow */
             height: min(60vh, 360px);
+            min-height: 220px;
             isolation: isolate;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                inset 0 0 25px rgba(0,0,0,0.9),
+                0 0 0 1px rgba(255,255,255,0.08),
+                0 35px 75px rgba(0, 0, 0, 0.6);
         }
 
         .video-shell {
@@ -221,6 +227,8 @@
             width: 100%;
             height: 100%;
             background: #000;
+            overflow: hidden;
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.15); /* Thin rim around the video itself */
         }
 
         .video-shell video,
@@ -231,21 +239,7 @@
             display: block;
             border: 0;
             background: #000;
-        }
-
-        .video-controls {
-            position: absolute;
-            inset: auto 0 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.85rem 0.9rem;
-            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.85) 100%);
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.25s ease, transform 0.25s ease;
-            z-index: 2;
+            pointer-events: none; /* Prevents interaction to hide native controls completely */
         }
 
         .video-fallback {
@@ -265,78 +259,31 @@
         }
 
         .video-fallback.is-hidden { display: none; }
-        .video-controls.is-hidden {
-            opacity: 0;
-            transform: translateY(8px);
-            pointer-events: none;
-        }
-
-        .video-controls button {
-            border: 0;
-            background: rgba(255, 255, 255, 0.14);
-            color: #fff;
-            width: 2.25rem;
-            height: 2.25rem;
-            border-radius: 999px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            transition: background 0.2s ease, transform 0.2s ease;
-        }
-
-        .video-controls button:hover {
-            background: rgba(230, 0, 0, 0.82);
-            transform: scale(1.04);
-        }
-
-        .video-progress {
-            flex: 1;
-            height: 0.35rem;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.24);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .video-progress span {
-            display: block;
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--zoga-red), #ff6b6b);
-            border-radius: inherit;
-            transition: width 0.2s ease;
-        }
 
         .video-caption {
             position: absolute;
             inset: auto 0 0 0;
-            padding: 1rem 1rem 1.1rem;
-            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.74) 100%);
+            padding: 2rem 1.25rem 1.25rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.9) 100%);
             pointer-events: none;
-            z-index: 1;
+            z-index: 10;
         }
 
         @media (max-width: 900px) and (orientation: landscape) {
             .video-showcase {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 0.75rem;
+                gap: 1.5rem;
             }
             .video-card { height: 70vh; min-height: 220px; }
         }
 
         @media (max-width: 640px) {
-            .video-showcase { grid-template-columns: 1fr; }
+            .video-showcase { grid-template-columns: 1fr; gap: 2rem; }
             .video-card { height: 45vh; min-height: 220px; }
         }
 
-        /* Animation Definitions... */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            /* Optimization #1: Using only opacity and transform for scroll reveals */
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
         }
@@ -367,61 +314,28 @@
             object-position: center;
             opacity: 0;
             animation: kenburns 30s infinite;
-            /* Optimization #1: Rely only on GPU-accelerated transforms */
             transition: opacity 1s ease-in-out, transform 8s ease-in-out;
             will-change: transform, opacity;
             filter: none;
         }
 
-        .slide:nth-child(1) {
-            animation-delay: 0s;
-        }
-
-        .slide:nth-child(2) {
-            animation-delay: 6s;
-        }
-
-        .slide:nth-child(3) {
-            animation-delay: 12s;
-        }
-
-        .slide:nth-child(4) {
-            animation-delay: 18s;
-        }
-
-        .slide:nth-child(5) {
-            animation-delay: 24s;
-        }
+        .slide:nth-child(1) { animation-delay: 0s; }
+        .slide:nth-child(2) { animation-delay: 6s; }
+        .slide:nth-child(3) { animation-delay: 12s; }
+        .slide:nth-child(4) { animation-delay: 18s; }
+        .slide:nth-child(5) { animation-delay: 24s; }
 
         @keyframes kenburns {
-            0% {
-                opacity: 0;
-                transform: scale(1.05);
-            }
-
-            5% {
-                opacity: 0.92;
-                transform: scale(1.08);
-            }
-
-            20% {
-                opacity: 0.92;
-                transform: scale(1.12);
-            }
-
-            25% {
-                opacity: 0;
-                transform: scale(1.15);
-            }
-
-            100% {
-                opacity: 0;
-                transform: scale(1.15);
-            }
+            0% { opacity: 0; transform: scale(1.05); }
+            5% { opacity: 0.92; transform: scale(1.08); }
+            20% { opacity: 0.92; transform: scale(1.12); }
+            25% { opacity: 0; transform: scale(1.15); }
+            100% { opacity: 0; transform: scale(1.15); }
         }
 
         #splash-overlay { transition: opacity 800ms ease, visibility 800ms ease; }
         #splash-logo { will-change: transform, opacity; animation: splash-zoom 2200ms cubic-bezier(.2,.9,.2,1) forwards; }
+        
         @keyframes splash-zoom {
             0% { transform: scale(1); opacity: 1; }
             30% { transform: scale(1.05); opacity: 1; }
@@ -429,51 +343,16 @@
             100% { transform: scale(8); opacity: 0; }
         }
 
-        #splash-logo {
-            will-change: transform, opacity;
-            animation: splash-zoom 2200ms cubic-bezier(.2, .9, .2, 1) forwards;
-        }
-
-        @keyframes splash-zoom {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-
-            30% {
-                transform: scale(1.05);
-                opacity: 1;
-            }
-
-            70% {
-                transform: scale(3.6);
-                opacity: 0.9;
-            }
-
-            100% {
-                transform: scale(8);
-                opacity: 0;
-            }
-        }
-
         @media (prefers-reduced-motion: reduce) {
-            #splash-logo {
-                animation: none;
-                transform: scale(1);
-            }
-
-            #splash-overlay {
-                display: none;
-            }
+            #splash-logo { animation: none; transform: scale(1); }
+            #splash-overlay { display: none; }
         }
 
-        /* Product Card Styling... */
         .product-item {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 1.5rem;
             padding: 1.25rem;
-            /* Optimization #1: Safe property animation */
             transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
@@ -498,7 +377,9 @@
             transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             will-change: transform;
         }
+        
         .product-item:hover .product-img { transform: scale(1.08); }
+        
         .product-overlay {
             position: absolute;
             inset: 0;
@@ -510,11 +391,14 @@
             transition: opacity 0.4s ease;
             z-index: 15;
         }
+        
         .product-item:hover .product-overlay { opacity: 1; }
+        
         .quick-view-btn {
             transform: translateY(15px);
             transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        
         .product-item:hover .quick-view-btn { transform: translateY(0); }
         
         .tag-new {
@@ -534,7 +418,6 @@
             backdrop-filter: blur(6px);
         }
 
-        /* Interactive Slideshow Components... */
         .frame-slideshow-container { position: relative; width: 100%; height: 100%; }
         
         .frame-slide {
@@ -545,7 +428,6 @@
             object-fit: cover;
             opacity: 0;
             transform: scale(1.04);
-            /* Optimization #1: Avoid animating non-compositor properties */
             transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
         }
@@ -586,7 +468,6 @@
 
         .slideshow-dot.active-dot {
             background: var(--zoga-red);
-            /* Note: width changes are technically layout thrashing, but acceptable for small ui dots. Scaling is better. */
             transform: scale(1.5); 
             box-shadow: 0 0 10px rgba(230, 0, 0, 0.8);
         }
@@ -643,7 +524,6 @@
             transform: scale(1.2);
         }
 
-        /* Footer and Modals Styling... */
         .footer-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -698,7 +578,6 @@
             -webkit-backdrop-filter: blur(24px);
             border-left: 1px solid rgba(255, 255, 255, 0.14);
             box-shadow: -12px 0 40px rgba(0, 0, 0, 0.35);
-            /* Optimization #1: Animate transform */
             transform: translateX(100%);
             transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
             z-index: 60;
@@ -751,7 +630,6 @@
             height: 2px;
             border-radius: 999px;
             background: #fff;
-            /* Optimization #1: transform instead of margin/padding animations */
             transition: transform 0.28s ease, opacity 0.28s ease, background 0.28s ease;
         }
         .mobile-menu-toggle.active .hamburger-line:nth-child(1) { transform: translateY(6px) rotate(45deg); }
@@ -823,7 +701,6 @@
     <!-- Header Hero Section -->
     <header class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
         <div class="hero-slideshow">
-            <!-- Optimization #4: Only loading hero images aggressively (no lazy load) -->
             <img src="https://lh3.googleusercontent.com/d/19P7jmwgdB6mNRMRgZO5z-cjn0sHcuQmi" class="slide" alt="Slide 1" fetchpriority="high">
             <img src="https://lh3.googleusercontent.com/d/1u5BdQpYuaDpstUkto_ejwkvkb1gdlvH9" class="slide" alt="Slide 2">
             <img src="https://lh3.googleusercontent.com/d/18SgN_UhedWTuFHR4vJWgnUlRewLjiIQ1" class="slide" alt="Slide 3">
@@ -853,28 +730,18 @@
 
     <main>
         <!-- Video Showcase Sections -->
-        <section class="py-6 px-6 md:px-12 max-w-[1400px] mx-auto">
+        <section class="py-12 px-6 md:px-12 max-w-[1400px] mx-auto mt-6">
             <div class="video-showcase">
                 <div class="video-card reveal">
                     <div class="video-shell">
                         <div class="video-fallback" data-fallback="eyewear">Loading video…</div>
-                        <!-- Optimization #4: Added webp formatting to fallback poster via URL Params -->
                         <video id="video-eyewear" autoplay muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1200&q=80&fm=webp" controlsList="nodownload noplaybackrate">
                             <source src="eyewear.mp4" type="video/mp4">
                         </video>
-                        <div class="video-controls" data-controls="eyewear">
-                            <button type="button" aria-label="Play/Pause" data-action="play">
-                                <i data-lucide="play"></i>
-                            </button>
-                            <div class="video-progress"><span></span></div>
-                            <button type="button" aria-label="Mute" data-action="mute">
-                                <i data-lucide="volume-2"></i>
-                            </button>
+                        <div class="video-caption">
+                            <p class="text-xs uppercase tracking-[0.3em] text-zoga-red mb-1">Luxury Eyewear</p>
+                            <h3 class="text-xl font-serif">Eyewear Motion</h3>
                         </div>
-                    </div>
-                    <div class="video-caption">
-                        <p class="text-xs uppercase tracking-[0.3em] text-zoga-red mb-1">Luxury Eyewear</p>
-                        <h3 class="text-xl font-serif">Eyewear Motion</h3>
                     </div>
                 </div>
 
@@ -884,19 +751,10 @@
                         <video id="video-watch" autoplay muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=1200&q=80&fm=webp" controlsList="nodownload noplaybackrate">
                             <source src="https://v1.pinimg.com/videos/mc/720p/1d/bb/06/1dbb06f8a3350960384c203ed0e31e83.mp4?" type="video/mp4">
                         </video>
-                        <div class="video-controls" data-controls="watch">
-                            <button type="button" aria-label="Play/Pause" data-action="play">
-                                <i data-lucide="play"></i>
-                            </button>
-                            <div class="video-progress"><span></span></div>
-                            <button type="button" aria-label="Mute" data-action="mute">
-                                <i data-lucide="volume-2"></i>
-                            </button>
+                        <div class="video-caption">
+                            <p class="text-xs uppercase tracking-[0.3em] text-zoga-red mb-1">Fine Watches</p>
+                            <h3 class="text-xl font-serif">Product Motion</h3>
                         </div>
-                    </div>
-                    <div class="video-caption">
-                        <p class="text-xs uppercase tracking-[0.3em] text-zoga-red mb-1">Fine Watches</p>
-                        <h3 class="text-xl font-serif">Product Motion</h3>
                     </div>
                 </div>
             </div>
@@ -915,10 +773,10 @@
                 </a>
             </div>
 
-            <!-- Changed to grid-cols-1 md:grid-cols-3 to perfectly balance 3 watch cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <!-- Grid updated to a 4-column layout similar to Eyewear Section (grid-cols-2 lg:grid-cols-4) -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
                 
-                <div class="product-item p-4 md:p-6 reveal group flex flex-col" id="trio-watch-card" style="transition-delay: 100ms;">
+                <div class="product-item p-3 md:p-5 reveal group flex flex-col" id="trio-watch-card" style="transition-delay: 100ms;">
                     <div class="product-img-wrap rounded-lg">
                         <div class="tag-new hidden sm:block">New Stock</div>
 
@@ -948,21 +806,21 @@
                         </div>
                     </div>
 
-                    <div class="mt-5 text-center flex-grow flex flex-col justify-end">
-                        <h3 id="trio-card-title" class="text-lg md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors truncate px-1">DENVOSI Tonneau Watch</h3>
-                        <p class="text-[0.7rem] md:text-xs text-gray-400 mt-1.5 uppercase tracking-widest truncate">DENVOSI</p>
+                    <div class="mt-4 text-center flex-grow flex flex-col justify-end">
+                        <h3 id="trio-card-title" class="text-sm md:text-xl font-serif text-white group-hover:text-zoga-red transition-colors truncate px-1">DENVOSI Tonneau</h3>
+                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest truncate">DENVOSI</p>
                         
-                        <div class="color-swatch-bar mt-3 mb-2">
+                        <div class="color-swatch-bar mt-2 mb-2">
                             <button class="swatch-btn active-swatch bg-black" onclick="setTrioSlide(0)" title="Obsidian Black"></button>
                             <button class="swatch-btn bg-stone-100" onclick="setTrioSlide(1)" title="Pearl White"></button>
                             <button class="swatch-btn bg-amber-900" onclick="setTrioSlide(2)" title="Auburn Brown"></button>
                         </div>
 
-                        <p class="text-zoga-red text-base font-medium mt-1">₹1,900/-</p>
+                        <p class="text-zoga-red text-sm md:text-base font-medium mt-1">₹1,900/-</p>
                     </div>
                 </div>
 
-                <div class="product-item p-4 md:p-6 reveal flex flex-col" style="transition-delay: 200ms;">
+                <div class="product-item p-3 md:p-5 reveal flex flex-col" style="transition-delay: 200ms;">
                     <div class="product-img-wrap rounded-lg">
                         <div class="tag-new hidden sm:block">New Stock</div>
                         <img src="product photos/IMG_6986.PNG" alt="Seiko Rose Gold Diver" class="product-img" loading="lazy" decoding="async">
@@ -972,14 +830,14 @@
                                 View</button>
                         </div>
                     </div>
-                    <div class="mt-5 text-center flex-grow flex flex-col justify-end">
-                        <h3 class="text-lg md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">SEIKO Diver-style</h3>
-                        <p class="text-[0.7rem] md:text-xs text-gray-400 mt-1.5 uppercase tracking-widest">SEIKO</p>
-                        <p class="text-zoga-red text-base font-medium mt-3">₹1,100/-</p>
+                    <div class="mt-4 text-center flex-grow flex flex-col justify-end">
+                        <h3 class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">SEIKO Diver</h3>
+                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest">SEIKO</p>
+                        <p class="text-zoga-red text-sm md:text-base font-medium mt-2">₹1,100/-</p>
                     </div>
                 </div>
 
-                <div class="product-item p-4 md:p-6 reveal flex flex-col" style="transition-delay: 300ms;">
+                <div class="product-item p-3 md:p-5 reveal flex flex-col" style="transition-delay: 300ms;">
                     <div class="product-img-wrap rounded-lg">
                         <img src="product photos/IMG_6987.PNG" alt="Casio Classic Silver" class="product-img" loading="lazy" decoding="async">
                         <div class="product-overlay">
@@ -988,12 +846,29 @@
                                 View</button>
                         </div>
                     </div>
-                    <div class="mt-5 text-center flex-grow flex flex-col justify-end">
-                        <h3 class="text-lg md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">Casio Classic</h3>
-                        <p class="text-[0.7rem] md:text-xs text-gray-400 mt-1.5 uppercase tracking-widest">Casio</p>
-                        <p class="text-zoga-red text-base font-medium mt-3">₹500/-</p>
+                    <div class="mt-4 text-center flex-grow flex flex-col justify-end">
+                        <h3 class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">Casio Classic</h3>
+                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest">Casio</p>
+                        <p class="text-zoga-red text-sm md:text-base font-medium mt-2">₹500/-</p>
                     </div>
                 </div>
+
+                <div class="product-item p-3 md:p-5 reveal flex flex-col" style="transition-delay: 400ms;">
+                    <div class="product-img-wrap rounded-lg">
+                        <img src="product photos/Rolex lux01.jpeg" alt="Rolex Luxury Watch" class="product-img" loading="lazy" decoding="async">
+                        <div class="product-overlay">
+                            <button
+                                class="quick-view-btn btn-accent bg-white text-black border-none hover:bg-zoga-red hover:text-white text-xs px-4 py-2">Quick
+                                View</button>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center flex-grow flex flex-col justify-end">
+                        <h3 class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">Rolex Luxury</h3>
+                        <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest">Rolex</p>
+                        <p class="text-zoga-red text-sm md:text-base font-medium mt-2">₹1300/-</p>
+                    </div>
+                </div>
+
             </div>
 
             <div class="mt-10 text-center md:hidden">
@@ -1016,7 +891,7 @@
                 </a>
             </div>
 
-            <div class="grid grid-cols-2 gap-4 md:gap-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
                 <div class="product-item p-3 md:p-5 reveal" style="transition-delay: 100ms;">
                     <div class="product-img-wrap rounded-lg">
                         <div class="tag-new hidden sm:block">New Stock</div>
@@ -1030,7 +905,7 @@
                     <div class="mt-4 text-center">
                         <h3
                             class="text-sm md:text-xl font-serif text-white hover:text-zoga-red transition-colors truncate px-1">
-                            Classic Gold Aviator</h3>
+                            Classic Aviator</h3>
                         <p class="text-[0.65rem] md:text-xs text-gray-400 mt-1 uppercase tracking-widest truncate">
                             Polarized</p>
                         <p class="text-zoga-red text-sm md:text-base font-medium mt-2">500/-</p>
@@ -1231,7 +1106,6 @@
         </div>
     </footer>
 
-    <!-- Optimization #3: Wrapping all heavy initial execution code inside DOMContentLoaded -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Because Lucide is deferred, it executes right before this.
@@ -1246,27 +1120,23 @@
 
             if (newsletterForm && newsletterEmail && newsletterMessage) {
                 newsletterForm.addEventListener('submit', (e) => {
-                    e.preventDefault(); // Prevent page reload
+                    e.preventDefault(); 
                     
                     const email = newsletterEmail.value.trim();
                     const message = newsletterMessage.value.trim();
                     
-                    if (!email || !message) return; // Basic validation check
+                    if (!email || !message) return;
                     
-                    // Format subject and body cleanly for the email client
                     const subject = encodeURIComponent("New Inquiry from Zoga Website");
                     const body = encodeURIComponent(`Visitor Email: ${email}\n\nMessage:\n${message}\n\n---\nSent via The Zoga Society Contact Form`);
                     
-                    // Direct to email client
                     window.location.href = `mailto:Fashionzoga@gmail.com?subject=${subject}&body=${body}`;
-                    
-                    // Optional: reset the form once the client opens
                     newsletterForm.reset();
                 });
             }
 
 
-            /* --- Performance Optimization #3: RequestAnimationFrame for scroll events --- */
+            /* --- Performance Optimization: RequestAnimationFrame for scroll events --- */
             const navbar = document.getElementById('navbar');
             let ticking = false;
             
@@ -1286,7 +1156,7 @@
                     });
                     ticking = true;
                 }
-            }, { passive: true }); // Adding passive:true further prevents scroll blocking
+            }, { passive: true });
 
             let currentHeritageIndex = 0;
             function setHeritageSlide(index) {
@@ -1308,27 +1178,18 @@
                 setHeritageSlide(next);
             }, 5000);
 
+            // Updated Autoplay Video Logic (Controls Completely Removed)
             const autoplayVideos = ['video-eyewear', 'video-watch'];
             autoplayVideos.forEach((id) => {
                 const video = document.getElementById(id);
                 if (!video) return;
-                const controls = document.querySelector(`[data-controls="${id.replace('video-', '')}"]`);
                 const fallback = document.querySelector(`[data-fallback="${id.replace('video-', '')}"]`);
-
-                const hideControls = () => { if (controls) controls.classList.add('is-hidden'); };
-                const showControls = () => { if (controls) controls.classList.remove('is-hidden'); };
 
                 video.addEventListener('loadeddata', () => { if (fallback) fallback.classList.add('is-hidden'); });
                 video.addEventListener('error', () => { if (fallback) fallback.textContent = 'Video unavailable'; });
-                video.addEventListener('mouseenter', showControls);
-                video.addEventListener('mouseleave', hideControls);
-                video.addEventListener('touchstart', showControls, { passive: true });
-                video.addEventListener('play', hideControls);
-                video.addEventListener('playing', hideControls);
-                video.addEventListener('pause', showControls);
 
                 video.load();
-                video.play().catch(() => {});
+                video.play().catch(() => {}); // Autoplay silently
             });
 
             // Mobile Nav Handlers
@@ -1410,7 +1271,6 @@
                 });
             })();
             
-            // Expose Trio slider functions cleanly
             window.changeTrioSlide = changeTrioSlide;
             window.setTrioSlide = setTrioSlide;
         });
@@ -1471,7 +1331,6 @@
             startTrioAutoplay();
         }
 
-        // Delay starting the slideshow so layout isn't thrashed on initial boot
         setTimeout(() => {
             const trioCard = document.getElementById('trio-watch-card');
             if (trioCard) {
@@ -1482,5 +1341,4 @@
         }, 1500);
     </script>
 </body>
-
 </html>
