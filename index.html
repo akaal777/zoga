@@ -197,17 +197,16 @@
             width: 100%;
         }
 
-        /* Classic Frame Styling for Video Container */
         .video-card {
             position: relative;
-            background: #111; /* Dark matte color */
-            padding: 1.25rem; /* Matte thickness */
-            border: 2px solid #2a2a2a; /* Outer frame border */
-            border-radius: 6px; /* Classic sharp/slight round corners */
+            background: #111; 
+            padding: 1.25rem; 
+            border: 2px solid #2a2a2a; 
+            border-radius: 6px; 
             box-shadow: 
-                inset 0 0 25px rgba(0,0,0,0.9), /* Inner matte depth */
-                0 0 0 1px rgba(255,255,255,0.05), /* Thin highlight */
-                0 25px 60px rgba(0, 0, 0, 0.5); /* Deep drop shadow */
+                inset 0 0 25px rgba(0,0,0,0.9), 
+                0 0 0 1px rgba(255,255,255,0.05), 
+                0 25px 60px rgba(0, 0, 0, 0.5); 
             height: min(60vh, 360px);
             min-height: 220px;
             isolation: isolate;
@@ -228,7 +227,7 @@
             height: 100%;
             background: #000;
             overflow: hidden;
-            box-shadow: 0 0 0 1px rgba(255,255,255,0.15); /* Thin rim around the video itself */
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.15);
         }
 
         .video-shell video,
@@ -239,7 +238,7 @@
             display: block;
             border: 0;
             background: #000;
-            pointer-events: none; /* Prevents interaction to hide native controls completely */
+            pointer-events: none; 
         }
 
         .video-fallback {
@@ -305,32 +304,20 @@
             z-index: 0;
         }
 
-        .slide {
+        .hero-single-img {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: center;
-            opacity: 0;
-            animation: kenburns 30s infinite;
-            transition: opacity 1s ease-in-out, transform 8s ease-in-out;
-            will-change: transform, opacity;
-            filter: none;
+            will-change: transform;
+            animation: slow-zoom 20s ease-in-out infinite alternate;
         }
 
-        .slide:nth-child(1) { animation-delay: 0s; }
-        .slide:nth-child(2) { animation-delay: 6s; }
-        .slide:nth-child(3) { animation-delay: 12s; }
-        .slide:nth-child(4) { animation-delay: 18s; }
-        .slide:nth-child(5) { animation-delay: 24s; }
-
-        @keyframes kenburns {
-            0% { opacity: 0; transform: scale(1.05); }
-            5% { opacity: 0.92; transform: scale(1.08); }
-            20% { opacity: 0.92; transform: scale(1.12); }
-            25% { opacity: 0; transform: scale(1.15); }
-            100% { opacity: 0; transform: scale(1.15); }
+        @keyframes slow-zoom {
+            0% { transform: scale(1.02); }
+            100% { transform: scale(1.15); }
         }
 
         #splash-overlay { transition: opacity 800ms ease, visibility 800ms ease; }
@@ -546,6 +533,37 @@
             transform: translateX(3px);
         }
 
+        @keyframes text-flow-glow {
+            0% { background-position: 0% center; }
+            100% { background-position: -200% center; }
+        }
+        
+        .continuous-flow-text {
+            background: linear-gradient(
+                to right, 
+                #e60000 20%, 
+                #ff4d4d 30%, 
+                #ffffff 40%, 
+                #ffffff 60%, 
+                #ff4d4d 70%, 
+                #e60000 80%
+            );
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: text-flow-glow 3s linear infinite;
+            font-weight: 600;
+        }
+
+        @keyframes marquee-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee-scroll {
+            animation: marquee-scroll 25s linear infinite;
+        }
+
         .contact-with-icon {
             display: inline-flex;
             align-items: center;
@@ -701,11 +719,7 @@
     <!-- Header Hero Section -->
     <header class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
         <div class="hero-slideshow">
-            <img src="https://lh3.googleusercontent.com/d/19P7jmwgdB6mNRMRgZO5z-cjn0sHcuQmi" class="slide" alt="Slide 1" fetchpriority="high">
-            <img src="https://lh3.googleusercontent.com/d/1u5BdQpYuaDpstUkto_ejwkvkb1gdlvH9" class="slide" alt="Slide 2">
-            <img src="https://lh3.googleusercontent.com/d/18SgN_UhedWTuFHR4vJWgnUlRewLjiIQ1" class="slide" alt="Slide 3">
-            <img src="https://lh3.googleusercontent.com/d/1wNk25XTzxlBWpcTb0gu9fQpzNs3S9wAU" class="slide" alt="Slide 4">
-            <img src="https://lh3.googleusercontent.com/d/1Kwy0FAHeC-DgESNmPMnK003szKmKmTze" class="slide" alt="Slide 5">
+            <img src="https://lh3.googleusercontent.com/d/1u5BdQpYuaDpstUkto_ejwkvkb1gdlvH9" class="hero-single-img" alt="Zoga Hero Banner" fetchpriority="high">
         </div>
         <div class="absolute inset-0 hero-overlay z-10 pointer-events-none"></div>
 
@@ -1063,10 +1077,11 @@
                 <div>
                     <h4 class="text-sm font-medium uppercase tracking-widest mb-6 text-white">Client Care</h4>
                     <ul class="space-y-4 text-gray-400 text-sm">
-                        <li class="flex items-center gap-5 pb-2">
-                            <a href="https://www.instagram.com/zogafashions?" class="text-white hover:text-zoga-red transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <li class="flex items-center gap-4 pb-2 flex-wrap">
+                            <a href="https://www.instagram.com/zogafashions/?" class="text-white hover:text-zoga-red transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
                             </a>
+                            <a href="https://www.instagram.com/zogafashions/?" class="text-white hover:text-zoga-red transition-colors"  rel="noopener noreferrer" aria-label="Instagram"></a>
                             <a href="https://www.facebook.com/people/Zoga-Zoga/61588925315012/?" class="text-white hover:text-zoga-red transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                             </a>
@@ -1105,6 +1120,18 @@
             </div>
         </div>
     </footer>
+
+    <!-- Post-Footer Developer Credit -->
+    <div class="w-full bg-[#050505] py-4 border-t border-white/10 flex justify-center items-center px-4 z-10 relative">
+        <a href="https://www.instagram.com/khus.hpreet771977/?" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 group">
+            <span class="text-gray-400 group-hover:text-zoga-red transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+            </span>
+            <span class="text-[11px] sm:text-xs uppercase tracking-[0.2em] font-medium text-gray-400 group-hover:text-white transition-colors duration-300">
+                Create Website for Contact us
+            </span>
+        </a>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
